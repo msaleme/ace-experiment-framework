@@ -145,6 +145,7 @@ This repository includes the completed foundation and hardening work for the ACE
 Primary closeout references:
 
 - `docs/PROJECT_CLOSEOUT.md`
+- `docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`
 - `reports/token_pruning_decision_memo.md`
 - `reports/token_pruning_2d_regime_table.md`
 
