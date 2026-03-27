@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-03-27T14:02:09.362021",
+  "executed": 5,
+  "accepted": 0,
+  "rejected": 2,
+  "promising_but_complex": 3,
+  "dashboard": "C:\\Users\\mikes\\OneDrive\\vs-code\\ACE Experiment Framework\\compute-efficiency-lab\\reports\\portfolio_dashboard.md",
+  "ranking": "C:\\Users\\mikes\\OneDrive\\vs-code\\ACE Experiment Framework\\compute-efficiency-lab\\reports\\portfolio_ranking.json"
+}

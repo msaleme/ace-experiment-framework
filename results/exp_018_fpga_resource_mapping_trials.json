@@ -1,0 +1,152 @@
+[
+  {
+    "trial_num": 1,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9769622432263705,
+      "latency_ms": 79.86359932837216,
+      "energy_joules": 0.49775193528974526,
+      "throughput_tok_sec": 12.474634822588426,
+      "ecd_improvement": 0.15799798460051656,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6792951271655294
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 2,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9754197200910459,
+      "latency_ms": 84.17221969887564,
+      "energy_joules": 0.4805999386517266,
+      "throughput_tok_sec": 11.760255232925035,
+      "ecd_improvement": 0.14768523722256963,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6029097253268111
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 3,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9748802820785091,
+      "latency_ms": 79.491276054227,
+      "energy_joules": 0.4903240092195242,
+      "throughput_tok_sec": 11.515733772328566,
+      "ecd_improvement": 0.15480164750618422,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.60110363670799
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 4,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9739999439597101,
+      "latency_ms": 82.5317210966454,
+      "energy_joules": 0.5215872004125657,
+      "throughput_tok_sec": 11.765662725383361,
+      "ecd_improvement": 0.18317174797426067,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.651571728402352
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 5,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9743018624599009,
+      "latency_ms": 81.72202518153745,
+      "energy_joules": 0.4906081844526952,
+      "throughput_tok_sec": 12.219910983879053,
+      "ecd_improvement": 0.17394797445827942,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6392415401455472
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 6,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9713189146337587,
+      "latency_ms": 83.26928105360815,
+      "energy_joules": 0.48813500335506893,
+      "throughput_tok_sec": 12.901320439640433,
+      "ecd_improvement": 0.14067513156940345,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.619271834726533
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 7,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9741324281642826,
+      "latency_ms": 79.66302840367683,
+      "energy_joules": 0.515126687685112,
+      "throughput_tok_sec": 12.218056175801042,
+      "ecd_improvement": 0.14264810840511793,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6049673994480531
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 8,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9726617372307254,
+      "latency_ms": 82.82446696866215,
+      "energy_joules": 0.48454878525102574,
+      "throughput_tok_sec": 12.157069727979927,
+      "ecd_improvement": 0.15951878798008906,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6970336149111753
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 9,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9750220898950316,
+      "latency_ms": 79.97162508574483,
+      "energy_joules": 0.5192733329505969,
+      "throughput_tok_sec": 11.770239220054137,
+      "ecd_improvement": 0.16140924604605456,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6552328640638573
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 10,
+    "timestamp": "2026-03-27T13:34:08.996943",
+    "metrics": {
+      "accuracy": 0.9705452265501046,
+      "latency_ms": 83.35397032704594,
+      "energy_joules": 0.49903170459946655,
+      "throughput_tok_sec": 12.906757192266252,
+      "ecd_improvement": 0.19731000641716792,
+      "conversion_overhead": 0.06,
+      "portability_score": 0.6406854488209293
+    },
+    "success": true,
+    "error_message": ""
+  }
+]

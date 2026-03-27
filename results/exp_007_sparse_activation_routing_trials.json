@@ -1,0 +1,192 @@
+[
+  {
+    "trial_num": 1,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9256933605793911,
+      "latency_ms": 75.53148003685924,
+      "energy_joules": 0.474337694631476,
+      "throughput_tok_sec": 13.239512843015941,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.2552851172164397
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 2,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9200151886770082,
+      "latency_ms": 70.14754447319807,
+      "energy_joules": 0.4405265792916839,
+      "throughput_tok_sec": 14.255666502796537,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.446442825301443
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 3,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9253539698814163,
+      "latency_ms": 68.31316538540338,
+      "energy_joules": 0.4290066786203332,
+      "throughput_tok_sec": 14.638466748807282,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.5340174296478623
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 4,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9729155779773241,
+      "latency_ms": 69.88251946208386,
+      "energy_joules": 0.43886222222188664,
+      "throughput_tok_sec": 14.309730211466828,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.5412364429770202
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 5,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9278924853607512,
+      "latency_ms": 73.13525305518543,
+      "energy_joules": 0.4592893891865645,
+      "throughput_tok_sec": 13.673296505112702,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.3420705338910675
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 6,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9311112489500658,
+      "latency_ms": 77.20852639576493,
+      "energy_joules": 0.4848695457654038,
+      "throughput_tok_sec": 12.951937391915465,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.2083764893084877
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 7,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9428009158207451,
+      "latency_ms": 73.0844198691329,
+      "energy_joules": 0.4589701567781546,
+      "throughput_tok_sec": 13.682806838867014,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.3655311398522457
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 8,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9262692420048244,
+      "latency_ms": 72.33027955237596,
+      "energy_joules": 0.454234155588921,
+      "throughput_tok_sec": 13.825468478604149,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.3697085800569955
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 9,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9518514362557483,
+      "latency_ms": 70.13292993325206,
+      "energy_joules": 0.4404347999808229,
+      "throughput_tok_sec": 14.258637147367644,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.4971193535758344
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 10,
+    "timestamp": "2026-03-27T13:34:08.811472",
+    "metrics": {
+      "accuracy": 0.9538017714535599,
+      "latency_ms": 77.0622504788328,
+      "energy_joules": 0.48395093300706993,
+      "throughput_tok_sec": 12.976522146529794,
+      "tokens_remaining": 409,
+      "tokens_pruned": 103,
+      "pruning_ratio": 0.15000000000000002,
+      "memory_traffic_reduction": 0.12000000000000002,
+      "layers_pruned": 18,
+      "output_quality_degradation": 0.020000000000000004,
+      "ecd_improvement": 0.2425273864514103
+    },
+    "success": true,
+    "error_message": ""
+  }
+]

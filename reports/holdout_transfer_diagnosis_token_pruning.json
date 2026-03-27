@@ -1,0 +1,728 @@
+{
+  "generated_at": "2026-03-27T15:18:35.303087Z",
+  "scope": [
+    "exp_002_token_pruning",
+    "exp_006_token_pruning_threshold_sweep"
+  ],
+  "standards_note": "Holdout and skeptic standards unchanged.",
+  "rows": [
+    {
+      "experiment_id": "exp_002_token_pruning",
+      "engine_verdict": "rejected",
+      "final_verdict": "rejected",
+      "holdout_failure_analysis": {
+        "gate_passed": false,
+        "failure_evidence": {
+          "required": true,
+          "holdout_has_data": true,
+          "holdout_ecd": -0.8271305647890707,
+          "holdout_quality": 0.9391165522806003,
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.935465
+        },
+        "thresholds": {
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.935465
+        },
+        "metrics_causing_failure": {
+          "holdout_ecd": -0.8271305647890707,
+          "holdout_quality": 0.9391165522806003
+        },
+        "holdout_effect_size": -43.59990952213782,
+        "holdout_significance": {
+          "significant": true,
+          "p_value": 6.469788517175321e-60
+        },
+        "quality_delta_holdout_vs_floor": 0.003651552280600323,
+        "energy_delta_holdout_vs_development": 6.752816203580233,
+        "ecd_delta_holdout_vs_development": -92.4850792775541
+      },
+      "split_comparison": {
+        "development": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": 91.65794871276503,
+              "std": 20.382522680904177,
+              "min": 58.51892237912291,
+              "max": 122.93561315279214
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9398391766794287,
+              "std": 0.017484988532040856,
+              "min": 0.9040564552485758,
+              "max": 0.970687866423251
+            },
+            "energy": {
+              "count": 40,
+              "mean": 0.3073773149963775,
+              "std": 0.033856303790868236,
+              "min": 0.26239783292112406,
+              "max": 0.3720535004564833
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 1.661498999980419,
+              "std": 0.1830070475182067,
+              "min": 1.4183666644385085,
+              "max": 2.011100002467477
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9398391766794287,
+            "effect_size": 6.359561875544038,
+            "p_value": 1.087861790987511e-27
+          }
+        },
+        "validation": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": 2.1493091620112184,
+              "std": 0.7178945275103727,
+              "min": 0.6310126160612776,
+              "max": 3.5324879403012632
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9363589149986693,
+              "std": 0.01882522508665437,
+              "min": 0.8982930466095672,
+              "max": 0.9755520713473752
+            },
+            "energy": {
+              "count": 40,
+              "mean": 1.669683460021967,
+              "std": 0.21098240972579588,
+              "min": 1.3655960000687628,
+              "max": 2.235155200090958
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 9.02531600011874,
+              "std": 1.140445457977275,
+              "min": 7.381600000371691,
+              "max": 12.081920000491664
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9363589149986693,
+            "effect_size": 4.234023314246671,
+            "p_value": 2.9023791671440783e-21
+          }
+        },
+        "holdout": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": -0.8271305647890707,
+              "std": 0.02682893784410464,
+              "min": -0.8956173567257577,
+              "max": -0.7954202550451205
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9391165522806003,
+              "std": 0.022027779157821215,
+              "min": 0.901531499214385,
+              "max": 0.9796649227617255
+            },
+            "energy": {
+              "count": 40,
+              "mean": 7.06019351857661,
+              "std": 0.6382307560752983,
+              "min": 6.35562875027972,
+              "max": 8.869297750070473
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 38.163208208522214,
+              "std": 3.4498959787853964,
+              "min": 34.354750001512,
+              "max": 47.942150000380934
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9391165522806003,
+            "effect_size": -43.59990952213782,
+            "p_value": 6.469788517175321e-60
+          }
+        }
+      },
+      "holdout_failure_diagnosis": [
+        "threshold_sensitivity"
+      ],
+      "holdout_dataset_audit": {
+        "benchmark_composition": {
+          "development": {
+            "benchmark_id": "transformer_inference_small",
+            "input_shape": {
+              "seq_len": "128",
+              "batch": "1",
+              "vocab": "50257",
+              "hidden": "1024"
+            },
+            "metadata": {
+              "model_type": "transformer_gpt2_like",
+              "num_layers": 12,
+              "num_heads": 16,
+              "hidden_dim": 1024,
+              "ffn_dim": 4096,
+              "model_params_millions": 125,
+              "data_source": "wikitext-103",
+              "timeout_seconds": 30,
+              "repetitions": 3,
+              "warmup_runs": 2
+            }
+          },
+          "validation": {
+            "benchmark_id": "transformer_inference_medium",
+            "input_shape": {
+              "seq_len": "256",
+              "batch": "2",
+              "vocab": "50257",
+              "hidden": "1536"
+            },
+            "metadata": {
+              "model_type": "transformer_gpt2_like",
+              "num_layers": 24,
+              "num_heads": 24,
+              "hidden_dim": 1536,
+              "ffn_dim": 6144,
+              "model_params_millions": 500,
+              "data_source": "wikitext-103 + openwebtext",
+              "timeout_seconds": 60,
+              "repetitions": 3,
+              "warmup_runs": 2
+            }
+          },
+          "holdout": {
+            "benchmark_id": "transformer_inference_holdout",
+            "input_shape": {
+              "seq_len": "512",
+              "batch": "4",
+              "vocab": "50257",
+              "hidden": "2048"
+            },
+            "metadata": {
+              "model_type": "transformer_hybrid_architecture",
+              "description": "Different architecture from dev set to prevent overfitting",
+              "num_layers": 32,
+              "num_heads": 32,
+              "hidden_dim": 2048,
+              "ffn_dim": 8192,
+              "model_params_millions": 1300,
+              "data_source": "arxiv-abstract-index (completely different from training data)",
+              "timeout_seconds": 120,
+              "repetitions": 5,
+              "warmup_runs": 3,
+              "warnings": [
+                "This benchmark is READ-ONLY",
+                "DO NOT include in optimization loop",
+                "Use only for final validation",
+                "Results on this set determine acceptance"
+              ]
+            }
+          }
+        },
+        "token_distribution_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.11166666666666668,
+            "std": 0.059805239458317255,
+            "min": 0.060000000000000005,
+            "max": 0.21000000000000002
+          },
+          "validation": {
+            "count": 6,
+            "mean": 0.125,
+            "std": 0.04415880433163924,
+            "min": 0.060000000000000005,
+            "max": 0.18
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 0.125,
+            "std": 0.052915026221291815,
+            "min": 0.05,
+            "max": 0.21000000000000002
+          }
+        },
+        "difficulty_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.9766666666666668,
+            "std": 0.16415439886480862,
+            "min": 0.8,
+            "max": 1.2000000000000002
+          },
+          "validation": {
+            "count": 6,
+            "mean": 1.0533333333333335,
+            "std": 0.13544986772480316,
+            "min": 0.9,
+            "max": 1.22
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 1.0,
+            "std": 0.1430284686946723,
+            "min": 0.8200000000000001,
+            "max": 1.22
+          }
+        },
+        "scoring_sensitivity_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.8966666666666666,
+            "std": 0.025033311140691423,
+            "min": 0.87,
+            "max": 0.9299999999999999
+          },
+          "validation": {
+            "count": 6,
+            "mean": 0.9,
+            "std": 0.024494897427831758,
+            "min": 0.86,
+            "max": 0.9299999999999999
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 0.9149999999999999,
+            "std": 0.022038926600773567,
+            "min": 0.87,
+            "max": 0.94
+          }
+        },
+        "classification": {
+          "expected_diversity": [
+            "Holdout model_type differs from development by design.",
+            "Holdout workload depth is higher than validation."
+          ],
+          "likely_mismatch": []
+        }
+      },
+      "stability_decomposition": {
+        "components": {
+          "runtime_variance": 15.963306368404508,
+          "throughput_variance": 176250.10430990072,
+          "power_variance": 0.0,
+          "quality_variance": 0.01943270981756478,
+          "energy_uncertainty": 0.1561646163099763
+        },
+        "shares": {
+          "runtime_variance": 9.056360467761572e-05,
+          "throughput_variance": 0.9999084401902468,
+          "power_variance": 0.0,
+          "quality_variance": 1.1024634929114975e-07,
+          "energy_uncertainty": 8.859587262022695e-07
+        },
+        "dominant_component": "throughput_variance"
+      },
+      "native_telemetry_readiness": {
+        "environment_requirements": [
+          "NVIDIA driver and nvidia-smi available in PATH",
+          "GPU power query permissions enabled (nvidia-smi --query-gpu=power.draw)",
+          "Python process allowed to sample at <=100ms cadence during trial windows",
+          "Optional: ACE_DIRECT_POWER_WATTS for external direct stream integration"
+        ],
+        "commands": [
+          "nvidia-smi --query-gpu=power.draw,power.draw.average,power.draw.instant --format=csv,noheader,nounits",
+          "python -m pytest -q",
+          "python run_full_program.py --experiment-id exp_002_token_pruning --experiment-id exp_006_token_pruning_threshold_sweep"
+        ],
+        "fallbacks": [
+          "If nvidia-smi missing, set ACE_DIRECT_POWER_WATTS from external power stream.",
+          "If ACE_DIRECT_POWER_WATTS missing, calibrated runtime-based proxy is used with explicit uncertainty."
+        ],
+        "expected_provenance_improvement": {
+          "power_watts": "estimated -> direct",
+          "energy_joules": "derived from estimated power -> derived from direct power",
+          "ecd_uncertainty": "reduced due to lower power uncertainty component"
+        }
+      },
+      "recommendation": "likely too benchmark-specific"
+    },
+    {
+      "experiment_id": "exp_006_token_pruning_threshold_sweep",
+      "engine_verdict": "rejected",
+      "final_verdict": "rejected",
+      "holdout_failure_analysis": {
+        "gate_passed": false,
+        "failure_evidence": {
+          "required": true,
+          "holdout_has_data": true,
+          "holdout_ecd": -0.8061495336495204,
+          "holdout_quality": 0.9391165522806003,
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.935465
+        },
+        "thresholds": {
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.935465
+        },
+        "metrics_causing_failure": {
+          "holdout_ecd": -0.8061495336495204,
+          "holdout_quality": 0.9391165522806003
+        },
+        "holdout_effect_size": -79.66112334677918,
+        "holdout_significance": {
+          "significant": true,
+          "p_value": 4.0564857866020206e-70
+        },
+        "quality_delta_holdout_vs_floor": 0.003651552280600323,
+        "energy_delta_holdout_vs_development": 6.3225871719451785,
+        "ecd_delta_holdout_vs_development": -103.1492202072237
+      },
+      "split_comparison": {
+        "development": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": 102.34307067357419,
+              "std": 17.504058826286954,
+              "min": 56.38772524311308,
+              "max": 128.1136622152642
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9398391766794287,
+              "std": 0.017484988532040856,
+              "min": 0.9040564552485758,
+              "max": 0.970687866423251
+            },
+            "energy": {
+              "count": 40,
+              "mean": 0.2892794818541764,
+              "std": 0.027689935974353163,
+              "min": 0.2577836246746301,
+              "max": 0.3881731664781303
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 1.56367287488744,
+              "std": 0.1496753295910982,
+              "min": 1.3934249982412439,
+              "max": 2.098233332314218
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9398391766794287,
+            "effect_size": 8.268651288129764,
+            "p_value": 5.584633240081094e-32
+          }
+        },
+        "validation": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": 2.62603318409119,
+              "std": 0.49270234179071315,
+              "min": 1.6149239779518905,
+              "max": 3.3709549882972376
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9363589149986693,
+              "std": 0.01882522508665437,
+              "min": 0.8982930466095672,
+              "max": 0.9755520713473752
+            },
+            "energy": {
+              "count": 40,
+              "mean": 1.5344324034931256,
+              "std": 0.11170081903028796,
+              "min": 1.3877898336916892,
+              "max": 1.8214729998726398
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 8.29422920807095,
+              "std": 0.6037882109745295,
+              "min": 7.501566668603725,
+              "max": 9.845799999311566
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9363589149986693,
+            "effect_size": 7.537556510663135,
+            "p_value": 1.8555963610855262e-30
+          }
+        },
+        "holdout": {
+          "gating_metric_mean_variance": {
+            "ecd": {
+              "count": 40,
+              "mean": -0.8061495336495204,
+              "std": 0.014311467826344584,
+              "min": -0.8453316792688653,
+              "max": -0.7870798965432929
+            },
+            "quality": {
+              "count": 40,
+              "mean": 0.9391165522806003,
+              "std": 0.022027779157821215,
+              "min": 0.901531499214385,
+              "max": 0.9796649227617255
+            },
+            "energy": {
+              "count": 40,
+              "mean": 6.611866653799355,
+              "std": 0.2541872540230082,
+              "min": 6.360559000131616,
+              "max": 7.4232776247299626
+            },
+            "runtime": {
+              "count": 40,
+              "mean": 35.73981975026678,
+              "std": 1.3739851568811252,
+              "min": 34.38140000071144,
+              "max": 40.12582499854034
+            }
+          },
+          "provenance_counts": {
+            "direct": 320,
+            "estimated": 40,
+            "derived": 520,
+            "benchmark-scored": 40,
+            "unknown": 0
+          },
+          "quality_behavior": {
+            "mean": 0.9391165522806003,
+            "effect_size": -79.66112334677918,
+            "p_value": 4.0564857866020206e-70
+          }
+        }
+      },
+      "holdout_failure_diagnosis": [
+        "threshold_sensitivity"
+      ],
+      "holdout_dataset_audit": {
+        "benchmark_composition": {
+          "development": {
+            "benchmark_id": "transformer_inference_small",
+            "input_shape": {
+              "seq_len": "128",
+              "batch": "1",
+              "vocab": "50257",
+              "hidden": "1024"
+            },
+            "metadata": {
+              "model_type": "transformer_gpt2_like",
+              "num_layers": 12,
+              "num_heads": 16,
+              "hidden_dim": 1024,
+              "ffn_dim": 4096,
+              "model_params_millions": 125,
+              "data_source": "wikitext-103",
+              "timeout_seconds": 30,
+              "repetitions": 3,
+              "warmup_runs": 2
+            }
+          },
+          "validation": {
+            "benchmark_id": "transformer_inference_medium",
+            "input_shape": {
+              "seq_len": "256",
+              "batch": "2",
+              "vocab": "50257",
+              "hidden": "1536"
+            },
+            "metadata": {
+              "model_type": "transformer_gpt2_like",
+              "num_layers": 24,
+              "num_heads": 24,
+              "hidden_dim": 1536,
+              "ffn_dim": 6144,
+              "model_params_millions": 500,
+              "data_source": "wikitext-103 + openwebtext",
+              "timeout_seconds": 60,
+              "repetitions": 3,
+              "warmup_runs": 2
+            }
+          },
+          "holdout": {
+            "benchmark_id": "transformer_inference_holdout",
+            "input_shape": {
+              "seq_len": "512",
+              "batch": "4",
+              "vocab": "50257",
+              "hidden": "2048"
+            },
+            "metadata": {
+              "model_type": "transformer_hybrid_architecture",
+              "description": "Different architecture from dev set to prevent overfitting",
+              "num_layers": 32,
+              "num_heads": 32,
+              "hidden_dim": 2048,
+              "ffn_dim": 8192,
+              "model_params_millions": 1300,
+              "data_source": "arxiv-abstract-index (completely different from training data)",
+              "timeout_seconds": 120,
+              "repetitions": 5,
+              "warmup_runs": 3,
+              "warnings": [
+                "This benchmark is READ-ONLY",
+                "DO NOT include in optimization loop",
+                "Use only for final validation",
+                "Results on this set determine acceptance"
+              ]
+            }
+          }
+        },
+        "token_distribution_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.11166666666666668,
+            "std": 0.059805239458317255,
+            "min": 0.060000000000000005,
+            "max": 0.21000000000000002
+          },
+          "validation": {
+            "count": 6,
+            "mean": 0.125,
+            "std": 0.04415880433163924,
+            "min": 0.060000000000000005,
+            "max": 0.18
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 0.125,
+            "std": 0.052915026221291815,
+            "min": 0.05,
+            "max": 0.21000000000000002
+          }
+        },
+        "difficulty_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.9766666666666668,
+            "std": 0.16415439886480862,
+            "min": 0.8,
+            "max": 1.2000000000000002
+          },
+          "validation": {
+            "count": 6,
+            "mean": 1.0533333333333335,
+            "std": 0.13544986772480316,
+            "min": 0.9,
+            "max": 1.22
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 1.0,
+            "std": 0.1430284686946723,
+            "min": 0.8200000000000001,
+            "max": 1.22
+          }
+        },
+        "scoring_sensitivity_proxy": {
+          "development": {
+            "count": 6,
+            "mean": 0.8966666666666666,
+            "std": 0.025033311140691423,
+            "min": 0.87,
+            "max": 0.9299999999999999
+          },
+          "validation": {
+            "count": 6,
+            "mean": 0.9,
+            "std": 0.024494897427831758,
+            "min": 0.86,
+            "max": 0.9299999999999999
+          },
+          "holdout": {
+            "count": 8,
+            "mean": 0.9149999999999999,
+            "std": 0.022038926600773567,
+            "min": 0.87,
+            "max": 0.94
+          }
+        },
+        "classification": {
+          "expected_diversity": [
+            "Holdout model_type differs from development by design.",
+            "Holdout workload depth is higher than validation."
+          ],
+          "likely_mismatch": []
+        }
+      },
+      "stability_decomposition": {
+        "components": {
+          "runtime_variance": 14.869078054340084,
+          "throughput_variance": 182810.6008468629,
+          "power_variance": 0.0,
+          "quality_variance": 0.01943270981756478,
+          "energy_uncertainty": 0.14643831762154136
+        },
+        "shares": {
+          "runtime_variance": 8.132928399021547e-05,
+          "throughput_variance": 0.9999177634525032,
+          "power_variance": 0.0,
+          "quality_variance": 1.062909461956091e-07,
+          "energy_uncertainty": 8.009725604618385e-07
+        },
+        "dominant_component": "throughput_variance"
+      },
+      "native_telemetry_readiness": {
+        "environment_requirements": [
+          "NVIDIA driver and nvidia-smi available in PATH",
+          "GPU power query permissions enabled (nvidia-smi --query-gpu=power.draw)",
+          "Python process allowed to sample at <=100ms cadence during trial windows",
+          "Optional: ACE_DIRECT_POWER_WATTS for external direct stream integration"
+        ],
+        "commands": [
+          "nvidia-smi --query-gpu=power.draw,power.draw.average,power.draw.instant --format=csv,noheader,nounits",
+          "python -m pytest -q",
+          "python run_full_program.py --experiment-id exp_002_token_pruning --experiment-id exp_006_token_pruning_threshold_sweep"
+        ],
+        "fallbacks": [
+          "If nvidia-smi missing, set ACE_DIRECT_POWER_WATTS from external power stream.",
+          "If ACE_DIRECT_POWER_WATTS missing, calibrated runtime-based proxy is used with explicit uncertainty."
+        ],
+        "expected_provenance_improvement": {
+          "power_watts": "estimated -> direct",
+          "energy_joules": "derived from estimated power -> derived from direct power",
+          "ecd_uncertainty": "reduced due to lower power uncertainty component"
+        }
+      },
+      "recommendation": "likely too benchmark-specific"
+    }
+  ]
+}

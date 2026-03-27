@@ -1,0 +1,192 @@
+[
+  {
+    "trial_num": 1,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 94.74949709106428,
+      "energy_joules": 0.5950268417318837,
+      "throughput_tok_sec": 10.554145728487553,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 12.853293453444918,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.15,
+      "ecd_improvement": -0.1514423923473218
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 2,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 101.92451655824068,
+      "energy_joules": 0.6400859639857515,
+      "throughput_tok_sec": 9.811182174492728,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.047091093553503,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.15000000000000002,
+      "ecd_improvement": -0.2667064955183889
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 3,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 95.15657375981655,
+      "energy_joules": 0.597583283211648,
+      "throughput_tok_sec": 10.50899544285912,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 12.975508342054384,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.14999999999999997,
+      "ecd_improvement": -0.15868706553744852
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 4,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 101.65748090830373,
+      "energy_joules": 0.6384089801041474,
+      "throughput_tok_sec": 9.836954359532204,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.29837481844581,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.14999999999999997,
+      "ecd_improvement": -0.2628489792468269
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 5,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 98.43215176331306,
+      "energy_joules": 0.618153913073606,
+      "throughput_tok_sec": 10.159282125667326,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.017397068802644,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.1499999999999999,
+      "ecd_improvement": -0.21374901893259973
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 6,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 101.2848408245034,
+      "energy_joules": 0.6360688003778814,
+      "throughput_tok_sec": 9.873145792199086,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.120225070524473,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.14999999999999997,
+      "ecd_improvement": -0.25741485248685037
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 7,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 94.5950617242684,
+      "energy_joules": 0.5940569876284055,
+      "throughput_tok_sec": 10.571376367562003,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 12.868133826808332,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.15,
+      "ecd_improvement": -0.14866942985769072
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 8,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 100.48477901473262,
+      "energy_joules": 0.6310444122125208,
+      "throughput_tok_sec": 9.951755975433697,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.093709654715754,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.14999999999999997,
+      "ecd_improvement": -0.2455428217835159
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 9,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 95.68404162988514,
+      "energy_joules": 0.6008957814356787,
+      "throughput_tok_sec": 10.451063552144817,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 12.960654604107148,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.15,
+      "ecd_improvement": -0.16793714283456268
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 10,
+    "timestamp": "2026-03-27T13:34:08.847007",
+    "metrics": {
+      "accuracy": 0.9847,
+      "latency_ms": 103.13992163166772,
+      "energy_joules": 0.6477187078468732,
+      "throughput_tok_sec": 9.69556680071166,
+      "peak_memory_mb": 10.649999999999999,
+      "memory_reduction": 0.25,
+      "recomputation_overhead_ms": 13.345562274814725,
+      "activations_recomputed": 15,
+      "memory_bandwidth_reduction": 0.2125,
+      "latency_change_ratio": 0.15,
+      "ecd_improvement": -0.28388698928482664
+    },
+    "success": true,
+    "error_message": ""
+  }
+]

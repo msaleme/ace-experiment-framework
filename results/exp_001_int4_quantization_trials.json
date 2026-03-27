@@ -1,0 +1,182 @@
+[
+  {
+    "trial_num": 1,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9595378290878827,
+      "latency_ms": 71.53300285510717,
+      "energy_joules": 0.449227257930073,
+      "throughput_tok_sec": 13.979561322562374,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.4507093451561325
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 2,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9556337111818961,
+      "latency_ms": 67.97433694763909,
+      "energy_joules": 0.4268788360311735,
+      "throughput_tok_sec": 14.711434416348984,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.600046934955347
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 3,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9592760648392927,
+      "latency_ms": 66.76203004889943,
+      "energy_joules": 0.41926554870708843,
+      "throughput_tok_sec": 14.97857388799526,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.6650058399992675
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 4,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9915284559769305,
+      "latency_ms": 67.61243908043785,
+      "energy_joules": 0.4246061174251497,
+      "throughput_tok_sec": 14.79017786668382,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.677966155275016
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 5,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9610005881754173,
+      "latency_ms": 69.6699276235544,
+      "energy_joules": 0.43752714547592164,
+      "throughput_tok_sec": 14.3533951320184,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.5316662937759705
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 6,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9631841643209891,
+      "latency_ms": 71.76427615807941,
+      "energy_joules": 0.4506796542727387,
+      "throughput_tok_sec": 13.934509668811275,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.44685142641113135
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 7,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.971224145575253,
+      "latency_ms": 69.61451649445291,
+      "energy_joules": 0.4371791635851643,
+      "throughput_tok_sec": 14.364820016809036,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.5504260944750667
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 8,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9598911458225319,
+      "latency_ms": 68.94008198947809,
+      "energy_joules": 0.4329437148939224,
+      "throughput_tok_sec": 14.505349734754073,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.5624625441128672
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 9,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9773526940842104,
+      "latency_ms": 67.90994894385479,
+      "energy_joules": 0.42647447936740807,
+      "throughput_tok_sec": 14.725382886486335,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.6395162558253233
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 10,
+    "timestamp": "2026-03-27T13:34:08.672020",
+    "metrics": {
+      "accuracy": 0.9785768007830513,
+      "latency_ms": 71.56215238373782,
+      "energy_joules": 0.44941031696987355,
+      "throughput_tok_sec": 13.973867004973505,
+      "memory_bandwidth_reduction": 0.75,
+      "model_size_mb": 1404.3487278761063,
+      "layers_int4": 58,
+      "layers_int8": 39,
+      "complexity_overhead": 0.02,
+      "ecd_improvement": 0.47828900701491056
+    },
+    "success": true,
+    "error_message": ""
+  }
+]

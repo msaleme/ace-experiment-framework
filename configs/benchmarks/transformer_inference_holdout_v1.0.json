@@ -1,0 +1,38 @@
+{
+  "benchmark_id": "transformer_inference_holdout",
+  "name": "Transformer Inference - Holdout (DO NOT OPTIMIZE ON)",
+  "workload_class": "dense_linear_algebra",
+  "input_size": "seq_len=512, batch=4, vocab=50257, hidden=2048, diverse_architecture",
+  "primary_metrics": [
+    "accuracy",
+    "latency_ms",
+    "energy_joules",
+    "throughput_tok_sec"
+  ],
+  "secondarty_metrics": [
+    "memory_traffic_bytes",
+    "cache_hit_rate",
+    "peak_power_watts"
+  ],
+  "quality_metric": "accuracy",
+  "metadata": {
+    "model_type": "transformer_hybrid_architecture",
+    "description": "Different architecture from dev set to prevent overfitting",
+    "num_layers": 32,
+    "num_heads": 32,
+    "hidden_dim": 2048,
+    "ffn_dim": 8192,
+    "model_params_millions": 1300,
+    "data_source": "arxiv-abstract-index (completely different from training data)",
+    "timeout_seconds": 120,
+    "repetitions": 5,
+    "warmup_runs": 3,
+    "warnings": [
+      "This benchmark is READ-ONLY",
+      "DO NOT include in optimization loop",
+      "Use only for final validation",
+      "Results on this set determine acceptance"
+    ]
+  },
+  "version": "1.0"
+}

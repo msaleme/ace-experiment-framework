@@ -1,0 +1,1005 @@
+{
+  "experiment_id": "exp_003_int4_static_quant_sweep",
+  "parent_experiment_id": null,
+  "hypothesis_text": "INT4 static quantization sweep can improve ECD with acceptable quality floor enforcement.",
+  "horizon_category": "near_term",
+  "workload_class": "dense_linear_algebra",
+  "hardware_target": "A100",
+  "representation_type": "int4_static_quant",
+  "mutation_scope": [
+    "quantization_config"
+  ],
+  "baseline_reference": "baseline_gpu_transformer_bf16_v1",
+  "evaluation_config": {
+    "quality_floor": 0.98,
+    "latency_budget_ms_p95": 120.0,
+    "latency_budget_ms_p99": 2000.0,
+    "reliability_threshold": 0.95,
+    "minimum_effect_threshold": 0.1,
+    "trials": 10,
+    "confidence_level": 0.95,
+    "require_holdout_pass": true,
+    "confidence_interval_excludes_zero": true,
+    "complexity_penalty_enabled": true
+  },
+  "benchmark_set": [
+    "transformer_inference_small",
+    "transformer_inference_medium",
+    "transformer_inference_holdout"
+  ],
+  "created_timestamp": "2026-03-27T14:02:07.835506",
+  "started_timestamp": "2026-03-27T14:02:07.835506",
+  "completed_timestamp": "2026-03-27T14:02:08.182110",
+  "raw_results": {
+    "benchmark_sets": {
+      "development": [
+        "transformer_inference_small"
+      ],
+      "validation": [
+        "transformer_inference_medium"
+      ],
+      "holdout": [
+        "transformer_inference_holdout"
+      ]
+    },
+    "configured_constraints": {
+      "acceptance": {
+        "minimum_ecd_improvement": 0.1,
+        "minimum_effect_size": 0.1,
+        "require_statistical_significance": true,
+        "confidence_level": 0.95,
+        "confidence_interval_excludes_zero": true,
+        "require_holdout_pass": true,
+        "require_validation_transfer": true,
+        "maximum_complexity_overhead": 0.05
+      },
+      "quality_floor": {
+        "metric": "accuracy",
+        "minimum_relative_to_baseline": 0.98,
+        "absolute_minimum": 0.9
+      }
+    },
+    "reporting": {
+      "report_format": [
+        "markdown",
+        "json"
+      ],
+      "include_raw_data": true,
+      "comparison_reports": true,
+      "portfolio_update": true,
+      "artifact_retention_days": 365
+    },
+    "maturity_label": "M5",
+    "metric_types": {
+      "near_term": "direct+estimated",
+      "mid_term": "estimated",
+      "moonshot": "estimated"
+    },
+    "baseline_metrics": {},
+    "gate_runs": {
+      "development": {
+        "benchmarks": [
+          "transformer_inference_small"
+        ],
+        "configured": true,
+        "executed_trials": 10,
+        "missing": false
+      },
+      "validation": {
+        "benchmarks": [
+          "transformer_inference_medium"
+        ],
+        "configured": true,
+        "executed_trials": 10,
+        "missing": false
+      },
+      "holdout": {
+        "benchmarks": [
+          "transformer_inference_holdout"
+        ],
+        "configured": true,
+        "executed_trials": 10,
+        "missing": false
+      }
+    },
+    "split_summaries": {
+      "development": {
+        "energy_joules": {
+          "count": 30,
+          "mean": 1.0626872733351775,
+          "std": 0.65524215789705,
+          "min": 0.04603519994998351,
+          "max": 1.4843750000000002,
+          "p95": 1.4843750000000002,
+          "p99": 1.4843750000000002
+        },
+        "throughput_tok_sec": {
+          "count": 30,
+          "mean": 397019.2623974975,
+          "std": 48457.81850238311,
+          "min": 303539.4871478827,
+          "max": 497706.1036965955,
+          "p95": 456720.81705390033,
+          "p99": 486056.43865925336
+        },
+        "latency_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "runtime_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "ecd_improvement": {
+          "count": 30,
+          "mean": 23.24261153784516,
+          "std": 41.12911383492792,
+          "min": 1.003400460258263,
+          "max": 176.52891769005916,
+          "p95": 98.6021313803964,
+          "p99": 157.5298038345668
+        },
+        "power_watts": {
+          "count": 30,
+          "mean": 91.36813504899898,
+          "std": 59.38081008579565,
+          "min": 8.0,
+          "max": 170.93020575634964,
+          "p95": 164.73604931840538,
+          "p99": 169.16109570903353
+        },
+        "memory_bandwidth_reduction": {
+          "count": 30,
+          "mean": 0.75,
+          "std": 0.0,
+          "min": 0.75,
+          "max": 0.75,
+          "p95": 0.75,
+          "p99": 0.75
+        },
+        "model_size_mb": {
+          "count": 30,
+          "mean": 1404.3487278761063,
+          "std": 0.0,
+          "min": 1404.3487278761063,
+          "max": 1404.3487278761063,
+          "p95": 1404.3487278761063,
+          "p99": 1404.3487278761063
+        },
+        "accuracy": {
+          "count": 30,
+          "mean": 0.9700736542515126,
+          "std": 0.011881964352123853,
+          "min": 0.9461656031615151,
+          "max": 0.9915284559769305,
+          "p95": 0.9897717620504843,
+          "p99": 0.9912385709887727
+        },
+        "memory_peak_mb": {
+          "count": 30,
+          "mean": 0.00029754638671875,
+          "std": 0.0,
+          "min": 0.00029754638671875,
+          "max": 0.00029754638671875,
+          "p95": 0.00029754638671875,
+          "p99": 0.00029754638671875
+        },
+        "complexity_overhead": {
+          "count": 30,
+          "mean": 0.02,
+          "std": 0.0,
+          "min": 0.02,
+          "max": 0.02,
+          "p95": 0.02,
+          "p99": 0.02
+        }
+      },
+      "validation": {
+        "energy_joules": {
+          "count": 30,
+          "mean": 1.0626872733351775,
+          "std": 0.65524215789705,
+          "min": 0.04603519994998351,
+          "max": 1.4843750000000002,
+          "p95": 1.4843750000000002,
+          "p99": 1.4843750000000002
+        },
+        "throughput_tok_sec": {
+          "count": 30,
+          "mean": 397019.2623974975,
+          "std": 48457.81850238311,
+          "min": 303539.4871478827,
+          "max": 497706.1036965955,
+          "p95": 456720.81705390033,
+          "p99": 486056.43865925336
+        },
+        "latency_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "runtime_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "ecd_improvement": {
+          "count": 30,
+          "mean": 23.24261153784516,
+          "std": 41.12911383492792,
+          "min": 1.003400460258263,
+          "max": 176.52891769005916,
+          "p95": 98.6021313803964,
+          "p99": 157.5298038345668
+        },
+        "power_watts": {
+          "count": 30,
+          "mean": 91.36813504899898,
+          "std": 59.38081008579565,
+          "min": 8.0,
+          "max": 170.93020575634964,
+          "p95": 164.73604931840538,
+          "p99": 169.16109570903353
+        },
+        "memory_bandwidth_reduction": {
+          "count": 30,
+          "mean": 0.75,
+          "std": 0.0,
+          "min": 0.75,
+          "max": 0.75,
+          "p95": 0.75,
+          "p99": 0.75
+        },
+        "model_size_mb": {
+          "count": 30,
+          "mean": 1404.3487278761063,
+          "std": 0.0,
+          "min": 1404.3487278761063,
+          "max": 1404.3487278761063,
+          "p95": 1404.3487278761063,
+          "p99": 1404.3487278761063
+        },
+        "accuracy": {
+          "count": 30,
+          "mean": 0.9700736542515126,
+          "std": 0.011881964352123853,
+          "min": 0.9461656031615151,
+          "max": 0.9915284559769305,
+          "p95": 0.9897717620504843,
+          "p99": 0.9912385709887727
+        },
+        "memory_peak_mb": {
+          "count": 30,
+          "mean": 0.00029754638671875,
+          "std": 0.0,
+          "min": 0.00029754638671875,
+          "max": 0.00029754638671875,
+          "p95": 0.00029754638671875,
+          "p99": 0.00029754638671875
+        },
+        "complexity_overhead": {
+          "count": 30,
+          "mean": 0.02,
+          "std": 0.0,
+          "min": 0.02,
+          "max": 0.02,
+          "p95": 0.02,
+          "p99": 0.02
+        }
+      },
+      "holdout": {
+        "energy_joules": {
+          "count": 30,
+          "mean": 1.0626872733351775,
+          "std": 0.65524215789705,
+          "min": 0.04603519994998351,
+          "max": 1.4843750000000002,
+          "p95": 1.4843750000000002,
+          "p99": 1.4843750000000002
+        },
+        "throughput_tok_sec": {
+          "count": 30,
+          "mean": 397019.2623974975,
+          "std": 48457.81850238311,
+          "min": 303539.4871478827,
+          "max": 497706.1036965955,
+          "p95": 456720.81705390033,
+          "p99": 486056.43865925336
+        },
+        "latency_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "runtime_ms": {
+          "count": 30,
+          "mean": 11.44156666729638,
+          "std": 2.6301696364124414,
+          "min": 5.754399993747938,
+          "max": 15.681999997468665,
+          "p95": 15.4217349980172,
+          "p99": 15.639108997929725
+        },
+        "ecd_improvement": {
+          "count": 30,
+          "mean": 23.24261153784516,
+          "std": 41.12911383492792,
+          "min": 1.003400460258263,
+          "max": 176.52891769005916,
+          "p95": 98.6021313803964,
+          "p99": 157.5298038345668
+        },
+        "power_watts": {
+          "count": 30,
+          "mean": 91.36813504899898,
+          "std": 59.38081008579565,
+          "min": 8.0,
+          "max": 170.93020575634964,
+          "p95": 164.73604931840538,
+          "p99": 169.16109570903353
+        },
+        "memory_bandwidth_reduction": {
+          "count": 30,
+          "mean": 0.75,
+          "std": 0.0,
+          "min": 0.75,
+          "max": 0.75,
+          "p95": 0.75,
+          "p99": 0.75
+        },
+        "model_size_mb": {
+          "count": 30,
+          "mean": 1404.3487278761063,
+          "std": 0.0,
+          "min": 1404.3487278761063,
+          "max": 1404.3487278761063,
+          "p95": 1404.3487278761063,
+          "p99": 1404.3487278761063
+        },
+        "accuracy": {
+          "count": 30,
+          "mean": 0.9700736542515126,
+          "std": 0.011881964352123853,
+          "min": 0.9461656031615151,
+          "max": 0.9915284559769305,
+          "p95": 0.9897717620504843,
+          "p99": 0.9912385709887727
+        },
+        "memory_peak_mb": {
+          "count": 30,
+          "mean": 0.00029754638671875,
+          "std": 0.0,
+          "min": 0.00029754638671875,
+          "max": 0.00029754638671875,
+          "p95": 0.00029754638671875,
+          "p99": 0.00029754638671875
+        },
+        "complexity_overhead": {
+          "count": 30,
+          "mean": 0.02,
+          "std": 0.0,
+          "min": 0.02,
+          "max": 0.02,
+          "p95": 0.02,
+          "p99": 0.02
+        }
+      }
+    },
+    "decision_trace": {
+      "engine_version": "single_decision_engine_v1",
+      "engine_only_verdict": true,
+      "configured_constraints": {
+        "minimum_ecd_improvement": 0.1,
+        "minimum_effect_size": 0.1,
+        "require_statistical_significance": true,
+        "confidence_level": 0.95,
+        "confidence_interval_excludes_zero": true,
+        "require_holdout_pass": true,
+        "require_validation_transfer": true,
+        "maximum_complexity_overhead": 0.05,
+        "quality_floor_relative": 0.98
+      },
+      "split_scores": {
+        "development": {
+          "has_data": true,
+          "trials": 10,
+          "ecd_mean": 11.656488033865417,
+          "quality_mean": 0.9677205599847455,
+          "latency_p95": 15.681999997468665,
+          "energy_mean": 1.2044301599962637,
+          "runtime_mean_ms": 12.167620000400348,
+          "throughput_mean": 387932.03829261847,
+          "memory_peak_mean_mb": 0.00029754638671875,
+          "complexity_overhead_mean": 0.02,
+          "complexity_overhead_samples": 10,
+          "effect_size": 0.7722498805109027,
+          "confidence_interval": [
+            1.482406889822975,
+            26.13919192234835
+          ],
+          "ci_excludes_zero": true,
+          "significant": false,
+          "p_value": 0.11827689079497881,
+          "metric_source_counts": {
+            "direct": 40,
+            "estimated": 50,
+            "unknown": 0
+          }
+        },
+        "validation": {
+          "has_data": true,
+          "trials": 10,
+          "ecd_mean": 34.72830531500501,
+          "quality_mean": 0.9714345047632298,
+          "latency_p95": 15.534099999058526,
+          "energy_mean": 1.05825130000012,
+          "runtime_mean_ms": 11.062870000023395,
+          "throughput_mean": 399469.7520388693,
+          "memory_peak_mean_mb": 0.00029754638671875,
+          "complexity_overhead_mean": 0.02,
+          "complexity_overhead_samples": 10,
+          "effect_size": 0.8024543479686352,
+          "confidence_interval": [
+            1.9438425080814108,
+            74.33248575144522
+          ],
+          "ci_excludes_zero": true,
+          "significant": false,
+          "p_value": 0.10633830430965809,
+          "metric_source_counts": {
+            "direct": 40,
+            "estimated": 50,
+            "unknown": 0
+          }
+        },
+        "holdout": {
+          "has_data": true,
+          "trials": 10,
+          "ecd_mean": 23.343041264665054,
+          "quality_mean": 0.9710658980065624,
+          "latency_p95": 14.830299995082896,
+          "energy_mean": 0.9253803600091487,
+          "runtime_mean_ms": 11.094210001465399,
+          "throughput_mean": 403655.9968610046,
+          "memory_peak_mean_mb": 0.00029754638671875,
+          "complexity_overhead_mean": 0.02,
+          "complexity_overhead_samples": 10,
+          "effect_size": 1.069136205743173,
+          "confidence_interval": [
+            6.949369948935425,
+            42.14081892112392
+          ],
+          "ci_excludes_zero": true,
+          "significant": true,
+          "p_value": 0.04051344850371159,
+          "metric_source_counts": {
+            "direct": 40,
+            "estimated": 50,
+            "unknown": 0
+          }
+        }
+      },
+      "gates": [
+        {
+          "gate": "development_minimum_ecd",
+          "passed": true,
+          "evidence": {
+            "required": 0.1,
+            "actual": 11.656488033865417,
+            "has_data": true
+          }
+        },
+        {
+          "gate": "development_minimum_effect",
+          "passed": true,
+          "evidence": {
+            "required": 0.1,
+            "actual": 0.7722498805109027,
+            "has_data": true
+          }
+        },
+        {
+          "gate": "development_significance",
+          "passed": false,
+          "evidence": {
+            "required": true,
+            "actual": false,
+            "p_value": 0.11827689079497881
+          }
+        },
+        {
+          "gate": "development_confidence_interval",
+          "passed": true,
+          "evidence": {
+            "required": true,
+            "actual": true,
+            "ci": [
+              1.482406889822975,
+              26.13919192234835
+            ]
+          }
+        },
+        {
+          "gate": "development_quality_floor",
+          "passed": true,
+          "evidence": {
+            "required": 0.965006,
+            "quality_floor_relative": 0.98,
+            "baseline_quality": 0.9847,
+            "actual": 0.9677205599847455,
+            "has_data": true
+          }
+        },
+        {
+          "gate": "confidence_level_configured",
+          "passed": true,
+          "evidence": {
+            "configured": 0.95,
+            "used": 0.95
+          }
+        },
+        {
+          "gate": "validation_transfer",
+          "passed": true,
+          "evidence": {
+            "required": true,
+            "validation_has_data": true,
+            "validation_ecd": 34.72830531500501,
+            "validation_quality": 0.9714345047632298,
+            "minimum_ecd_required": 0.1,
+            "quality_floor_required": 0.965006
+          }
+        },
+        {
+          "gate": "holdout_independent_gate",
+          "passed": true,
+          "evidence": {
+            "required": true,
+            "holdout_has_data": true,
+            "holdout_ecd": 23.343041264665054,
+            "holdout_quality": 0.9710658980065624,
+            "minimum_ecd_required": 0.1,
+            "quality_floor_required": 0.965006
+          }
+        },
+        {
+          "gate": "complexity_overhead_gate",
+          "passed": true,
+          "evidence": {
+            "required": 0.05,
+            "actual": 0.02,
+            "samples": 10
+          }
+        },
+        {
+          "gate": "configured_constraint_coverage",
+          "passed": true,
+          "evidence": {
+            "configured": [
+              "confidence_interval_excludes_zero",
+              "confidence_level",
+              "maximum_complexity_overhead",
+              "minimum_ecd_improvement",
+              "minimum_effect_size",
+              "quality_floor_relative",
+              "require_holdout_pass",
+              "require_statistical_significance",
+              "require_validation_transfer"
+            ],
+            "checked": [
+              "confidence_interval_excludes_zero",
+              "confidence_level",
+              "maximum_complexity_overhead",
+              "minimum_ecd_improvement",
+              "minimum_effect_size",
+              "quality_floor_relative",
+              "require_holdout_pass",
+              "require_statistical_significance",
+              "require_validation_transfer"
+            ],
+            "uncovered": []
+          }
+        }
+      ],
+      "constraint_coverage": {
+        "configured": [
+          "confidence_interval_excludes_zero",
+          "confidence_level",
+          "maximum_complexity_overhead",
+          "minimum_ecd_improvement",
+          "minimum_effect_size",
+          "quality_floor_relative",
+          "require_holdout_pass",
+          "require_statistical_significance",
+          "require_validation_transfer"
+        ],
+        "checked": [
+          "confidence_interval_excludes_zero",
+          "confidence_level",
+          "maximum_complexity_overhead",
+          "minimum_ecd_improvement",
+          "minimum_effect_size",
+          "quality_floor_relative",
+          "require_holdout_pass",
+          "require_statistical_significance",
+          "require_validation_transfer"
+        ],
+        "uncovered": [],
+        "all_checked": true
+      },
+      "final_verdict": "rejected"
+    },
+    "verdict_source": "single_decision_engine_v1"
+  },
+  "summarized_results": {
+    "energy_joules": {
+      "count": 30,
+      "mean": 1.0626872733351775,
+      "std": 0.65524215789705,
+      "min": 0.04603519994998351,
+      "max": 1.4843750000000002,
+      "p95": 1.4843750000000002,
+      "p99": 1.4843750000000002
+    },
+    "throughput_tok_sec": {
+      "count": 30,
+      "mean": 397019.2623974975,
+      "std": 48457.81850238311,
+      "min": 303539.4871478827,
+      "max": 497706.1036965955,
+      "p95": 456720.81705390033,
+      "p99": 486056.43865925336
+    },
+    "latency_ms": {
+      "count": 30,
+      "mean": 11.44156666729638,
+      "std": 2.6301696364124414,
+      "min": 5.754399993747938,
+      "max": 15.681999997468665,
+      "p95": 15.4217349980172,
+      "p99": 15.639108997929725
+    },
+    "runtime_ms": {
+      "count": 30,
+      "mean": 11.44156666729638,
+      "std": 2.6301696364124414,
+      "min": 5.754399993747938,
+      "max": 15.681999997468665,
+      "p95": 15.4217349980172,
+      "p99": 15.639108997929725
+    },
+    "ecd_improvement": {
+      "count": 30,
+      "mean": 23.24261153784516,
+      "std": 41.12911383492792,
+      "min": 1.003400460258263,
+      "max": 176.52891769005916,
+      "p95": 98.6021313803964,
+      "p99": 157.5298038345668
+    },
+    "power_watts": {
+      "count": 30,
+      "mean": 91.36813504899898,
+      "std": 59.38081008579565,
+      "min": 8.0,
+      "max": 170.93020575634964,
+      "p95": 164.73604931840538,
+      "p99": 169.16109570903353
+    },
+    "memory_bandwidth_reduction": {
+      "count": 30,
+      "mean": 0.75,
+      "std": 0.0,
+      "min": 0.75,
+      "max": 0.75,
+      "p95": 0.75,
+      "p99": 0.75
+    },
+    "model_size_mb": {
+      "count": 30,
+      "mean": 1404.3487278761063,
+      "std": 0.0,
+      "min": 1404.3487278761063,
+      "max": 1404.3487278761063,
+      "p95": 1404.3487278761063,
+      "p99": 1404.3487278761063
+    },
+    "accuracy": {
+      "count": 30,
+      "mean": 0.9700736542515126,
+      "std": 0.011881964352123853,
+      "min": 0.9461656031615151,
+      "max": 0.9915284559769305,
+      "p95": 0.9897717620504843,
+      "p99": 0.9912385709887727
+    },
+    "memory_peak_mb": {
+      "count": 30,
+      "mean": 0.00029754638671875,
+      "std": 0.0,
+      "min": 0.00029754638671875,
+      "max": 0.00029754638671875,
+      "p95": 0.00029754638671875,
+      "p99": 0.00029754638671875
+    },
+    "complexity_overhead": {
+      "count": 30,
+      "mean": 0.02,
+      "std": 0.0,
+      "min": 0.02,
+      "max": 0.02,
+      "p95": 0.02,
+      "p99": 0.02
+    }
+  },
+  "statistical_assessment": {
+    "engine_version": "single_decision_engine_v1",
+    "engine_only_verdict": true,
+    "configured_constraints": {
+      "minimum_ecd_improvement": 0.1,
+      "minimum_effect_size": 0.1,
+      "require_statistical_significance": true,
+      "confidence_level": 0.95,
+      "confidence_interval_excludes_zero": true,
+      "require_holdout_pass": true,
+      "require_validation_transfer": true,
+      "maximum_complexity_overhead": 0.05,
+      "quality_floor_relative": 0.98
+    },
+    "split_scores": {
+      "development": {
+        "has_data": true,
+        "trials": 10,
+        "ecd_mean": 11.656488033865417,
+        "quality_mean": 0.9677205599847455,
+        "latency_p95": 15.681999997468665,
+        "energy_mean": 1.2044301599962637,
+        "runtime_mean_ms": 12.167620000400348,
+        "throughput_mean": 387932.03829261847,
+        "memory_peak_mean_mb": 0.00029754638671875,
+        "complexity_overhead_mean": 0.02,
+        "complexity_overhead_samples": 10,
+        "effect_size": 0.7722498805109027,
+        "confidence_interval": [
+          1.482406889822975,
+          26.13919192234835
+        ],
+        "ci_excludes_zero": true,
+        "significant": false,
+        "p_value": 0.11827689079497881,
+        "metric_source_counts": {
+          "direct": 40,
+          "estimated": 50,
+          "unknown": 0
+        }
+      },
+      "validation": {
+        "has_data": true,
+        "trials": 10,
+        "ecd_mean": 34.72830531500501,
+        "quality_mean": 0.9714345047632298,
+        "latency_p95": 15.534099999058526,
+        "energy_mean": 1.05825130000012,
+        "runtime_mean_ms": 11.062870000023395,
+        "throughput_mean": 399469.7520388693,
+        "memory_peak_mean_mb": 0.00029754638671875,
+        "complexity_overhead_mean": 0.02,
+        "complexity_overhead_samples": 10,
+        "effect_size": 0.8024543479686352,
+        "confidence_interval": [
+          1.9438425080814108,
+          74.33248575144522
+        ],
+        "ci_excludes_zero": true,
+        "significant": false,
+        "p_value": 0.10633830430965809,
+        "metric_source_counts": {
+          "direct": 40,
+          "estimated": 50,
+          "unknown": 0
+        }
+      },
+      "holdout": {
+        "has_data": true,
+        "trials": 10,
+        "ecd_mean": 23.343041264665054,
+        "quality_mean": 0.9710658980065624,
+        "latency_p95": 14.830299995082896,
+        "energy_mean": 0.9253803600091487,
+        "runtime_mean_ms": 11.094210001465399,
+        "throughput_mean": 403655.9968610046,
+        "memory_peak_mean_mb": 0.00029754638671875,
+        "complexity_overhead_mean": 0.02,
+        "complexity_overhead_samples": 10,
+        "effect_size": 1.069136205743173,
+        "confidence_interval": [
+          6.949369948935425,
+          42.14081892112392
+        ],
+        "ci_excludes_zero": true,
+        "significant": true,
+        "p_value": 0.04051344850371159,
+        "metric_source_counts": {
+          "direct": 40,
+          "estimated": 50,
+          "unknown": 0
+        }
+      }
+    },
+    "gates": [
+      {
+        "gate": "development_minimum_ecd",
+        "passed": true,
+        "evidence": {
+          "required": 0.1,
+          "actual": 11.656488033865417,
+          "has_data": true
+        }
+      },
+      {
+        "gate": "development_minimum_effect",
+        "passed": true,
+        "evidence": {
+          "required": 0.1,
+          "actual": 0.7722498805109027,
+          "has_data": true
+        }
+      },
+      {
+        "gate": "development_significance",
+        "passed": false,
+        "evidence": {
+          "required": true,
+          "actual": false,
+          "p_value": 0.11827689079497881
+        }
+      },
+      {
+        "gate": "development_confidence_interval",
+        "passed": true,
+        "evidence": {
+          "required": true,
+          "actual": true,
+          "ci": [
+            1.482406889822975,
+            26.13919192234835
+          ]
+        }
+      },
+      {
+        "gate": "development_quality_floor",
+        "passed": true,
+        "evidence": {
+          "required": 0.965006,
+          "quality_floor_relative": 0.98,
+          "baseline_quality": 0.9847,
+          "actual": 0.9677205599847455,
+          "has_data": true
+        }
+      },
+      {
+        "gate": "confidence_level_configured",
+        "passed": true,
+        "evidence": {
+          "configured": 0.95,
+          "used": 0.95
+        }
+      },
+      {
+        "gate": "validation_transfer",
+        "passed": true,
+        "evidence": {
+          "required": true,
+          "validation_has_data": true,
+          "validation_ecd": 34.72830531500501,
+          "validation_quality": 0.9714345047632298,
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.965006
+        }
+      },
+      {
+        "gate": "holdout_independent_gate",
+        "passed": true,
+        "evidence": {
+          "required": true,
+          "holdout_has_data": true,
+          "holdout_ecd": 23.343041264665054,
+          "holdout_quality": 0.9710658980065624,
+          "minimum_ecd_required": 0.1,
+          "quality_floor_required": 0.965006
+        }
+      },
+      {
+        "gate": "complexity_overhead_gate",
+        "passed": true,
+        "evidence": {
+          "required": 0.05,
+          "actual": 0.02,
+          "samples": 10
+        }
+      },
+      {
+        "gate": "configured_constraint_coverage",
+        "passed": true,
+        "evidence": {
+          "configured": [
+            "confidence_interval_excludes_zero",
+            "confidence_level",
+            "maximum_complexity_overhead",
+            "minimum_ecd_improvement",
+            "minimum_effect_size",
+            "quality_floor_relative",
+            "require_holdout_pass",
+            "require_statistical_significance",
+            "require_validation_transfer"
+          ],
+          "checked": [
+            "confidence_interval_excludes_zero",
+            "confidence_level",
+            "maximum_complexity_overhead",
+            "minimum_ecd_improvement",
+            "minimum_effect_size",
+            "quality_floor_relative",
+            "require_holdout_pass",
+            "require_statistical_significance",
+            "require_validation_transfer"
+          ],
+          "uncovered": []
+        }
+      }
+    ],
+    "constraint_coverage": {
+      "configured": [
+        "confidence_interval_excludes_zero",
+        "confidence_level",
+        "maximum_complexity_overhead",
+        "minimum_ecd_improvement",
+        "minimum_effect_size",
+        "quality_floor_relative",
+        "require_holdout_pass",
+        "require_statistical_significance",
+        "require_validation_transfer"
+      ],
+      "checked": [
+        "confidence_interval_excludes_zero",
+        "confidence_level",
+        "maximum_complexity_overhead",
+        "minimum_ecd_improvement",
+        "minimum_effect_size",
+        "quality_floor_relative",
+        "require_holdout_pass",
+        "require_statistical_significance",
+        "require_validation_transfer"
+      ],
+      "uncovered": [],
+      "all_checked": true
+    },
+    "final_verdict": "rejected"
+  },
+  "verdict": "rejected",
+  "artifact_paths": {},
+  "code_commit_hash": "",
+  "notes": "Auto-generated by full ACE closed-loop runner\nSkeptic review: High variance in ECD improvement suggests instability."
+}

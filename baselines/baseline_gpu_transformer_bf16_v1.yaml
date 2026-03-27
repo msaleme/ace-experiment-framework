@@ -1,0 +1,144 @@
+# BASELINE SNAPSHOT: GPU Transformer BF16
+# Baseline ID: baseline_gpu_transformer_bf16_v1
+# Status: IMMUTABLE - Do not modify
+# Purpose: Reference point for all quantization experiments
+
+baseline_id: baseline_gpu_transformer_bf16_v1
+hardware:
+  name: A100-40GB
+  device_type: GPU
+  model: A100
+  arch: Ampere
+  cores: 6912
+  memory_gb: 40.0
+  peak_power_watts: 300.0
+  peak_bandwidth_gbs: 1555.5
+
+benchmark:
+  benchmark_id: transformer_inference_small
+  name: Small Transformer Inference
+  workload_class: dense_linear_algebra
+  input_size: "seq_len=128, batch=1, vocab=50257, hidden=1024"
+  primary_metrics:
+    - accuracy
+    - latency_ms
+    - energy_joules
+    - throughput_tok_sec
+  secondary_metrics:
+    - memory_traffic_bytes
+    - cache_hit_rate
+    - peak_power_watts
+  quality_metric: accuracy
+  version: "1.0"
+
+# ============================================================================
+# BASELINE MEASUREMENT RESULTS (IMMUTABLE)
+# ============================================================================
+baseline_measurements:
+  accuracy_mean: 0.9847
+  accuracy_std: 0.0012
+  latency_ms_mean: 87.3
+  latency_ms_p95: 92.1
+  latency_ms_p99: 95.4
+  energy_joules_mean: 0.548
+  energy_joules_std: 0.032
+  throughput_tok_sec_mean: 1468
+  throughput_tok_sec_p95: 1395
+  memory_traffic_bytes: 67108864
+  cache_hit_rate: 0.78
+  peak_power_watts: 285
+
+# ============================================================================
+# ENVIRONMENT SNAPSHOT (IMMUTABLE)
+# ============================================================================
+code_commit: "abc123def456789defabc"
+code_branch: "main"
+code_tag: "v1.0.0"
+
+compiler_version: "cudnn-8.9.0"
+torch_version: "2.1.0"
+cuda_version: "12.1"
+cublas_version: "12.1.0.104"
+cudnn_version: "8.9.0"
+
+python_version: "3.10.12"
+platform: "Linux (ubuntu-22.04)"
+kernel_version: "5.15.0-97-generic"
+
+dependency_versions:
+  torch: "2.1.0"
+  torchvision: "0.16.0"
+  numpy: "1.24.3"
+  scipy: "1.11.4"
+  pandas: "2.1.3"
+  matplotlib: "3.8.2"
+  pytorch_lightning: "2.1.2"
+
+environment_variables:
+  CUDA_VISIBLE_DEVICES: "0"
+  CUDA_DEVICE_ORDER: "PCI_BUS_ID"
+  CUDA_LAUNCH_BLOCKING: "0"
+  TF32_ENABLED: "1"
+  TORCH_CUDNN_BENCHMARK: "1"
+  TORCH_ALLOW_TF32: "1"
+  NCCL_DEBUG: "INFO"
+
+# ============================================================================
+# MEASUREMENT CONFIGURATION (IMMUTABLE)
+# ============================================================================
+measurement_method: "pytorch_profiler + RAPL"
+profiler_type: "torch.profiler.profile"
+profiler_wait_warmup_steps: 2
+profiler_active_measurements: 3
+rapl_measurement_interval_ms: 100
+energy_monitor: "intel_rapl_sysfs"
+
+seed_policy: "fixed_seed_only"
+seeds_used:
+  - 42
+  - 101
+  - 2022
+  - 54321
+  - 999
+
+model_specification:
+  model_type: "transformer_gpt2_like"
+  num_layers: 12
+  num_heads: 16
+  hidden_dim: 1024
+  ffn_dim: 4096
+  model_params_millions: 125
+  dtype: "bfloat16"
+  device: "cuda:0"
+
+data_specification:
+  dataset: "wikitext-103"
+  split: "validation"
+  samples: 100
+  sequence_length: 128
+  batch_size: 1
+  vocabulary_size: 50257
+
+# ============================================================================
+# HASH AND SIGNATURES (FOR INTEGRITY VERIFICATION)
+# ============================================================================
+created_timestamp: "2026-03-27T09:00:00Z"
+baseline_hash: "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+measurement_hash: "sha256:ab1234cd5678ef9012345678901234567890abcdef1234567890abcdef123456"
+
+# ============================================================================
+# IMMUTABILITY STATEMENT
+# ============================================================================
+immutable_marker: true
+notes: |
+  This baseline is IMMUTABLE.
+  Do not modify, overwrite, or recalculate.
+  
+  It serves as the reference point for:
+  - exp_001_int4_quantization
+  - exp_002_int8_quantization
+  - exp_003_mixed_precision_search
+  
+  Any changes to this baseline invalidate all experiments that reference it.
+  
+  To update methodology, create a new baseline with a new ID (e.g., v2).

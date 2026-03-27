@@ -1,0 +1,27 @@
+[
+  {
+    "experiment_id": "exp_004_compiler_fusion",
+    "score": 13.767887803328136,
+    "verdict": "promising_but_complex"
+  },
+  {
+    "experiment_id": "exp_008_kernel_fusion_loop",
+    "score": 13.518655981510369,
+    "verdict": "rejected"
+  },
+  {
+    "experiment_id": "exp_006_token_pruning_threshold_sweep",
+    "score": 12.530890965139701,
+    "verdict": "promising_but_complex"
+  },
+  {
+    "experiment_id": "exp_002_token_pruning",
+    "score": 9.943663448085367,
+    "verdict": "promising_but_complex"
+  },
+  {
+    "experiment_id": "exp_003_int4_static_quant_sweep",
+    "score": 8.475928769096107,
+    "verdict": "rejected"
+  }
+]

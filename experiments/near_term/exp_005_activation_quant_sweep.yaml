@@ -1,0 +1,54 @@
+﻿experiment_id: exp_005_activation_quant_sweep
+parent_experiment_id: null
+horizon: near_term
+hypothesis: "Activation quantization sweep improves ECD while meeting quality floor."
+
+baseline: baseline_gpu_transformer_bf16_v1
+
+mutation_scope:
+  - activation_quant_config
+no_mutation_allowed:
+  - model_architecture
+  - training_data
+  - benchmark_set
+  - evaluation_method
+
+trials: 10
+trial_configuration:
+  seeds: [42, 101, 2022, 54321, 999, 12345, 777, 8888, 111, 5555]
+  timeout_per_trial_seconds: 120
+
+quality_floor:
+  metric: accuracy
+  minimum_relative_to_baseline: 0.99
+  absolute_minimum: 0.90
+
+benchmark_sets:
+  development:
+    - transformer_inference_small
+  validation:
+    - transformer_inference_medium
+  holdout:
+    - transformer_inference_holdout
+holdout_validation_required: true
+
+acceptance:
+  minimum_ecd_improvement: 0.10
+  minimum_effect_size: 0.10
+  require_statistical_significance: true
+  confidence_level: 0.95
+  confidence_interval_excludes_zero: true
+  require_holdout_pass: true
+  require_validation_transfer: true
+  maximum_complexity_overhead: 0.05
+
+reporting:
+  report_format: [markdown, json]
+  include_raw_data: true
+  comparison_reports: true
+  portfolio_update: true
+  artifact_retention_days: 365
+
+workload_class: dense_linear_algebra
+representation_type: activation_quant
+hardware_target: A100

@@ -1,0 +1,312 @@
+# Experiment Acceptance Policies
+# Define rules for accepting, rejecting, or marking experiments inconclusive
+
+# ============================================================================
+# STANDARD NEAR-TERM POLICY
+# ============================================================================
+name: near_term_acceptance_policy
+version: 1.0
+horizon: near_term
+effective_date: "2026-03-27"
+
+# All conditions must be true for acceptance
+acceptance_conditions:
+  - condition: minimum_effect_size
+    metric: effect_size_cohens_d
+    operator: ">="
+    value: 0.10
+    reasoning: "Small but meaningful effect"
+  
+  - condition: statistical_significance
+    metric: p_value
+    operator: "<"
+    value: 0.05
+    test: "welch_ttest"
+    reasoning: "Standard p-value threshold"
+  
+  - condition: confidence_interval_excludes_zero
+    metric: confidence_interval_95
+    operator: "excludes_zero"
+    reasoning: "Result must be consistently positive"
+  
+  - condition: quality_floor
+    metric: accuracy
+    operator: ">="
+    relative_to: baseline
+    value: 0.99
+    reasoning: "No more than 1% quality loss"
+  
+  - condition: latency_compliance
+    metric: latency_ms_p95
+    operator: "<="
+    value: 120.0
+    reasoning: "Hard latency deadline"
+  
+  - condition: minimum_ecd_improvement
+    metric: ecd_improvement
+    operator: ">="
+    value: 0.15
+    reasoning: "At least 15% improvement needed"
+  
+  - condition: holdout_validation
+    metric: holdout_benchmark_verdict
+    operator: "=="
+    value: "accepted"
+    reasoning: "CRITICAL: Must work on unseen data"
+  
+  - condition: transfer_validation
+    metric: validation_benchmark_verdict
+    operator: "=="
+    value: "accepted"
+    reasoning: "Must generalize to different workload"
+
+# ============================================================================
+# REJECTION CONDITIONS
+# ============================================================================
+rejection_conditions:
+  - condition: negative_quality_impact
+    metric: quality_loss
+    operator: ">"
+    value: 0.01
+    action: reject_immediately
+    reasoning: "Quality floor violation is disqualifying"
+  
+  - condition: unstable_results
+    metric: coefficient_of_variation
+    operator: ">"
+    value: 0.20
+    action: mark_inconclusive
+    reasoning: "High variance suggests measurement issues"
+  
+  - condition: excessive_overhead
+    metric: orchestration_overhead_pct
+    operator: ">"
+    value: 0.05
+    action: reject
+    reasoning: "Overhead wipes out gains"
+
+# ============================================================================
+# INCONCLUSIVE CONDITIONS
+# ============================================================================
+inconclusive_conditions:
+  - condition: insufficient_trials
+    metric: completed_trials
+    operator: "<"
+    value: 8
+    reasoning: "Need at least 8 of 10 trials successful"
+  
+  - condition: borderline_significance
+    metric: p_value
+    operator: "between"
+    lower: 0.03
+    upper: 0.10
+    reasoning: "Marginally significant, needs more investigation"
+  
+  - condition: conflicting_metrics
+    description: "Quality improvements but latency degradation"
+    tradeoff: true
+    reasoning: "Requires manual evaluation"
+
+# ============================================================================
+# MID-TERM POLICY (Alternative numeric systems, etc.)
+# ============================================================================
+name: mid_term_acceptance_policy
+version: 1.0
+horizon: mid_term
+
+acceptance_conditions:
+  - condition: theoretical_feasibility
+    metric: conversion_overhead
+    operator: "<"
+    relative_to: improvement
+    value: 0.5
+    reasoning: "Conversion overhead must be < 50% of improvement"
+  
+  - condition: minimum_gates_passed
+    metric: gates_passed
+    operator: ">="
+    value: 3  # At least Gate 1, 2, 3
+    reasoning: "Must survive conceptual, emulation, and proxy testing"
+  
+  - condition: platform_compatibility
+    metric: portability_score
+    operator: ">="
+    value: 0.6
+    reasoning: "Must work on at least 2 platforms"
+
+# ============================================================================
+# MOONSHOT POLICY (Speculative research)
+# ============================================================================
+name: moonshot_acceptance_policy
+version: 1.0
+horizon: moonshot
+
+acceptance_conditions:
+  - condition: plausible_advantage
+    metric: system_level_ecd_projection
+    operator: ">="
+    value: 2.0  # 2x improvement potential
+    reasoning: "Must show 2x or higher potential benefit in simulation"
+  
+  - condition: publication_worthy
+    metric: novelty_score
+    operator: ">="
+    value: 0.7
+    reasoning: "Novel enough to publish/patent"
+  
+  - condition: minimal_implementation_burden
+    # Moonshots are allowed to be less efficient if novel
+    metric: engineering_complexity
+    operator: "<="
+    value: 5.0
+    reasoning: "Must not require unreasonable complexity"
+
+# ============================================================================
+# STATISTICAL RIGOR REQUIREMENTS
+# ============================================================================
+statistical_rigor:
+  minimum_trials: 10
+  minimum_successful_trials: 8
+  outlier_detection: "tukey_fences"
+  outlier_action: "remove_and_report"
+  bootstrap_replicates: 1000
+  confidence_level: 0.95
+  effect_size_metric: "cohens_d"
+  significance_test: "welch_ttest"
+  
+  outlier_thresholds:
+    tukey_iqr_multiplier: 1.5
+    zscore_threshold: 3.0
+
+# ============================================================================
+# ANTI-SELF-DECEPTION SAFEGUARDS
+# ============================================================================
+safeguards:
+  - name: immutable_baseline
+    enforced: true
+    description: "Baseline cannot be modified after experiment starts"
+  
+  - name: declared_scope
+    enforced: true
+    description: "Only allowed mutations permitted"
+  
+  - name: holdout_separation
+    enforced: true
+    description: "Holdout set cannot be used for optimization"
+  
+  - name: full_overhead_accounting
+    enforced: true
+    description: "Conversion + orchestration overhead must be included"
+  
+  - name: repeated_trials
+    enforced: true
+    minimum_trials: 10
+    description: "No single-run acceptance"
+  
+  - name: skeptic_review
+    enforced: false
+    frequency: "every_accepted_experiment"
+    description: "Independent validation of wins"
+  
+  - name: complexity_penalty
+    enforced: true
+    max_overhead_pct: 5
+    description: "Overhead cannot exceed 5% of savings"
+
+# ============================================================================
+# VERDICT DEFINITIONS
+# ============================================================================
+verdicts:
+  ACCEPTED:
+    description: "Repeatable gain, quality preserved, statistically significant, holdout validated"
+    color: green
+    action: "Archive and branch to next experiment"
+  
+  REJECTED:
+    description: "No meaningful gain, quality loss, or overhead too high"
+    color: red
+    action: "Archive results, update hypothesis"
+  
+  INCONCLUSIVE:
+    description: "Signal too noisy or insufficient data"
+    color: yellow
+    action: "Increase trials or investigate variance sources"
+  
+  PROMISING_BUT_COMPLEX:
+    description: "Interesting effect but engineering overhead too high"
+    color: orange
+    action: "Archive for future investigation"
+  
+  INTERESTING_FOR_MOONSHOT:
+    description: "Not production-ready but worth moonshot exploration"
+    color: blue
+    action: "Escalate to mid-term or moonshot lane"
+
+# ============================================================================
+# REPORTING REQUIREMENTS
+# ============================================================================
+reporting:
+  required_sections:
+    - hypothesis
+    - baseline_reference
+    - mutation_applied
+    - benchmark_scope
+    - raw_metric_summary
+    - statistical_summary
+    - ecd_comparison
+    - complexity_considerations
+    - verdict
+    - next_experiment_suggestions
+  
+  required_artifacts:
+    - experiment_record_json
+    - trial_data_csv
+    - summary_statistics_json
+    - individual_report_md
+    - comparison_vs_baseline_plot
+    - reproducibility_metadata
+  
+  chart_requirements:
+    - accuracy_vs_trial
+    - latency_p95_distribution
+    - energy_per_inference_boxplot
+    - ecd_improvement_timeline
+
+# ============================================================================
+# GATE MODEL (Multi-stage validation)
+# ============================================================================
+gates:
+  gate_1_conceptual_viability:
+    description: "Can the idea be formalized and simulated?"
+    required_for: near_term
+    evidence:
+      - mathematical_formulation
+      - simulation_feasibility
+  
+  gate_2_controlled_emulation:
+    description: "Does it beat baseline in software emulation?"
+    required_for: mid_term
+    evidence:
+      - emulation_benchmark_results
+      - overhead_analysis
+  
+  gate_3_hardware_proxy:
+    description: "Does advantage survive hardware proxy analysis?"
+    required_for: mid_term
+    evidence:
+      - fpga_results_or
+      - area_power_estimates
+  
+  gate_4_end_to_end_integration:
+    description: "Does it still win after full overhead?"
+    required_for: near_term
+    evidence:
+      - complete_system_measurement
+      - conversion_overhead_accounting
+  
+  gate_5_economic_relevance:
+    description: "Would the gain justify implementation cost?"
+    required_for: moonshot
+    evidence:
+      - cost_benefit_analysis
+      - market_relevance_assessment

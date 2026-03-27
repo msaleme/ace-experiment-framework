@@ -1,0 +1,1381 @@
+{
+  "generated_at": "2026-03-27T13:41:36.348594Z",
+  "summary": {
+    "total_experiments": 29,
+    "accepted": 23,
+    "rejected": 6
+  },
+  "implementation_inventory": [
+    {
+      "family": "Phase 1 - Adaptive INT8/INT4 quantization",
+      "file_paths": [
+        "src/kernels/quantization.py",
+        "experiments/near_term/exp_001_int4_quantization.yaml",
+        "experiments/near_term/exp_002_int8_static_quant_sweep.yaml",
+        "experiments/near_term/exp_003_int4_static_quant_sweep.yaml",
+        "experiments/near_term/exp_004_per_layer_mixed_precision_search.yaml"
+      ],
+      "maturity": "M5",
+      "substantive_logic": true,
+      "logic_note": "Substantive kernel logic with per-layer/fallback behavior and trial execution.",
+      "metrics_type": "mocked/synthetic benchmarked"
+    },
+    {
+      "family": "Phase 1 - Dynamic sparsity / token pruning",
+      "file_paths": [
+        "src/kernels/sparsity.py",
+        "experiments/near_term/exp_002_token_pruning.yaml",
+        "experiments/near_term/exp_006_token_pruning_threshold_sweep.yaml",
+        "experiments/near_term/exp_007_sparse_activation_routing.yaml"
+      ],
+      "maturity": "M5",
+      "substantive_logic": true,
+      "logic_note": "Substantive pruning math and trial generation; synthetic metrics.",
+      "metrics_type": "mocked/synthetic benchmarked"
+    },
+    {
+      "family": "Phase 1 - Memory-traffic reduction",
+      "file_paths": [
+        "src/kernels/memory_optimization.py",
+        "experiments/near_term/exp_003_memory_optimization.yaml",
+        "experiments/near_term/exp_009_memory_layout_cache_policy.yaml",
+        "experiments/near_term/exp_010_retrieval_vs_recompute.yaml"
+      ],
+      "maturity": "M5",
+      "substantive_logic": true,
+      "logic_note": "Substantive recomputation/storage tradeoff logic; synthetic metrics.",
+      "metrics_type": "mocked/synthetic benchmarked"
+    },
+    {
+      "family": "Phase 1 - Compiler graph optimization",
+      "file_paths": [
+        "src/kernels/compiler_optimization.py",
+        "experiments/near_term/exp_004_compiler_fusion.yaml",
+        "experiments/near_term/exp_008_kernel_fusion_loop.yaml"
+      ],
+      "maturity": "M5",
+      "substantive_logic": true,
+      "logic_note": "Substantive fusion/tiling simulation logic; synthetic metrics.",
+      "metrics_type": "mocked/synthetic benchmarked"
+    },
+    {
+      "family": "Phase 2 - RNS emulator",
+      "file_paths": [
+        "simulators/mid_term_simulator.py",
+        "experiments/mid_term/exp_011_rns_emulator.yaml",
+        "experiments/mid_term/exp_012_rns_modulus_search.yaml"
+      ],
+      "maturity": "M2/M3",
+      "substantive_logic": true,
+      "logic_note": "Executable proxy simulator with estimated conversion overhead.",
+      "metrics_type": "estimated/simulated"
+    },
+    {
+      "family": "Phase 2 - LNS comparison harness",
+      "file_paths": [
+        "simulators/mid_term_simulator.py",
+        "experiments/mid_term/exp_013_lns_kernel_comparison.yaml",
+        "experiments/mid_term/exp_014_posit_simulation.yaml",
+        "experiments/mid_term/exp_015_ternary_representation.yaml"
+      ],
+      "maturity": "M2/M3",
+      "substantive_logic": true,
+      "logic_note": "Executable representation proxy harness; simulation-only metrics.",
+      "metrics_type": "estimated/simulated"
+    },
+    {
+      "family": "Phase 2 - Heterogeneous arithmetic boundary testing",
+      "file_paths": [
+        "simulators/mid_term_simulator.py",
+        "experiments/mid_term/exp_016_heterogeneous_boundary_search.yaml"
+      ],
+      "maturity": "M2/M3",
+      "substantive_logic": true,
+      "logic_note": "Boundary-placement modeled in proxy simulator.",
+      "metrics_type": "estimated/simulated"
+    },
+    {
+      "family": "Phase 2 - Event-driven workload harness",
+      "file_paths": [
+        "simulators/mid_term_simulator.py",
+        "experiments/mid_term/exp_017_async_execution_emulator.yaml",
+        "experiments/mid_term/exp_018_fpga_resource_mapping.yaml"
+      ],
+      "maturity": "M2/M3",
+      "substantive_logic": true,
+      "logic_note": "Event-driven behavior approximated in executable simulator.",
+      "metrics_type": "estimated/simulated"
+    },
+    {
+      "family": "Phase 3 - Analog / photonic / in-memory adapters",
+      "file_paths": [
+        "simulators/moonshot_simulator.py",
+        "experiments/moonshot/exp_019_analog_mac_noise_sweep.yaml",
+        "experiments/moonshot/exp_020_analog_calibration_overhead.yaml",
+        "experiments/moonshot/exp_021_photonic_linear_algebra_model.yaml",
+        "experiments/moonshot/exp_022_optical_boundary_cost.yaml",
+        "experiments/moonshot/exp_023_in_memory_compute_model.yaml",
+        "experiments/moonshot/exp_024_endurance_drift_sensitivity.yaml",
+        "experiments/moonshot/exp_025_neuromorphic_temporal.yaml"
+      ],
+      "maturity": "M2/M3",
+      "substantive_logic": true,
+      "logic_note": "Executable moonshot adapters with synthetic/estimated metrics.",
+      "metrics_type": "estimated/simulated"
+    }
+  ],
+  "acceptance_audit": [
+    {
+      "experiment_id": "exp_001_bf16_baseline_freeze",
+      "hypothesis": "BF16 baseline freeze establishes immutable reference with reproducible measurement envelope.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.0,
+      "quality_delta": -0.00051479899392326,
+      "latency_delta_ms": -0.62152489636415,
+      "energy_delta_j": -0.004508212701216152,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 0.0,
+        "significant": false,
+        "p_value": NaN,
+        "confidence_interval": [
+          0.0,
+          0.0
+        ],
+        "ci_excludes_zero": false,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "effect_below_threshold",
+        "not_significant",
+        "ci_includes_zero",
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_001_int4_quantization",
+      "hypothesis": "Adaptive per-layer INT4 quantization with BF16 fallback improves ECD by at least 15% on transformer inference without violating the 99% quality floor.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5124157482604035,
+          0.6068067138808251
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_002_int8_static_quant_sweep",
+      "hypothesis": "INT8 static quantization sweep improves ECD while keeping quality within 1% of baseline.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5095314280369498,
+          0.6092071581926863
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_002_token_pruning",
+      "hypothesis": "Dynamic token pruning improves energy efficiency >=20% with bounded quality loss.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.30860864336259913,
+          0.45677038902373746
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_003_int4_static_quant_sweep",
+      "hypothesis": "INT4 static quantization sweep can improve ECD with acceptable quality floor enforcement.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5111893821265174,
+          0.6094356408234315
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_003_memory_optimization",
+      "hypothesis": "Selective recomputation reduces memory traffic while preserving output quality.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": -0.2156885187830032,
+      "quality_delta": 0.0,
+      "latency_delta_ms": 11.410886490579557,
+      "energy_delta_j": 0.07190436716083959,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": -5.646697793197405,
+        "significant": true,
+        "p_value": 4.985962897986838e-07,
+        "confidence_interval": [
+          -0.24484855684171303,
+          -0.18612810590106937
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_004_compiler_fusion",
+      "hypothesis": "Kernel fusion reduces p95 latency by >=10% with semantic equivalence.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.22748448968367457,
+      "quality_delta": 0.0,
+      "latency_delta_ms": -8.45114588897296,
+      "energy_delta_j": -0.05282919618275023,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 5.10436044822142,
+        "significant": true,
+        "p_value": 1.1783921921470223e-06,
+        "confidence_interval": [
+          0.1895792809695553,
+          0.26167035145671635
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_004_per_layer_mixed_precision_search",
+      "hypothesis": "Per-layer mixed precision search improves ECD over uniform precision policies.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5102536193070959,
+          0.6096916184662983
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_005_activation_quant_sweep",
+      "hypothesis": "Activation quantization sweep improves ECD while meeting quality floor.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5096099026168921,
+          0.6105160204894422
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_006_token_pruning_threshold_sweep",
+      "hypothesis": "Token pruning threshold sweep reduces energy per task by at least 20% with bounded quality loss.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.3124419900013257,
+          0.44889042914679494
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_007_sparse_activation_routing",
+      "hypothesis": "Sparse activation routing improves ECD via conditional compute paths.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.3100491391150863,
+          0.453932688989921
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": false,
+        "overall_verdict": "rejected"
+      },
+      "reason": [
+        "quality_floor_failed"
+      ],
+      "verdict": "rejected"
+    },
+    {
+      "experiment_id": "exp_008_kernel_fusion_loop",
+      "hypothesis": "Iterative kernel fusion loop reduces p95 latency by at least 10%.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.22748448968367457,
+      "quality_delta": 0.0,
+      "latency_delta_ms": -8.45114588897296,
+      "energy_delta_j": -0.05282919618275023,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 5.10436044822142,
+        "significant": true,
+        "p_value": 1.1783921921470223e-06,
+        "confidence_interval": [
+          0.19372121402467504,
+          0.2632513599168754
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_009_memory_layout_cache_policy",
+      "hypothesis": "Memory layout and cache policy sweep reduces bytes moved per task.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": -0.2156885187830032,
+      "quality_delta": 0.0,
+      "latency_delta_ms": 11.410886490579557,
+      "energy_delta_j": 0.07190436716083959,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": -5.646697793197405,
+        "significant": true,
+        "p_value": 4.985962897986838e-07,
+        "confidence_interval": [
+          -0.24714061698118472,
+          -0.18352487078104804
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_010_retrieval_vs_recompute",
+      "hypothesis": "Retrieval versus recompute policy improves energy without quality loss.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": -0.2156885187830032,
+      "quality_delta": 0.0,
+      "latency_delta_ms": 11.410886490579557,
+      "energy_delta_j": 0.07190436716083959,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": -5.646697793197405,
+        "significant": true,
+        "p_value": 4.985962897986838e-07,
+        "confidence_interval": [
+          -0.24704962734789607,
+          -0.18525784804837023
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_011_rns_emulator",
+      "hypothesis": "RNS arithmetic kernel emulator yields net ECD gains after conversion overhead.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.1518608457394715,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 10.141139913141233,
+        "significant": true,
+        "p_value": 2.9915356858725377e-09,
+        "confidence_interval": [
+          0.13736819584960397,
+          0.16324738770473107
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_012_rns_modulus_search",
+      "hypothesis": "RNS modulus set search improves arithmetic efficiency and stability.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.1506460294609821,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.821179950453507,
+        "significant": true,
+        "p_value": 3.973553648425403e-09,
+        "confidence_interval": [
+          0.13731130490397636,
+          0.16390885051953816
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_013_lns_kernel_comparison",
+      "hypothesis": "LNS multiply-heavy kernels improve energy proxy relative to binary baseline.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.15580052040881243,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 12.326661043323284,
+        "significant": true,
+        "p_value": 5.284110655583522e-10,
+        "confidence_interval": [
+          0.14576321766609107,
+          0.1665434617773816
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_014_posit_simulation",
+      "hypothesis": "Posit representation improves quality-energy tradeoff on selected workloads.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.14880431126393245,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 11.852070427869682,
+        "significant": true,
+        "p_value": 7.494356250754116e-10,
+        "confidence_interval": [
+          0.13812785203427533,
+          0.15942233068752462
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_015_ternary_representation",
+      "hypothesis": "Ternary representation reduces active compute with acceptable quality loss.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.3073658265470254,
+          0.45006215295541335
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_016_heterogeneous_boundary_search",
+      "hypothesis": "Boundary placement search in heterogeneous arithmetic pipelines improves net ECD.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.14513262048731454,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 11.321657706977298,
+        "significant": true,
+        "p_value": 1.1259978541232714e-09,
+        "confidence_interval": [
+          0.13457354545109546,
+          0.15592927649261795
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_017_async_execution_emulator",
+      "hypothesis": "Asynchronous execution emulation lowers joules per event on sparse temporal workloads.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.14534972378150493,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 11.807904969670474,
+        "significant": true,
+        "p_value": 7.747439875034343e-10,
+        "confidence_interval": [
+          0.13544534505100114,
+          0.15509575216580881
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_018_fpga_resource_mapping",
+      "hypothesis": "FPGA proxy mapping demonstrates viable performance-resource tradeoffs for alternative arithmetic.",
+      "horizon": "mid_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.16191658721796434,
+      "quality_delta": -0.010775555171056106,
+      "latency_delta_ms": -5.613678680160447,
+      "energy_delta_j": -0.04930132181324731,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 12.65595760254868,
+        "significant": true,
+        "p_value": 4.1782528063200534e-10,
+        "confidence_interval": [
+          0.15196788684132828,
+          0.17336662553346727
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_019_analog_mac_noise_sweep",
+      "hypothesis": "Analog MAC noise sweep indicates plausible system-level ECD advantage under bounded drift.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.145980832138066,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 26.566796764443932,
+        "significant": true,
+        "p_value": 5.469249232861511e-13,
+        "confidence_interval": [
+          2.0814950837632935,
+          2.209472734209469
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_020_analog_calibration_overhead",
+      "hypothesis": "Analog calibration overhead remains below projected efficiency gains.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.1132494040750713,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 26.089671375478115,
+        "significant": true,
+        "p_value": 6.435705488028257e-13,
+        "confidence_interval": [
+          2.040849200390135,
+          2.17010142144948
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_021_photonic_linear_algebra_model",
+      "hypothesis": "Photonic linear algebra model retains throughput-energy gains after system integration assumptions.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.1444789708895375,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 20.829587947027253,
+        "significant": true,
+        "p_value": 4.8531523622703555e-12,
+        "confidence_interval": [
+          2.0542089634467526,
+          2.2275398540138878
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_022_optical_boundary_cost",
+      "hypothesis": "Optical-digital boundary cost can be amortized in hybrid matrix workloads.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.138471708979523,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 26.292185220297224,
+        "significant": true,
+        "p_value": 6.004065265755071e-13,
+        "confidence_interval": [
+          2.07146211058278,
+          2.2041237032326304
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_023_in_memory_compute_model",
+      "hypothesis": "In-memory compute model reduces data-movement energy enough to raise ECD.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.1424837996895096,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 25.401123947785013,
+        "significant": true,
+        "p_value": 8.182382215679013e-13,
+        "confidence_interval": [
+          2.0682821605541566,
+          2.2063937846661537
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_024_endurance_drift_sensitivity",
+      "hypothesis": "Endurance and drift sensitivity remains within tolerable bounds under projected workloads.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.1295096557593216,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 21.20276118531211,
+        "significant": true,
+        "p_value": 4.1387994458535825e-12,
+        "confidence_interval": [
+          2.0478009666692647,
+          2.210987806232976
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    },
+    {
+      "experiment_id": "exp_025_neuromorphic_temporal",
+      "hypothesis": "Neuromorphic temporal coding improves joules per event in sparse temporal tasks.",
+      "horizon": "moonshot",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 2.124411306139857,
+      "quality_delta": -0.06507777585528018,
+      "latency_delta_ms": 6.654404399465193,
+      "energy_delta_j": -0.14060264362649466,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 23.451148503535606,
+        "significant": true,
+        "p_value": 1.6758036827876594e-12,
+        "confidence_interval": [
+          2.0409454906942677,
+          2.1907395063193116
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted"
+    }
+  ],
+  "integrity_audit": {
+    "stubbed_implementations": [
+      {
+        "finding": "Mid-term and moonshot families rely on proxy simulators rather than hardware-backed implementations.",
+        "evidence": [
+          "simulators/mid_term_simulator.py",
+          "simulators/moonshot_simulator.py"
+        ],
+        "severity": "high"
+      }
+    ],
+    "mocked_metrics": [
+      {
+        "finding": "Near-term kernels inject random noise and synthetic formulas; no real profiler ingestion in execution path.",
+        "evidence": [
+          "src/kernels/quantization.py",
+          "src/kernels/sparsity.py",
+          "src/kernels/memory_optimization.py",
+          "src/kernels/compiler_optimization.py",
+          "agents/build/build_agent.py"
+        ],
+        "severity": "high"
+      }
+    ],
+    "dead_code_or_unused_paths": [
+      {
+        "finding": "StatsEvaluator.generate_verdict exists but full pipeline uses StatisticsAgent.evaluate directly.",
+        "evidence": [
+          "src/stats_evaluator.py",
+          "agents/stats/statistics_agent.py",
+          "run_full_program.py"
+        ],
+        "severity": "medium"
+      }
+    ],
+    "holdout_leakage_or_missing_holdout_eval": [
+      {
+        "finding": "Benchmark set declares holdout, but ExperimentRunner executes trials only on benchmark_set[0].",
+        "evidence": [
+          "src/experiment_runner.py"
+        ],
+        "severity": "critical"
+      }
+    ],
+    "acceptance_without_repeated_trials": [
+      {
+        "finding": "No acceptance without repeated trials detected in stored records (trials configured as 10).",
+        "evidence": [
+          "results/*/experiment.json"
+        ],
+        "severity": "low"
+      }
+    ],
+    "config_only_counted_as_implemented": [
+      {
+        "finding": "Some experiment families are config-only wrappers over generic simulators, not bespoke implementations per experiment.",
+        "evidence": [
+          "experiments/**/*.yaml",
+          "agents/build/build_agent.py"
+        ],
+        "severity": "high"
+      }
+    ],
+    "metrics_collected_but_ignored_in_verdicts": [
+      {
+        "finding": "Verdict pipeline primarily uses ecd_improvement, significance, CI, quality_ok; several collected metrics do not affect decision directly.",
+        "evidence": [
+          "agents/stats/statistics_agent.py",
+          "results/*/experiment.json"
+        ],
+        "severity": "high"
+      }
+    ]
+  },
+  "top5_credible_wins": [
+    {
+      "experiment_id": "exp_003_int4_static_quant_sweep",
+      "hypothesis": "INT4 static quantization sweep can improve ECD with acceptable quality floor enforcement.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.5602939897001032,
+      "quality_delta": -0.016979440015254532,
+      "latency_delta_ms": -17.965728747475893,
+      "energy_delta_j": -0.11258077653414872,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 9.310099409594297,
+        "significant": true,
+        "p_value": 6.373742469345318e-09,
+        "confidence_interval": [
+          0.5111893821265174,
+          0.6094356408234315
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_002_token_pruning",
+      "hypothesis": "Dynamic token pruning improves energy efficiency >=20% with bounded quality loss.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.30860864336259913,
+          0.45677038902373746
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_006_token_pruning_threshold_sweep",
+      "hypothesis": "Token pruning threshold sweep reduces energy per task by at least 20% with bounded quality loss.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.3802315298278806,
+      "quality_delta": -0.046929480303916526,
+      "latency_delta_ms": -14.617163135791131,
+      "energy_delta_j": -0.0915517844927684,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 4.4149560953458336,
+        "significant": true,
+        "p_value": 3.982369420329183e-06,
+        "confidence_interval": [
+          0.3124419900013257,
+          0.44889042914679494
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_004_compiler_fusion",
+      "hypothesis": "Kernel fusion reduces p95 latency by >=10% with semantic equivalence.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.22748448968367457,
+      "quality_delta": 0.0,
+      "latency_delta_ms": -8.45114588897296,
+      "energy_delta_j": -0.05282919618275023,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 5.10436044822142,
+        "significant": true,
+        "p_value": 1.1783921921470223e-06,
+        "confidence_interval": [
+          0.1895792809695553,
+          0.26167035145671635
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    },
+    {
+      "experiment_id": "exp_008_kernel_fusion_loop",
+      "hypothesis": "Iterative kernel fusion loop reduces p95 latency by at least 10%.",
+      "horizon": "near_term",
+      "baseline": "baseline_gpu_transformer_bf16_v1",
+      "benchmark": [
+        "transformer_inference_small",
+        "transformer_inference_medium",
+        "transformer_inference_holdout"
+      ],
+      "trial_count": 10,
+      "ecd_delta": 0.22748448968367457,
+      "quality_delta": 0.0,
+      "latency_delta_ms": -8.45114588897296,
+      "energy_delta_j": -0.05282919618275023,
+      "holdout_result": "declared_present_but_no_separate_holdout_metric",
+      "decision_trace": {
+        "minimum_effect_threshold": 0.1,
+        "effect_size": 5.10436044822142,
+        "significant": true,
+        "p_value": 1.1783921921470223e-06,
+        "confidence_interval": [
+          0.19372121402467504,
+          0.2632513599168754
+        ],
+        "ci_excludes_zero": true,
+        "quality_ok": true,
+        "overall_verdict": "accepted"
+      },
+      "reason": [
+        "all_statistical_checks_passed_under_current_pipeline"
+      ],
+      "verdict": "accepted",
+      "credibility_note": "Higher practical value due to near-term path and reusable kernel scaffolding; credibility constrained by synthetic metrics and missing independent holdout scoring."
+    }
+  ],
+  "gaps_and_next_work": [
+    "Replace synthetic metric generation with real benchmark harness integration (GPU telemetry, power, latency traces).",
+    "Execute dev/validation/holdout as independent scored passes and gate acceptance on explicit holdout metrics.",
+    "Unify verdict logic so all configured constraints (latency/energy/complexity/transfer) are mandatory in code.",
+    "Add per-family bespoke implementations for mid-term and moonshot experiments instead of shared generic simulator outputs.",
+    "Add reproducibility hardening: pinned environments, artifact hashing for results/trials, deterministic replay checks."
+  ]
+}

@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.vscode/
+
+# Local experiment scratch outputs
+reports/_*/
+results/_*/
+notebooks/.ipynb_checkpoints/

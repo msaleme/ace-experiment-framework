@@ -1,0 +1,11 @@
+{
+  "development": [
+    "transformer_inference_small"
+  ],
+  "validation": [
+    "transformer_inference_medium"
+  ],
+  "holdout": [
+    "transformer_inference_holdout"
+  ]
+}

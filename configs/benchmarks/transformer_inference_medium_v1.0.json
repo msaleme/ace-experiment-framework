@@ -1,0 +1,31 @@
+{
+  "benchmark_id": "transformer_inference_medium",
+  "name": "Medium Transformer Inference",
+  "workload_class": "dense_linear_algebra",
+  "input_size": "seq_len=256, batch=2, vocab=50257, hidden=1536",
+  "primary_metrics": [
+    "accuracy",
+    "latency_ms",
+    "energy_joules",
+    "throughput_tok_sec"
+  ],
+  "secondarty_metrics": [
+    "memory_traffic_bytes",
+    "cache_hit_rate",
+    "peak_power_watts"
+  ],
+  "quality_metric": "accuracy",
+  "metadata": {
+    "model_type": "transformer_gpt2_like",
+    "num_layers": 24,
+    "num_heads": 24,
+    "hidden_dim": 1536,
+    "ffn_dim": 6144,
+    "model_params_millions": 500,
+    "data_source": "wikitext-103 + openwebtext",
+    "timeout_seconds": 60,
+    "repetitions": 3,
+    "warmup_runs": 2
+  },
+  "version": "1.0"
+}

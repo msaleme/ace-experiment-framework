@@ -1,0 +1,1778 @@
+{
+  "generated_at": "2026-03-27T16:04:59.231204Z",
+  "scope": [
+    "exp_002_token_pruning",
+    "exp_006_token_pruning_threshold_sweep"
+  ],
+  "telemetry_mode": "ACE_DIRECT_POWER_WATTS=185.0 direct override to isolate regime behavior under current environment",
+  "ecd_regime_definition": {
+    "positive": "ecd_mean > 0.10",
+    "neutral": "-0.10 <= ecd_mean <= 0.10",
+    "negative": "ecd_mean < -0.10"
+  },
+  "family_summary": {
+    "shared_executor_note": "exp_002_token_pruning and exp_006_token_pruning_threshold_sweep both route through the same default PruningConfig() executor in BuildAgent, so boundary behavior is effectively family-level in the current implementation.",
+    "dominant_variables": {
+      "exp_002_token_pruning": "seq_len",
+      "exp_006_token_pruning_threshold_sweep": "seq_len"
+    },
+    "classifications": {
+      "exp_002_token_pruning": "useful in bounded regime",
+      "exp_006_token_pruning_threshold_sweep": "useful in bounded regime"
+    }
+  },
+  "rows": [
+    {
+      "experiment_id": "exp_002_token_pruning",
+      "regime_map": {
+        "seq_len": [
+          {
+            "seq_len": 64,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 92.23436099178154,
+            "ecd_std": 25.06187368974415,
+            "runtime_ms_mean": 1.6871691672753917,
+            "throughput_mean": 616993.6083535181,
+            "energy_mean": 0.3121262959459475,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627677752161631,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 64
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 109.61151218775262,
+            "ecd_std": 16.235885775968878,
+            "runtime_ms_mean": 1.522631944782107,
+            "throughput_mean": 675746.6816644247,
+            "energy_mean": 0.2816869097846898,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 128
+          },
+          {
+            "seq_len": 192,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 24.155946439113134,
+            "ecd_std": 2.4105841189472663,
+            "runtime_ms_mean": 3.1798366668024554,
+            "throughput_mean": 443692.7715899643,
+            "energy_mean": 0.5882697833584543,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627319059431431,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 192
+          },
+          {
+            "seq_len": 256,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 9.47983466107352,
+            "ecd_std": 0.5108723512804859,
+            "runtime_ms_mean": 4.915703333709745,
+            "throughput_mean": 364731.86181432207,
+            "energy_mean": 0.9094051167363028,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628215277391236,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 256
+          },
+          {
+            "seq_len": 384,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 2.525940919316127,
+            "ecd_std": 0.2790928638997731,
+            "runtime_ms_mean": 8.485616109202157,
+            "throughput_mean": 302119.0589221192,
+            "energy_mean": 1.5698389802023989,
+            "power_mean": 185.0,
+            "quality_mean": 0.962689858219208,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 384
+          },
+          {
+            "seq_len": 512,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 0.8205589575803912,
+            "ecd_std": 0.019487426098417176,
+            "runtime_ms_mean": 11.785061111125591,
+            "throughput_mean": 282398.1857839696,
+            "energy_mean": 2.180236305558234,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627600201866955,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 512
+          },
+          {
+            "seq_len": 768,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.34611298807606605,
+            "ecd_std": 0.1374893602331815,
+            "runtime_ms_mean": 20.026055554909462,
+            "throughput_mean": 246017.9783035398,
+            "energy_mean": 3.704820277658251,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628017610387225,
+            "memory_peak_mb_mean": 0.00032806396484375,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 768
+          },
+          {
+            "seq_len": 1024,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.6280830167416653,
+            "ecd_std": 0.025439031236483486,
+            "runtime_ms_mean": 26.116014999206527,
+            "throughput_mean": 245322.08468384313,
+            "energy_mean": 4.8314627748532075,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628767656475695,
+            "memory_peak_mb_mean": 0.00032806396484375,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 1024
+          }
+        ],
+        "batch": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 101.43892597156767,
+            "ecd_std": 28.263804879497936,
+            "runtime_ms_mean": 1.6263836100430733,
+            "throughput_mean": 645454.025500446,
+            "energy_mean": 0.30088096785796853,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1
+          },
+          {
+            "seq_len": 128,
+            "batch": 2,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 20.35575699232953,
+            "ecd_std": 1.2312859936690723,
+            "runtime_ms_mean": 3.444345834355368,
+            "throughput_mean": 464849.2168203387,
+            "energy_mean": 0.6372039793557431,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627461161389961,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 2
+          },
+          {
+            "seq_len": 128,
+            "batch": 3,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 6.5684775882998805,
+            "ecd_std": 0.2969047770979107,
+            "runtime_ms_mean": 5.782336110941186,
+            "throughput_mean": 398582.6587790706,
+            "energy_mean": 1.0697321805241193,
+            "power_mean": 185.0,
+            "quality_mean": 0.962671899457548,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 3
+          },
+          {
+            "seq_len": 128,
+            "batch": 4,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 2.4634550950783227,
+            "ecd_std": 0.16171341928184196,
+            "runtime_ms_mean": 8.549059167368492,
+            "throughput_mean": 366991.0677561234,
+            "energy_mean": 1.581575945963171,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625737745111985,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 4
+          },
+          {
+            "seq_len": 128,
+            "batch": 6,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.0535031357144458,
+            "ecd_std": 0.027837385134182425,
+            "runtime_ms_mean": 16.347039166774064,
+            "throughput_mean": 317179.6571547254,
+            "energy_mean": 3.0242022458532016,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625881941133535,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "neutral",
+            "var_value": 6
+          },
+          {
+            "seq_len": 128,
+            "batch": 8,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.6258406386082104,
+            "ecd_std": 0.0060564854887365125,
+            "runtime_ms_mean": 25.996942499518305,
+            "throughput_mean": 297897.08022677066,
+            "energy_mean": 4.809434362410887,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627471368740924,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 8
+          }
+        ],
+        "hidden": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 512,
+            "layers": 12,
+            "ecd_mean": 121.09794647908704,
+            "ecd_std": 12.292734828140256,
+            "runtime_ms_mean": 1.4440902769921296,
+            "throughput_mean": 710828.0203729569,
+            "energy_mean": 0.26715670124354396,
+            "power_mean": 185.0,
+            "quality_mean": 0.962665630778572,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 512
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 113.21853237232236,
+            "ecd_std": 13.421860549920517,
+            "runtime_ms_mean": 1.4946130559312425,
+            "throughput_mean": 687245.7127347004,
+            "energy_mean": 0.27650341534727985,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1024
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1536,
+            "layers": 12,
+            "ecd_mean": 111.55201573725573,
+            "ecd_std": 13.55038914549073,
+            "runtime_ms_mean": 1.505956666329035,
+            "throughput_mean": 682165.9711070433,
+            "energy_mean": 0.27860198327087143,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627185500188515,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1536
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 2048,
+            "layers": 12,
+            "ecd_mean": 111.95294907085669,
+            "ecd_std": 13.545543295606816,
+            "runtime_ms_mean": 1.5031019450867058,
+            "throughput_mean": 683420.9227522596,
+            "energy_mean": 0.27807385984104055,
+            "power_mean": 185.0,
+            "quality_mean": 0.9626388043355265,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 2048
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 3072,
+            "layers": 12,
+            "ecd_mean": 106.14802211848652,
+            "ecd_std": 18.13116991667768,
+            "runtime_ms_mean": 1.5498811115523696,
+            "throughput_mean": 664723.0234175739,
+            "energy_mean": 0.28672800563718837,
+            "power_mean": 185.0,
+            "quality_mean": 0.9624334761488825,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 3072
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 4096,
+            "layers": 12,
+            "ecd_mean": 97.35655240135142,
+            "ecd_std": 21.61347232097099,
+            "runtime_ms_mean": 1.6283800001474447,
+            "throughput_mean": 635436.3510215562,
+            "energy_mean": 0.30125030002727726,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627211140397934,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 4096
+          }
+        ],
+        "layers": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 8,
+            "ecd_mean": 97.7134626559269,
+            "ecd_std": 16.429243466702538,
+            "runtime_ms_mean": 1.6146830545848287,
+            "throughput_mean": 637961.771894022,
+            "energy_mean": 0.2987163650981933,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627827441479836,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 8
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 111.76878479679735,
+            "ecd_std": 18.5271094709764,
+            "runtime_ms_mean": 1.5121555559744593,
+            "throughput_mean": 681784.265887225,
+            "energy_mean": 0.27974877785527497,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 12
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 16,
+            "ecd_mean": 109.48692420363531,
+            "ecd_std": 10.450483900923727,
+            "runtime_ms_mean": 1.516822222684924,
+            "throughput_mean": 676324.8763985429,
+            "energy_mean": 0.2806121111967109,
+            "power_mean": 185.0,
+            "quality_mean": 0.962678694064794,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 16
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 24,
+            "ecd_mean": 113.07368526742404,
+            "ecd_std": 11.981069864231177,
+            "runtime_ms_mean": 1.494017499680922,
+            "throughput_mean": 687069.6584972627,
+            "energy_mean": 0.27639323744097055,
+            "power_mean": 185.0,
+            "quality_mean": 0.96258220890489,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 24
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 32,
+            "ecd_mean": 118.72256120431972,
+            "ecd_std": 9.529542876938761,
+            "runtime_ms_mean": 1.4562222220774856,
+            "throughput_mean": 704175.4062423479,
+            "energy_mean": 0.26940111108433484,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627300495128506,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 32
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 48,
+            "ecd_mean": 114.26522305965518,
+            "ecd_std": 12.461974956112465,
+            "runtime_ms_mean": 1.4868400002039077,
+            "throughput_mean": 690499.4901538547,
+            "energy_mean": 0.2750654000377229,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628537970572605,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 48
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 64,
+            "ecd_mean": 106.54962550861521,
+            "ecd_std": 14.221998292268852,
+            "runtime_ms_mean": 1.541585557364063,
+            "throughput_mean": 666648.9540336416,
+            "energy_mean": 0.2851933281123517,
+            "power_mean": 185.0,
+            "quality_mean": 0.962772081555438,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 64
+          }
+        ]
+      },
+      "breakpoint_analysis": {
+        "breakpoints": {
+          "seq_len": {
+            "cross_zero_point": {
+              "from_value": 512,
+              "to_value": 768,
+              "from_ecd": 0.8205589575803912,
+              "to_ecd": -0.34611298807606605
+            },
+            "cross_acceptance_point": {
+              "from_value": 512,
+              "to_value": 768,
+              "from_ecd": 0.8205589575803912,
+              "to_ecd": -0.34611298807606605
+            }
+          },
+          "batch": {
+            "cross_zero_point": {
+              "from_value": 4,
+              "to_value": 6,
+              "from_ecd": 2.4634550950783227,
+              "to_ecd": -0.0535031357144458
+            },
+            "cross_acceptance_point": {
+              "from_value": 4,
+              "to_value": 6,
+              "from_ecd": 2.4634550950783227,
+              "to_ecd": -0.0535031357144458
+            }
+          },
+          "hidden": {
+            "cross_zero_point": null,
+            "cross_acceptance_point": null
+          },
+          "layers": {
+            "cross_zero_point": null,
+            "cross_acceptance_point": null
+          }
+        },
+        "effect_strengths": {
+          "seq_len": 110.2395952044943,
+          "batch": 102.06476661017588,
+          "hidden": 23.74139407773562,
+          "layers": 21.009098548392814
+        },
+        "dominant_variable": "seq_len",
+        "actual_benchmark_tiers": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 118.116039829899,
+            "ecd_std": 11.209438564677365,
+            "runtime_ms_mean": 1.4614999995198257,
+            "throughput_mean": 702169.339273843,
+            "energy_mean": 0.2703774999111677,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "tier": "development"
+          },
+          {
+            "seq_len": 256,
+            "batch": 2,
+            "hidden": 1536,
+            "layers": 24,
+            "ecd_mean": 3.12533530990508,
+            "ecd_std": 0.1878229699777155,
+            "runtime_ms_mean": 7.83274166610176,
+            "throughput_mean": 326974.1772717948,
+            "energy_mean": 1.4490572082288256,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625110491211984,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "tier": "validation"
+          },
+          {
+            "seq_len": 512,
+            "batch": 4,
+            "hidden": 2048,
+            "layers": 32,
+            "ecd_mean": -0.6396152993477198,
+            "ecd_std": 0.00744132870138039,
+            "runtime_ms_mean": 26.490661667634818,
+            "throughput_mean": 270610.2697427033,
+            "energy_mean": 4.900772408512442,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627550976910895,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "tier": "holdout"
+          }
+        ]
+      },
+      "mechanism_report": {
+        "scheduler_effects": {
+          "evidence": "ECD decays as runtime grows because candidate_qat uses measured runtime_ms * energy_joules, and with direct power override energy scales linearly with runtime, creating near-quadratic penalty in runtime.",
+          "seq_runtime_growth_ms": [
+            [
+              64,
+              1.6871691672753917
+            ],
+            [
+              128,
+              1.522631944782107
+            ],
+            [
+              192,
+              3.1798366668024554
+            ],
+            [
+              256,
+              4.915703333709745
+            ],
+            [
+              384,
+              8.485616109202157
+            ],
+            [
+              512,
+              11.785061111125591
+            ],
+            [
+              768,
+              20.026055554909462
+            ],
+            [
+              1024,
+              26.116014999206527
+            ]
+          ],
+          "batch_runtime_growth_ms": [
+            [
+              1,
+              1.6263836100430733
+            ],
+            [
+              2,
+              3.444345834355368
+            ],
+            [
+              3,
+              5.782336110941186
+            ],
+            [
+              4,
+              8.549059167368492
+            ],
+            [
+              6,
+              16.347039166774064
+            ],
+            [
+              8,
+              25.996942499518305
+            ]
+          ]
+        },
+        "memory_effects": {
+          "evidence": "Memory peak increases with larger sequence/batch, but hidden size is currently not wired into measured workload size, so memory pressure is mostly driven by seq_len and batch.",
+          "seq_memory_mb": [
+            [
+              64,
+              0.00025177001953125
+            ],
+            [
+              128,
+              0.00025177001953125
+            ],
+            [
+              192,
+              0.00029754638671875
+            ],
+            [
+              256,
+              0.00029754638671875
+            ],
+            [
+              384,
+              0.00029754638671875
+            ],
+            [
+              512,
+              0.00029754638671875
+            ],
+            [
+              768,
+              0.00032806396484375
+            ],
+            [
+              1024,
+              0.00032806396484375
+            ]
+          ],
+          "batch_memory_mb": [
+            [
+              1,
+              0.00025177001953125
+            ],
+            [
+              2,
+              0.00029754638671875
+            ],
+            [
+              3,
+              0.00029754638671875
+            ],
+            [
+              4,
+              0.00029754638671875
+            ],
+            [
+              6,
+              0.00029754638671875
+            ],
+            [
+              8,
+              0.00029754638671875
+            ]
+          ],
+          "hidden_memory_mb": [
+            [
+              512,
+              0.00025177001953125
+            ],
+            [
+              1024,
+              0.00025177001953125
+            ],
+            [
+              1536,
+              0.00025177001953125
+            ],
+            [
+              2048,
+              0.00025177001953125
+            ],
+            [
+              3072,
+              0.00025177001953125
+            ],
+            [
+              4096,
+              0.00025177001953125
+            ]
+          ]
+        },
+        "pruning_overhead": {
+          "evidence": "Pruning latency improvement and pruning ratio stay almost flat across depth because avg_pruning_ratio is target_ratio * floor(0.75 * layers)/layers, while hidden size is unused in prune_tokens.",
+          "layer_latency_improvement": [
+            [
+              8,
+              0.12749999999999992
+            ],
+            [
+              12,
+              0.12749999999999992
+            ],
+            [
+              16,
+              0.12749999999999992
+            ],
+            [
+              24,
+              0.12749999999999992
+            ],
+            [
+              32,
+              0.12749999999999992
+            ],
+            [
+              48,
+              0.12749999999999992
+            ],
+            [
+              64,
+              0.12749999999999992
+            ]
+          ],
+          "layer_pruning_ratio": [
+            [
+              8,
+              0.15000000000000002
+            ],
+            [
+              12,
+              0.15000000000000002
+            ],
+            [
+              16,
+              0.15000000000000002
+            ],
+            [
+              24,
+              0.15000000000000002
+            ],
+            [
+              32,
+              0.15000000000000002
+            ],
+            [
+              48,
+              0.15000000000000002
+            ],
+            [
+              64,
+              0.15000000000000002
+            ]
+          ],
+          "hidden_ecd": [
+            [
+              512,
+              121.09794647908704
+            ],
+            [
+              1024,
+              113.21853237232236
+            ],
+            [
+              1536,
+              111.55201573725573
+            ],
+            [
+              2048,
+              111.95294907085669
+            ],
+            [
+              3072,
+              106.14802211848652
+            ],
+            [
+              4096,
+              97.35655240135142
+            ]
+          ]
+        }
+      },
+      "result_classification": "useful in bounded regime"
+    },
+    {
+      "experiment_id": "exp_006_token_pruning_threshold_sweep",
+      "regime_map": {
+        "seq_len": [
+          {
+            "seq_len": 64,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 117.55485945013231,
+            "ecd_std": 12.836523184599375,
+            "runtime_ms_mean": 1.4665955551511918,
+            "throughput_mean": 700260.2893636676,
+            "energy_mean": 0.2713201777029705,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627677752161631,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 64
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 111.87089917414887,
+            "ecd_std": 10.211381894931367,
+            "runtime_ms_mean": 1.500326666326954,
+            "throughput_mean": 683628.245906928,
+            "energy_mean": 0.2775604332704865,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 128
+          },
+          {
+            "seq_len": 192,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 23.745052304055335,
+            "ecd_std": 1.8721690790295036,
+            "runtime_ms_mean": 3.20205916624319,
+            "throughput_mean": 440229.20982489805,
+            "energy_mean": 0.5923809457549901,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627319059431431,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 192
+          },
+          {
+            "seq_len": 256,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 9.893093245381117,
+            "ecd_std": 0.5172251369358897,
+            "runtime_ms_mean": 4.8213797222059736,
+            "throughput_mean": 371858.29221161734,
+            "energy_mean": 0.8919552486081052,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628215277391236,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 256
+          },
+          {
+            "seq_len": 384,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 2.7599651718618525,
+            "ecd_std": 0.16077401910277714,
+            "runtime_ms_mean": 8.204756665751725,
+            "throughput_mean": 312136.8722027612,
+            "energy_mean": 1.5178799831640695,
+            "power_mean": 185.0,
+            "quality_mean": 0.962689858219208,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 384
+          },
+          {
+            "seq_len": 512,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 0.7945073843602021,
+            "ecd_std": 0.037936877334159694,
+            "runtime_ms_mean": 11.871518888316738,
+            "throughput_mean": 280360.74118954374,
+            "energy_mean": 2.1962309943385967,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627600201866955,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 512
+          },
+          {
+            "seq_len": 768,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.32058425336495877,
+            "ecd_std": 0.044448641973613874,
+            "runtime_ms_mean": 19.317476111084236,
+            "throughput_mean": 252021.7159428202,
+            "energy_mean": 3.573733080550584,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628017610387225,
+            "memory_peak_mb_mean": 0.00032806396484375,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 768
+          },
+          {
+            "seq_len": 1024,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.6198002605985842,
+            "ecd_std": 0.01845690867825523,
+            "runtime_ms_mean": 25.809268333190023,
+            "throughput_mean": 248102.44421599168,
+            "energy_mean": 4.774714641640155,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628767656475695,
+            "memory_peak_mb_mean": 0.00032806396484375,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 1024
+          }
+        ],
+        "batch": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 99.94975151016202,
+            "ecd_std": 21.670388553937606,
+            "runtime_ms_mean": 1.6081883327691078,
+            "throughput_mean": 643758.6599866049,
+            "energy_mean": 0.29751484156228497,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1
+          },
+          {
+            "seq_len": 128,
+            "batch": 2,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 22.035193296529464,
+            "ecd_std": 1.955091881949872,
+            "runtime_ms_mean": 3.320368611194782,
+            "throughput_mean": 482588.2235502882,
+            "energy_mean": 0.6142681930710346,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627461161389961,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 2
+          },
+          {
+            "seq_len": 128,
+            "batch": 3,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 6.199291327165105,
+            "ecd_std": 0.4223968948925403,
+            "runtime_ms_mean": 5.932486667006742,
+            "throughput_mean": 388659.9507184441,
+            "energy_mean": 1.0975100333962473,
+            "power_mean": 185.0,
+            "quality_mean": 0.962671899457548,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 3
+          },
+          {
+            "seq_len": 128,
+            "batch": 4,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 2.1688612352259544,
+            "ecd_std": 0.570599923416661,
+            "runtime_ms_mean": 9.040853333580243,
+            "throughput_mean": 349799.7255127856,
+            "energy_mean": 1.6725578667123449,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625737745111985,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 4
+          },
+          {
+            "seq_len": 128,
+            "batch": 6,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.0817326065786196,
+            "ecd_std": 0.05056547754733093,
+            "runtime_ms_mean": 16.608179166602593,
+            "throughput_mean": 312341.43080769095,
+            "energy_mean": 3.072513145821479,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625881941133535,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "neutral",
+            "var_value": 6
+          },
+          {
+            "seq_len": 128,
+            "batch": 8,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": -0.6309238548656941,
+            "ecd_std": 0.008023491755566783,
+            "runtime_ms_mean": 26.17713388816709,
+            "throughput_mean": 295859.974754933,
+            "energy_mean": 4.8427697693109115,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627471368740924,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "var_value": 8
+          }
+        ],
+        "hidden": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 512,
+            "layers": 12,
+            "ecd_mean": 115.85227518516751,
+            "ecd_std": 11.635363548679708,
+            "runtime_ms_mean": 1.47578777820551,
+            "throughput_mean": 695429.9483263177,
+            "energy_mean": 0.2730207389680193,
+            "power_mean": 185.0,
+            "quality_mean": 0.962665630778572,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 512
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 110.58235596908578,
+            "ecd_std": 15.763053191285996,
+            "runtime_ms_mean": 1.5155611110256157,
+            "throughput_mean": 678791.1053923682,
+            "energy_mean": 0.28037880553973893,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1024
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1536,
+            "layers": 12,
+            "ecd_mean": 112.41336194431487,
+            "ecd_std": 16.260183919443058,
+            "runtime_ms_mean": 1.5039436111086009,
+            "throughput_mean": 684264.5273334536,
+            "energy_mean": 0.2782295680550912,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627185500188515,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 1536
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 2048,
+            "layers": 12,
+            "ecd_mean": 113.58359007790759,
+            "ecd_std": 14.655615855722584,
+            "runtime_ms_mean": 1.4932341674163276,
+            "throughput_mean": 688199.7440282498,
+            "energy_mean": 0.2762483209720206,
+            "power_mean": 185.0,
+            "quality_mean": 0.9626388043355265,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 2048
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 3072,
+            "layers": 12,
+            "ecd_mean": 111.47437838774371,
+            "ecd_std": 16.440188481665583,
+            "runtime_ms_mean": 1.5101250014292116,
+            "throughput_mean": 681488.7782157527,
+            "energy_mean": 0.2793731252644041,
+            "power_mean": 185.0,
+            "quality_mean": 0.9624334761488825,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 3072
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 4096,
+            "layers": 12,
+            "ecd_mean": 101.70118583505739,
+            "ecd_std": 14.735871000497474,
+            "runtime_ms_mean": 1.578667499355409,
+            "throughput_mean": 651287.5318894775,
+            "energy_mean": 0.2920534873807507,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627211140397934,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 4096
+          }
+        ],
+        "layers": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 8,
+            "ecd_mean": 101.64791982017431,
+            "ecd_std": 13.674500525007263,
+            "runtime_ms_mean": 1.5775441667655186,
+            "throughput_mean": 651304.958294722,
+            "energy_mean": 0.29184567085162094,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627827441479836,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 8
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 97.46181361032049,
+            "ecd_std": 15.791583191197315,
+            "runtime_ms_mean": 1.614165000137291,
+            "throughput_mean": 637423.0870018017,
+            "energy_mean": 0.2986205250253988,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 12
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 16,
+            "ecd_mean": 115.93539042534555,
+            "ecd_std": 15.068452441993887,
+            "runtime_ms_mean": 1.4794083335800678,
+            "throughput_mean": 695095.1718139967,
+            "energy_mean": 0.27369054171231255,
+            "power_mean": 185.0,
+            "quality_mean": 0.962678694064794,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 16
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 24,
+            "ecd_mean": 118.87038064734378,
+            "ecd_std": 11.151347509180802,
+            "runtime_ms_mean": 1.4564816661934148,
+            "throughput_mean": 704474.1658934313,
+            "energy_mean": 0.2694491082457817,
+            "power_mean": 185.0,
+            "quality_mean": 0.96258220890489,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 24
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 32,
+            "ecd_mean": 110.5813933945974,
+            "ecd_std": 12.972979327457164,
+            "runtime_ms_mean": 1.5119858327428422,
+            "throughput_mean": 679287.1465356444,
+            "energy_mean": 0.27971737905742583,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627300495128506,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 32
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 48,
+            "ecd_mean": 113.98318502454686,
+            "ecd_std": 9.49319173227406,
+            "runtime_ms_mean": 1.4861999995143076,
+            "throughput_mean": 690022.475665909,
+            "energy_mean": 0.27494699991014687,
+            "power_mean": 185.0,
+            "quality_mean": 0.9628537970572605,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 48
+          },
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 64,
+            "ecd_mean": 110.9480366027819,
+            "ecd_std": 16.37452043029647,
+            "runtime_ms_mean": 1.5131791666135541,
+            "throughput_mean": 679836.1299747664,
+            "energy_mean": 0.2799381458235075,
+            "power_mean": 185.0,
+            "quality_mean": 0.962772081555438,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "var_value": 64
+          }
+        ]
+      },
+      "breakpoint_analysis": {
+        "breakpoints": {
+          "seq_len": {
+            "cross_zero_point": {
+              "from_value": 512,
+              "to_value": 768,
+              "from_ecd": 0.7945073843602021,
+              "to_ecd": -0.32058425336495877
+            },
+            "cross_acceptance_point": {
+              "from_value": 512,
+              "to_value": 768,
+              "from_ecd": 0.7945073843602021,
+              "to_ecd": -0.32058425336495877
+            }
+          },
+          "batch": {
+            "cross_zero_point": {
+              "from_value": 4,
+              "to_value": 6,
+              "from_ecd": 2.1688612352259544,
+              "to_ecd": -0.0817326065786196
+            },
+            "cross_acceptance_point": {
+              "from_value": 4,
+              "to_value": 6,
+              "from_ecd": 2.1688612352259544,
+              "to_ecd": -0.0817326065786196
+            }
+          },
+          "hidden": {
+            "cross_zero_point": null,
+            "cross_acceptance_point": null
+          },
+          "layers": {
+            "cross_zero_point": null,
+            "cross_acceptance_point": null
+          }
+        },
+        "effect_strengths": {
+          "seq_len": 118.1746597107309,
+          "batch": 100.58067536502772,
+          "hidden": 14.151089350110126,
+          "layers": 21.40856703702329
+        },
+        "dominant_variable": "seq_len",
+        "actual_benchmark_tiers": [
+          {
+            "seq_len": 128,
+            "batch": 1,
+            "hidden": 1024,
+            "layers": 12,
+            "ecd_mean": 111.31130509718966,
+            "ecd_std": 17.12915812864705,
+            "runtime_ms_mean": 1.512551110984835,
+            "throughput_mean": 680741.3497383683,
+            "energy_mean": 0.2798219555321945,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627191126173495,
+            "memory_peak_mb_mean": 0.00025177001953125,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "tier": "development"
+          },
+          {
+            "seq_len": 256,
+            "batch": 2,
+            "hidden": 1536,
+            "layers": 24,
+            "ecd_mean": 3.3128799318388213,
+            "ecd_std": 0.2636500496740818,
+            "runtime_ms_mean": 7.664794722930107,
+            "throughput_mean": 334263.7828414518,
+            "energy_mean": 1.41798702374207,
+            "power_mean": 185.0,
+            "quality_mean": 0.9625110491211984,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "positive",
+            "tier": "validation"
+          },
+          {
+            "seq_len": 512,
+            "batch": 4,
+            "hidden": 2048,
+            "layers": 32,
+            "ecd_mean": -0.6424089219265708,
+            "ecd_std": 0.011308894113665938,
+            "runtime_ms_mean": 26.598915555971164,
+            "throughput_mean": 269542.843133734,
+            "energy_mean": 4.9207993778546655,
+            "power_mean": 185.0,
+            "quality_mean": 0.9627550976910895,
+            "memory_peak_mb_mean": 0.00029754638671875,
+            "pruning_latency_improvement_mean": 0.12749999999999992,
+            "memory_traffic_reduction_mean": 0.12000000000000002,
+            "pruning_ratio_mean": 0.15000000000000002,
+            "regime": "negative",
+            "tier": "holdout"
+          }
+        ]
+      },
+      "mechanism_report": {
+        "scheduler_effects": {
+          "evidence": "ECD decays as runtime grows because candidate_qat uses measured runtime_ms * energy_joules, and with direct power override energy scales linearly with runtime, creating near-quadratic penalty in runtime.",
+          "seq_runtime_growth_ms": [
+            [
+              64,
+              1.4665955551511918
+            ],
+            [
+              128,
+              1.500326666326954
+            ],
+            [
+              192,
+              3.20205916624319
+            ],
+            [
+              256,
+              4.8213797222059736
+            ],
+            [
+              384,
+              8.204756665751725
+            ],
+            [
+              512,
+              11.871518888316738
+            ],
+            [
+              768,
+              19.317476111084236
+            ],
+            [
+              1024,
+              25.809268333190023
+            ]
+          ],
+          "batch_runtime_growth_ms": [
+            [
+              1,
+              1.6081883327691078
+            ],
+            [
+              2,
+              3.320368611194782
+            ],
+            [
+              3,
+              5.932486667006742
+            ],
+            [
+              4,
+              9.040853333580243
+            ],
+            [
+              6,
+              16.608179166602593
+            ],
+            [
+              8,
+              26.17713388816709
+            ]
+          ]
+        },
+        "memory_effects": {
+          "evidence": "Memory peak increases with larger sequence/batch, but hidden size is currently not wired into measured workload size, so memory pressure is mostly driven by seq_len and batch.",
+          "seq_memory_mb": [
+            [
+              64,
+              0.00025177001953125
+            ],
+            [
+              128,
+              0.00025177001953125
+            ],
+            [
+              192,
+              0.00029754638671875
+            ],
+            [
+              256,
+              0.00029754638671875
+            ],
+            [
+              384,
+              0.00029754638671875
+            ],
+            [
+              512,
+              0.00029754638671875
+            ],
+            [
+              768,
+              0.00032806396484375
+            ],
+            [
+              1024,
+              0.00032806396484375
+            ]
+          ],
+          "batch_memory_mb": [
+            [
+              1,
+              0.00025177001953125
+            ],
+            [
+              2,
+              0.00029754638671875
+            ],
+            [
+              3,
+              0.00029754638671875
+            ],
+            [
+              4,
+              0.00029754638671875
+            ],
+            [
+              6,
+              0.00029754638671875
+            ],
+            [
+              8,
+              0.00029754638671875
+            ]
+          ],
+          "hidden_memory_mb": [
+            [
+              512,
+              0.00025177001953125
+            ],
+            [
+              1024,
+              0.00025177001953125
+            ],
+            [
+              1536,
+              0.00025177001953125
+            ],
+            [
+              2048,
+              0.00025177001953125
+            ],
+            [
+              3072,
+              0.00025177001953125
+            ],
+            [
+              4096,
+              0.00025177001953125
+            ]
+          ]
+        },
+        "pruning_overhead": {
+          "evidence": "Pruning latency improvement and pruning ratio stay almost flat across depth because avg_pruning_ratio is target_ratio * floor(0.75 * layers)/layers, while hidden size is unused in prune_tokens.",
+          "layer_latency_improvement": [
+            [
+              8,
+              0.12749999999999992
+            ],
+            [
+              12,
+              0.12749999999999992
+            ],
+            [
+              16,
+              0.12749999999999992
+            ],
+            [
+              24,
+              0.12749999999999992
+            ],
+            [
+              32,
+              0.12749999999999992
+            ],
+            [
+              48,
+              0.12749999999999992
+            ],
+            [
+              64,
+              0.12749999999999992
+            ]
+          ],
+          "layer_pruning_ratio": [
+            [
+              8,
+              0.15000000000000002
+            ],
+            [
+              12,
+              0.15000000000000002
+            ],
+            [
+              16,
+              0.15000000000000002
+            ],
+            [
+              24,
+              0.15000000000000002
+            ],
+            [
+              32,
+              0.15000000000000002
+            ],
+            [
+              48,
+              0.15000000000000002
+            ],
+            [
+              64,
+              0.15000000000000002
+            ]
+          ],
+          "hidden_ecd": [
+            [
+              512,
+              115.85227518516751
+            ],
+            [
+              1024,
+              110.58235596908578
+            ],
+            [
+              1536,
+              112.41336194431487
+            ],
+            [
+              2048,
+              113.58359007790759
+            ],
+            [
+              3072,
+              111.47437838774371
+            ],
+            [
+              4096,
+              101.70118583505739
+            ]
+          ]
+        }
+      },
+      "result_classification": "useful in bounded regime"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "baseline_id": "baseline_gpu_transformer_bf16_v1",
+  "hardware": {
+    "name": "A100-40GB",
+    "device_type": "GPU",
+    "model": "A100",
+    "arch": "Ampere",
+    "cores": 6912,
+    "memory_gb": 40.0,
+    "peak_power_watts": 300.0,
+    "metadata": {
+      "peak_bandwidth_gbs": 1555.5
+    }
+  },
+  "benchmark": {
+    "benchmark_id": "transformer_inference_small",
+    "name": "Small Transformer Inference",
+    "workload_class": "dense_linear_algebra",
+    "input_size": "seq_len=128, batch=1, vocab=50257, hidden=1024",
+    "primary_metrics": [
+      "accuracy",
+      "latency_ms",
+      "energy_joules",
+      "throughput_tok_sec"
+    ],
+    "secondarty_metrics": [
+      "memory_traffic_bytes",
+      "cache_hit_rate",
+      "peak_power_watts"
+    ],
+    "quality_metric": "accuracy",
+    "metadata": {},
+    "version": "1.0"
+  },
+  "code_commit": "abc123def456789defabc",
+  "compiler_version": "cudnn-8.9.0",
+  "dependency_versions": {
+    "torch": "2.1.0",
+    "torchvision": "0.16.0",
+    "numpy": "1.24.3",
+    "scipy": "1.11.4",
+    "pandas": "2.1.3",
+    "matplotlib": "3.8.2",
+    "pytorch_lightning": "2.1.2"
+  },
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "0",
+    "CUDA_DEVICE_ORDER": "PCI_BUS_ID",
+    "CUDA_LAUNCH_BLOCKING": "0",
+    "TF32_ENABLED": "1",
+    "TORCH_CUDNN_BENCHMARK": "1",
+    "TORCH_ALLOW_TF32": "1",
+    "NCCL_DEBUG": "INFO"
+  },
+  "created_timestamp": "2026-03-27T13:24:46.373844",
+  "measurement_method": "pytorch_profiler + RAPL",
+  "seed_policy": "fixed_seed_only",
+  "notes": "This baseline is IMMUTABLE.\nDo not modify, overwrite, or recalculate.\n\nIt serves as the reference point for:\n- exp_001_int4_quantization\n- exp_002_int8_quantization\n- exp_003_mixed_precision_search\n\nAny changes to this baseline invalidate all experiments that reference it.\n\nTo update methodology, create a new baseline with a new ID (e.g., v2).\n"
+}

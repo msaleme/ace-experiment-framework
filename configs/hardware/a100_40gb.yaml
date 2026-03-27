@@ -1,0 +1,22 @@
+# Hardware Configuration: NVIDIA A100-40GB
+
+name: A100-40GB
+device_type: GPU
+model: A100
+arch: Ampere
+cores: 6912
+memory_gb: 40.0
+peak_power_watts: 300.0
+peak_bandwidth_gbs: 1.5555  # 1.555 TB/s
+
+metadata:
+  compute_capability: "8.0"
+  max_block_threads: 1024
+  max_registers_per_block: 65536
+  warp_size: 32
+  l1_cache_kb: 192
+  l2_cache_mb: 40
+  shared_memory_per_block_kb: 96
+  typical_clock_mhz: 1410
+  default_clock_mhz: 1410
+  max_clock_mhz: 1860

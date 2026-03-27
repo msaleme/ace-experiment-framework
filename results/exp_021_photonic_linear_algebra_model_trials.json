@@ -1,0 +1,152 @@
+[
+  {
+    "trial_num": 1,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9348112161318527,
+      "latency_ms": 87.87866442790722,
+      "energy_joules": 0.4055038705794905,
+      "throughput_tok_sec": 11.110458204647312,
+      "ecd_improvement": 2.240094715910903,
+      "system_level_ecd_projection": 2.284579264265048,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 2,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9270986004552298,
+      "latency_ms": 102.24073232958546,
+      "energy_joules": 0.3711998773034532,
+      "throughput_tok_sec": 10.172834993214108,
+      "ecd_improvement": 2.1262455482597975,
+      "system_level_ecd_projection": 2.1365856482982024,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 3,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9244014103925454,
+      "latency_ms": 86.63758684742334,
+      "energy_joules": 0.39064801843904834,
+      "throughput_tok_sec": 9.851900576181244,
+      "ecd_improvement": 2.238502967968203,
+      "system_level_ecd_projection": 2.1912498342463635,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 4,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9199997197985507,
+      "latency_ms": 96.77240365548464,
+      "energy_joules": 0.4531744008251314,
+      "throughput_tok_sec": 10.179932327065663,
+      "ecd_improvement": 1.9527938176098625,
+      "system_level_ecd_projection": 1.9446927694190046,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 5,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.921509312299505,
+      "latency_ms": 94.07341727179148,
+      "energy_joules": 0.39121636890539035,
+      "throughput_tok_sec": 10.776133166341259,
+      "ecd_improvement": 2.2304203877971793,
+      "system_level_ecd_projection": 2.159261497668847,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 6,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9065945731687939,
+      "latency_ms": 99.23093684536049,
+      "energy_joules": 0.38627000671013784,
+      "throughput_tok_sec": 11.67048307702807,
+      "ecd_improvement": 2.0398113787191288,
+      "system_level_ecd_projection": 2.080736868633468,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 7,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9206621408214131,
+      "latency_ms": 87.21009467892277,
+      "energy_joules": 0.4402533753702241,
+      "throughput_tok_sec": 10.77369873073887,
+      "ecd_improvement": 2.3229406865590008,
+      "system_level_ecd_projection": 2.273246409462899,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 8,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.913308686153627,
+      "latency_ms": 97.74822322887383,
+      "energy_joules": 0.3790975705020515,
+      "throughput_tok_sec": 10.693654017973657,
+      "ecd_improvement": 2.1518660050606506,
+      "system_level_ecd_projection": 2.100985372496559,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 9,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9251104494751579,
+      "latency_ms": 88.23875028581612,
+      "energy_joules": 0.44854666590119374,
+      "throughput_tok_sec": 10.185938976321056,
+      "ecd_improvement": 2.26432524335502,
+      "system_level_ecd_projection": 2.202592894916265,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  },
+  {
+    "trial_num": 10,
+    "timestamp": "2026-03-27T13:34:09.066343",
+    "metrics": {
+      "accuracy": 0.9027261327505229,
+      "latency_ms": 99.5132344234865,
+      "energy_joules": 0.4080634091989331,
+      "throughput_tok_sec": 11.677618814849456,
+      "ecd_improvement": 1.8777889576556281,
+      "system_level_ecd_projection": 1.9086580566516012,
+      "novelty_score": 0.82
+    },
+    "success": true,
+    "error_message": ""
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "benchmark_id": "transformer_inference_small",
+  "name": "Small Transformer Inference",
+  "workload_class": "dense_linear_algebra",
+  "input_size": "seq_len=128, batch=1, vocab=50257, hidden=1024",
+  "primary_metrics": [
+    "accuracy",
+    "latency_ms",
+    "energy_joules",
+    "throughput_tok_sec"
+  ],
+  "secondarty_metrics": [
+    "memory_traffic_bytes",
+    "cache_hit_rate",
+    "peak_power_watts"
+  ],
+  "quality_metric": "accuracy",
+  "metadata": {
+    "model_type": "transformer_gpt2_like",
+    "num_layers": 12,
+    "num_heads": 16,
+    "hidden_dim": 1024,
+    "ffn_dim": 4096,
+    "model_params_millions": 125,
+    "data_source": "wikitext-103",
+    "timeout_seconds": 30,
+    "repetitions": 3,
+    "warmup_runs": 2
+  },
+  "version": "1.0"
+}

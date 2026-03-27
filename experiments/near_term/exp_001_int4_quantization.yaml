@@ -1,0 +1,170 @@
+# Experiment Configuration: Adaptive INT4 Quantization
+# Experiment ID: exp_001_int4_quantization
+# Horizon: Near-term
+# Status: Ready for execution
+
+experiment_id: exp_001_int4_quantization
+parent_experiment_id: null
+horizon: near_term
+hypothesis: "Adaptive per-layer INT4 quantization with BF16 fallback improves ECD by at least 15% on transformer inference without violating the 99% quality floor."
+
+# ============================================================================
+# 1. IMMUTABLE BASELINE SNAPSHOT
+# ============================================================================
+baseline: baseline_gpu_transformer_bf16_v1
+
+baseline_specification:
+  hardware_target: A100-40GB
+  code_commit: "abc123def456789"
+  compiler_version: "cudnn-8.9.0, torch-2.1.0"
+  dependency_versions:
+    torch: "2.1.0"
+    cuda: "12.1"
+    cudnn: "8.9.0"
+    numpy: "1.24.3"
+    python: "3.10.12"
+  environment:
+    CUDA_VISIBLE_DEVICES: "0"
+    CUDA_DEVICE_ORDER: "PCI_BUS_ID"
+    TF32_ENABLED: "1"
+  measurement_method: "pytorch_profiler + rapl"
+  seed_policy: "fixed_seed_only"
+  created_timestamp: "2026-03-27T10:00:00Z"
+
+# ============================================================================
+# 2. DECLARED MUTATION SCOPE
+# ============================================================================
+# Strictly what may change. Nothing else permitted.
+mutation_scope:
+  - quantization_config         # Which layers, precision levels
+  - fallback_policy             # Fallback conditions
+  - layer_fallback_thresholds   # Per-layer quality thresholds
+
+# These are explicitly NOT allowed to change:
+no_mutation_allowed:
+  - model_architecture          # Cannot change model structure
+  - training_data               # Cannot use different data
+  - benchmark_set               # Cannot switch benchmarks
+  - evaluation_method           # Cannot change how we measure
+
+# ============================================================================
+# 3. REPEATED TRIALS
+# ============================================================================
+trials: 10
+
+trial_configuration:
+  seeds:
+    - 42
+    - 101
+    - 2022
+    - 54321
+    - 999
+    - 12345
+    - 777
+    - 8888
+    - 111
+    - 5555
+  timeout_per_trial_seconds: 120
+  skip_on_single_failure: false  # Don't skip a trial if one fails
+
+# ============================================================================
+# 4. QUALITY FLOOR
+# ============================================================================
+quality_floor:
+  metric: accuracy
+  minimum_relative_to_baseline: 0.99  # Must be >= 99% of baseline accuracy
+  absolute_minimum: 0.90              # And >= 90% absolute
+
+# ============================================================================
+# 5. HOLDOUT BENCHMARK SUPPORT
+# ============================================================================
+benchmark_sets:
+  development:
+    - transformer_inference_small           # Optimization target
+  validation:
+    - transformer_inference_medium          # Transfer test
+  holdout:
+    - transformer_inference_holdout         # Final validation (never optimized on)
+
+holdout_validation_required: true
+
+# ============================================================================
+# 6. STATISTICAL VERDICT
+# ============================================================================
+acceptance:
+  # All must be true for acceptance
+  minimum_ecd_improvement: 0.15            # At least 15% improvement
+  minimum_effect_size: 0.10                # Cohen's d >= 0.10
+  require_statistical_significance: true   # p < 0.05
+  confidence_level: 0.95                   # 95% CI
+  confidence_interval_excludes_zero: true  # CI should not include zero
+  require_holdout_pass: true               # Must work on holdout set
+  require_validation_transfer: true        # Must work on validation set
+  maximum_complexity_overhead: 0.05        # Overhead < 5% of savings
+
+# ============================================================================
+# 7. ARCHIVED REPORT OUTPUT
+# ============================================================================
+reporting:
+  report_format:
+    - markdown                    # Individual experiment report
+    - json                       # Machine-readable results
+  include_raw_data: true         # Save raw trial metrics
+  comparison_reports: true       # Generate vs. baseline comparison
+  portfolio_update: true         # Update portfolio dashboard
+  artifact_retention_days: 365   # Keep artifacts for 1 year
+
+# ============================================================================
+# EXPERIMENT METADATA
+# ============================================================================
+workload_class: dense_linear_algebra
+representation_type: mixed_precision_int4_bf16
+hardware_target: A100
+notes: |
+  This is the first near-term experiment.
+  Focuses on quantization with layer-adaptive fallback.
+  Quality floor is critical - no accuracy loss tolerated.
+  Holdout benchmark validation is mandatory before acceptance.
+
+# ============================================================================
+# MUTATION DETAILS (for implementation)
+# ============================================================================
+quantization_config:
+  default_precision: INT4
+  fallback_precision: BF16
+  dynamic_fallback_enabled: true
+  layer_precision_mapping:
+    # Each layer can have its own precision
+    # Will be populated by adaptive search
+    layer_0: INT4
+    layer_1: INT4
+    # ... more layers
+    layer_11: INT4
+
+fallback_policy:
+  trigger_metric: accuracy_loss
+  trigger_threshold: 0.005      # Fallback if > 0.5% accuracy loss
+  min_layers_in_quantization: 2  # Don't quantize fewer than 2 layers
+  max_layers_in_quantization: 12 # Don't try to quantize all
+
+# ============================================================================
+# EXECUTION CONSTRAINTS
+# ============================================================================
+constraints:
+  max_total_time_hours: 48
+  max_memory_per_trial_gb: 30
+  require_clean_system: true
+  checkpoint_every_n_trials: 5
+
+# ============================================================================
+# SUCCESS CRITERIA
+# ============================================================================
+success_criteria: |
+  Experiment ACCEPTED only if:
+  1. Mean ECD improvement >= 15%
+  2. Accuracy >= 99% of baseline
+  3. p-value < 0.05 (Welch's t-test)
+  4. Confidence interval excludes zero
+  5. Effect replicates on validation set
+  6. Effect confirmed on holdout set
+  7. Overhead < 5% of gains
