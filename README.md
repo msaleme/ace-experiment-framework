@@ -1,6 +1,8 @@
 # ACE Experiment Framework
 
-**Automated Compute Efficiency Lab — A decision-grade research framework for discovering where AI compute efficiency is real, and where it isn't.**
+**A boundary-discovery and anti-self-deception framework for AI efficiency research.**
+
+The core value is not any individual finding. It is the capacity to tell when an optimization claim is true, false, or only conditionally true — with traceable evidence at every verdict.
 
 ---
 
@@ -14,7 +16,7 @@ The result: teams deploy optimizations that collapse under production load.
 
 ## What ACE Does
 
-ACE is a systematic, closed-loop research program that searches the design space of AI compute efficiency — across precision, sparsity, scheduling, memory strategy, and physical substrate — and enforces the conditions necessary to trust what it finds.
+ACE is a systematic, closed-loop research program that searches the design space of AI compute efficiency and enforces the conditions necessary to trust what it finds.
 
 Every experiment runs inside a fixed harness that enforces:
 
@@ -25,7 +27,7 @@ Every experiment runs inside a fixed harness that enforces:
 - **Skeptic agent review** — adversarial challenge of every apparent win
 - **Full overhead accounting** — conversion, orchestration, and complexity costs included
 
-The result is a **compute discovery engine** that produces falsifiable, condition-specific answers rather than average-case claims.
+Each validated result is evidence of the method working. Each honest rejection is equally valuable.
 
 ---
 
@@ -35,15 +37,15 @@ The result is a **compute discovery engine** that produces falsifiable, conditio
 ECD = Quality-Adjusted Throughput / (Energy × Area)
 ```
 
-ECD improves when a system does more useful work, uses less energy, or achieves the same result with less silicon-equivalent footprint — without degrading task quality.
-
-This single composite metric enables fair comparison across near-term software optimizations, mid-term architectural alternatives, and moonshot compute substrates.
+ECD is most useful in situations where simpler metrics mislead — where throughput gains are achieved at hidden cost to quality or energy, or where benchmark-average improvements mask per-condition collapse. It is a tool for catching what aggregate reporting misses, not a replacement for supporting metrics.
 
 ---
 
-## Key Finding: Token Pruning Bounded-Efficiency Regime
+## First Validated Result: Token Pruning Has a Hard Failure Boundary
 
-The first completed study — a boundary-aware analysis of token pruning — produced a concrete, deployable result:
+Token pruning is a widely cited inference optimization. ACE's first completed boundary analysis produced a concrete deployment-risk finding.
+
+**Thesis:** Token pruning ECD gains are regime-bounded by sequence length and batch size. Outside the validated envelope, ECD degrades deterministically. This is a systems-boundary failure, not noise.
 
 | Region | Sequence Length | Batch Size | ECD Outcome |
 |---|---|---|---|
@@ -52,22 +54,27 @@ The first completed study — a boundary-aware analysis of token pruning — pro
 | Boundary | 128–512 | 3–6 | Mixed |
 | Collapse | > 512 | > 4 | Deterministic loss |
 
-**Implication:** Token pruning should not be accepted or rejected on average. It should be deployed with explicit operating envelope enforcement.
+**Deployment implication:** Token pruning should not be accepted or rejected on average. Rollout should be gated on sequence-length and batch-size ceilings, not aggregate ECD.
 
-Full analysis: [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md)
+**Telemetry caveat:** This result was produced under simulated power telemetry (`ACE_DIRECT_POWER_WATTS` override). Native device telemetry would strengthen provenance but is unlikely to reverse the dominant boundary pattern.
+
+Full analysis: [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Decision memo: [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md)
 
 ---
 
-## Three-Horizon Research Portfolio
+## Research Portfolio
 
-### Near-Term (30–90 days)
-Software and systems optimizations on existing hardware. Quantization, token pruning, kernel fusion, memory traffic reduction.
+### Active Lane: Near-Term Software Optimizations
 
-### Mid-Term
-Alternative numeric representations and execution models. Residue number systems, logarithmic arithmetic, heterogeneous pipelines, FPGA proxies.
+Software and systems work on existing hardware — the lane where ACE has produced validated results. Quantization, token pruning, kernel fusion, memory traffic reduction.
 
-### Moonshot
-Unconventional compute substrates. Analog MAC, photonic linear algebra, in-memory compute, neuromorphic temporal coding.
+### Exploratory Lanes
+
+**Mid-term** — Alternative numeric representations and execution models: residue number systems, logarithmic arithmetic, heterogeneous pipelines, FPGA proxies. These experiments are exploratory; none have produced validated results yet.
+
+**Moonshot** — Unconventional compute substrates: analog MAC, photonic linear algebra, in-memory compute, neuromorphic temporal coding. This lane is strategically tracked, not active.
+
+The three-horizon structure exists to prevent near-term work from cannibalizing long-cycle research. The external narrative rests on the near-term validated results until the exploratory lanes produce confirmed findings.
 
 ---
 
@@ -91,17 +98,17 @@ ace-experiment-framework/
 │   └── build/                   # Experiment wiring and executors
 ├── configs/                     # Benchmark, hardware, and policy configs
 ├── experiments/                 # Experiment definitions by horizon
-│   ├── near_term/
-│   ├── mid_term/
-│   └── moonshot/
+│   ├── near_term/               # Active
+│   ├── mid_term/                # Exploratory
+│   └── moonshot/                # Tracked
 ├── baselines/                   # Immutable baseline snapshots
 ├── results/                     # Raw trial data
 ├── reports/                     # Generated experiment and portfolio reports
-├── docs/                        # Research papers and protocols
-│   ├── RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md
-│   ├── PROJECT_CLOSEOUT.md
-│   └── telemetry_variance_protocol.md
-└── kernels/                     # Reference kernel implementations
+└── docs/                        # Research papers, validated results, and protocols
+    ├── VALIDATED_RESULTS.md                           ← start here
+    ├── RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md
+    ├── PROJECT_CLOSEOUT.md
+    └── telemetry_variance_protocol.md
 ```
 
 ---
@@ -124,14 +131,15 @@ All gates are explicit and traceable. No subjective pass decisions.
 
 ## Anti-Self-Deception Controls
 
-This domain is vulnerable to false positives. ACE encodes institutional skepticism:
+This domain is systematically vulnerable to false positives. ACE encodes institutional skepticism:
 
 1. Holdout benchmarks are write-protected — never seen during optimization
 2. Skeptic agent challenges every apparent win before acceptance
 3. Complexity penalty discounts orchestration-heavy approaches
 4. Full overhead accounting — no kernel-only celebrations
 5. Baseline refresh checks prevent silent drift
-6. All accepted results include reproducibility metadata
+6. All accepted results require reproducibility metadata
+7. Telemetry provenance is declared and caveated in every report
 
 ---
 
@@ -150,22 +158,23 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 
 | Document | Purpose |
 |---|---|
+| [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md) | Validated findings with theses, caveats, and deployment implications |
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
-| [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, findings, known limits |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
+| [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, known limits, recommended next work |
 | [`docs/telemetry_variance_protocol.md`](docs/telemetry_variance_protocol.md) | Telemetry hardening and variance protocol |
+| [`reports/token_pruning_decision_memo.md`](reports/token_pruning_decision_memo.md) | Deployment-risk memo: envelope, collapse boundaries, telemetry caveats |
 | [`reports/portfolio_dashboard.md`](reports/portfolio_dashboard.md) | Full experiment portfolio summary |
-| [`reports/token_pruning_decision_memo.md`](reports/token_pruning_decision_memo.md) | Deployment guidance: token pruning operating envelope |
 
 ---
 
 ## Design Principles
 
-1. **Boundary-first deployment policy** — optimizations are accepted with operating envelopes, not as universal improvements
-2. **Artifact-first reporting** — every verdict is backed by traceable artifacts
-3. **Config-driven reproducibility** — every experiment is replayable from its config
-4. **Declared scope** — mutations are bounded before execution begins
-5. **Portfolio view** — no single-benchmark optimization; cross-workload transferability required
+1. **Method over findings** — the framework's credibility compounds across experiments; individual results are evidence of the method working
+2. **Boundary-first deployment policy** — optimizations are accepted with operating envelopes, not as universal improvements
+3. **Honest accounting** — telemetry provenance, overhead costs, and result caveats are declared, not omitted
+4. **Artifact-first reporting** — every verdict is backed by traceable artifacts
+5. **Config-driven reproducibility** — every experiment is replayable from its config
 
 ---
 
