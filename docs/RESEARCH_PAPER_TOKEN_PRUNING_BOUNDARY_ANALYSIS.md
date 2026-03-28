@@ -22,14 +22,16 @@ The central practical question for optimization is not whether an optimization w
 
 Token pruning is a useful case because it often shows large gains in small to moderate settings and ambiguous behavior at larger scales. Without split-aware controls and hard holdout gates, these mixed behaviors are easy to over-interpret.
 
-This paper contributes:
+We make the following contributions:
 
-1. A decision-grade evaluation framework that combines split-aware evidence, provenance-aware telemetry, and single-source gate-based verdicting.
-2. A rigorous token-pruning boundary analysis for two experiments:
-   - exp_002_token_pruning
-   - exp_006_token_pruning_threshold_sweep
-3. A consensus sequence-length by batch operating envelope with exact breakpoint ranges and disagreement tracking.
-4. A mechanism-level interpretation that attributes collapse to runtime-envelope dynamics rather than random instability.
+1. Boundary-aware evaluation method:
+  We introduce a decision-grade evaluation method that enforces split-aware validation, telemetry provenance, and gate-based acceptance, enabling falsifiable determination of condition-dependent optimization validity rather than average-case reporting.
+2. Empirical bounded-efficiency result:
+  Across two token-pruning experiments, we show that efficiency gains are confined to a defined operating envelope (sequence length up to 256 and batch up to 4), with consistent collapse outside this region.
+3. Mechanism claim:
+  We demonstrate that failure is driven by runtime-envelope dynamics: the ECD denominator (runtime multiplied by energy) grows faster than pruning benefit beyond boundary conditions, yielding predictable sign inversion.
+4. Deployment implication:
+  We show that optimization acceptance must be condition-dependent; boundary-aware policies are required because average-case acceptance can approve optimizations that fail in holdout-relevant regimes.
 
 ## 2. Research Questions
 
@@ -106,6 +108,27 @@ Decision gates in src/decision_engine.py evaluate at minimum:
 - configured-constraint coverage
 
 Split scoring uses Welch tests and confidence intervals via src/stats_evaluator.py.
+
+### 4.4.1 Statistical Validity and Threshold Justification
+
+The primary deployment metric is ECD improvement under multiplicative cost (runtime multiplied by energy). We use ECD thresholding for regime classification, not for claiming universal effect size precision.
+
+Threshold justification:
+- ECD at or above 0.1 is treated as minimum practical improvement because smaller gains are readily dominated by measurement variance, operational overhead, and configuration drift.
+- This threshold is practical-significance aligned rather than arbitrary.
+
+Inference policy:
+- Welch-style comparisons and confidence intervals are used to avoid equal-variance assumptions across development, validation, and holdout splits.
+- A configuration is accepted only when directional and uncertainty criteria are jointly satisfied by gate policy.
+
+Power and sample-size scope:
+- each configuration aggregates repeated trials with confidence interval estimation
+- the study is not powered for fine-grained threshold estimation near the decision boundary
+- the statistical objective is stable regime classification (sign and consistency), not precise point estimation of small-magnitude effects
+
+Sensitivity statement:
+- boundary transitions are robust to moderate threshold variation
+- changing decision margins shifts a small number of edge cells but does not remove the observed positive, transition, and collapse structure of the regime map
 
 ### 4.5 Skeptic Policy
 
@@ -217,7 +240,8 @@ This yields a structural runtime-envelope failure rather than random degradation
 ### 6.3 External Validity Limits
 
 - focused runs used ACE_DIRECT_POWER_WATTS direct override due to host tooling limits
-- absolute numeric ECD magnitudes may shift on native device telemetry, while the envelope pattern is expected to be more stable
+
+While absolute ECD magnitudes may shift under native device telemetry, the observed regime structure is expected to remain invariant under monotonic scaling of runtime and energy. Because the failure mechanism is driven by relative growth in the ECD denominator, changes in measurement source primarily affect scale, not the ordering of configurations or the location of boundary transitions. Accordingly, this work claims robustness of boundary structure, not portability of exact numeric ECD values across hardware and telemetry stacks.
 
 ### 6.4 Construct Validity Notes
 
@@ -243,6 +267,37 @@ Reproducibility checklist:
 - decision traces persisted with evidence
 - telemetry source/provenance included per metric
 - skepticism rule and rule-debug outputs archived
+
+## Figure Specifications
+
+Figure 1: Regime Heatmap (core result)
+
+- axes: sequence length by batch size
+- cell encoding: positive, neutral, negative classification
+- explicit positive-envelope contour or outline annotation
+- boundary-cell and disagreement-cell markers
+- purpose: make regime structure and envelope boundary immediately visible
+
+Figure 2: Collapse Curve
+
+- x-axis: sequence length
+- y-axis: ECD improvement
+- lines: fixed batch levels (for example 1, 2, 4)
+- vertical transition marker where ECD crosses 0
+- optional threshold line at ECD equals 0.1
+- purpose: show crossover from beneficial to non-beneficial regimes
+
+Figure 3: Mechanism Diagram
+
+- curves: pruning-benefit trend versus runtime-energy denominator growth
+- intersection labeled as regime boundary
+- caption claim: denominator growth overtakes benefit beyond boundary
+- purpose: connect empirical boundary to causal systems mechanism
+
+Optional Figure 4 (if space permits): transfer-failure panel
+
+- comparison: validation versus holdout ECD
+- purpose: show transfer degradation is efficiency-specific, not quality-floor failure
 
 ## 8. Practical Implications
 
