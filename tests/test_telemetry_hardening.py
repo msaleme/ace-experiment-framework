@@ -1,5 +1,5 @@
-from src.benchmark_quality import score_quality
-from src.near_term_telemetry import run_near_term_trial
+from ace_lab.benchmark_quality import score_quality
+from ace_lab.near_term_telemetry import run_near_term_trial
 
 
 BASELINE = {

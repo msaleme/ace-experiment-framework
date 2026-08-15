@@ -7,10 +7,10 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any, Callable
 import time
-from src.model import ExperimentRecord, Verdict
-from src.baseline_manager import BaselineManager
-from src.benchmark_registry import BenchmarkRegistry
-from src.metrics_collector import MetricsCollector
+from ace_lab.model import ExperimentRecord, Verdict
+from ace_lab.baseline_manager import BaselineManager
+from ace_lab.benchmark_registry import BenchmarkRegistry
+from ace_lab.metrics_collector import MetricsCollector
 
 
 class ExperimentRunner:

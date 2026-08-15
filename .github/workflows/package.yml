@@ -1,0 +1,30 @@
+name: Package
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build distributions
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build
+      - name: Inspect wheel
+        run: unzip -l dist/*.whl | grep -q 'ace_lab/cli.py'
+      - name: Clean-install smoke test
+        run: |
+          python -m venv /tmp/ace-smoke
+          /tmp/ace-smoke/bin/pip install dist/*.whl
+          /tmp/ace-smoke/bin/ace --version
+          /tmp/ace-smoke/bin/ace validate experiments/near_term/exp_002_token_pruning.yaml
+          /tmp/ace-smoke/bin/ace run experiments/near_term/exp_002_token_pruning.yaml --output /tmp/ace-artifacts
+          test -f /tmp/ace-artifacts/exp_002_token_pruning.manifest.json
+          test -f /tmp/ace-artifacts/exp_002_token_pruning.report.md

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Dict, Any
 
-from src.model import ExperimentRecord
+from ace_lab.model import ExperimentRecord
 
 
 class SkepticAgent:

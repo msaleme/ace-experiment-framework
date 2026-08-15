@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from dataclasses import asdict
-from src.model import Benchmark, WorkloadClass
+from ace_lab.model import Benchmark, WorkloadClass
 
 
 class BenchmarkRegistry:

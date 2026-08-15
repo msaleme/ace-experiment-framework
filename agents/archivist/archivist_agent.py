@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import Dict, Any
 
-from src.results_store import ResultsStore
-from src.report_generator import ReportGenerator
-from src.model import ExperimentRecord
+from ace_lab.results_store import ResultsStore
+from ace_lab.report_generator import ReportGenerator
+from ace_lab.model import ExperimentRecord
 
 
 class ArchivistAgent:

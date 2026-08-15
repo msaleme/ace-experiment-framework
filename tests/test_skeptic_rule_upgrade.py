@@ -1,5 +1,5 @@
 from agents.skeptic.skeptic_agent import SkepticAgent
-from src.model import ExperimentRecord
+from ace_lab.model import ExperimentRecord
 
 
 def test_uncertainty_normalized_skeptic_rule_triggers_and_reports_debug():

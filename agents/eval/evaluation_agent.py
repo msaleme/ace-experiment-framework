@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Callable
 
-from src.experiment_runner import ExperimentRunner
-from src.model import ExperimentRecord
+from ace_lab.experiment_runner import ExperimentRunner
+from ace_lab.model import ExperimentRecord
 
 
 class EvaluationAgent:

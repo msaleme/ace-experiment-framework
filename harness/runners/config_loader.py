@@ -7,9 +7,9 @@ from typing import Dict, Any
 
 import yaml
 
-from src.model import Hardware, Benchmark, WorkloadClass
-from src.baseline_manager import BaselineManager
-from src.benchmark_registry import BenchmarkRegistry
+from ace_lab.model import Hardware, Benchmark, WorkloadClass
+from ace_lab.baseline_manager import BaselineManager
+from ace_lab.benchmark_registry import BenchmarkRegistry
 
 
 def load_yaml(path: Path) -> Dict[str, Any]:

@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, List
 
-from src.model import ExperimentRecord, Verdict
+from ace_lab.model import ExperimentRecord, Verdict
 
 
 @dataclass

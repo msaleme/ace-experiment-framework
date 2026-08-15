@@ -1,7 +1,7 @@
-from src.decision_engine import DecisionEngine
-from src.model import EvaluationConfig, ExperimentRecord, HorizonCategory, MetricSet, Verdict, WorkloadClass
-from src.metrics_collector import MetricsCollector
-from src.stats_evaluator import StatsEvaluator
+from ace_lab.decision_engine import DecisionEngine
+from ace_lab.model import EvaluationConfig, ExperimentRecord, HorizonCategory, MetricSet, Verdict, WorkloadClass
+from ace_lab.metrics_collector import MetricsCollector
+from ace_lab.stats_evaluator import StatsEvaluator
 from agents.stats.statistics_agent import StatisticsAgent
 
 

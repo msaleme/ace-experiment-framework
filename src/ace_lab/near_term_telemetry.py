@@ -15,7 +15,7 @@ import time
 import tracemalloc
 import random
 
-from src.benchmark_quality import score_quality
+from ace_lab.benchmark_quality import score_quality
 
 
 @dataclass(frozen=True)
@@ -362,7 +362,9 @@ def _stable_seed(experiment_id: str, benchmark_id: str, trial_num: int, window_i
 
 
 def _load_benchmark_profile(benchmark_id: str) -> Dict[str, object]:
-    root = Path(__file__).resolve().parents[1]
+    # Package modules live at ``src/ace_lab`` while benchmark fixtures remain
+    # repository research assets at the checkout root.
+    root = Path(__file__).resolve().parents[2]
     path = root / "configs" / "benchmarks" / f"{benchmark_id}.yaml"
     import yaml
 
