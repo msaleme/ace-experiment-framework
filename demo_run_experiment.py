@@ -22,7 +22,7 @@ import yaml
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from src import (
+from ace_lab import (
     BaselineManager, BenchmarkRegistry, MetricsCollector,
     ExperimentRunner, StatsEvaluator, ResultsStore, ReportGenerator,
     Hardware, Benchmark, WorkloadClass, HorizonCategory, 

@@ -5,19 +5,24 @@
 ### Installation
 
 ```bash
-# Navigate to framework directory
-cd compute-efficiency-lab
+# Install the stable command-line tool
+pip install .
 
-# Install dependencies
-pip install -e .
+# Validate an experiment contract
+ace validate experiments/near_term/exp_002_token_pruning.yaml
 
-# Verify installation
-python -c "import src; print('ACE Framework ready')"
+# Emit a provenance manifest and a human-readable run record
+ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts
 ```
 
-### Run the demo
+The stable package API covers contract validation, provenance records, experiment execution
+components, verdict evaluation, and reporting. It does not turn the repository's simulated
+results into production measurements.
+
+### Contributor demo
 
 ```bash
+pip install -e .
 python demo_run_experiment.py
 ```
 
@@ -327,7 +332,7 @@ def trial_executor(trial_num: int, benchmark_id: str):
 ### Step 5: Run experiment
 
 ```python
-from src import ExperimentRunner
+from ace_lab import ExperimentRunner
 
 runner = ExperimentRunner(baseline_mgr, benchmark_registry, metrics_collector)
 experiment = runner.run_experiment(

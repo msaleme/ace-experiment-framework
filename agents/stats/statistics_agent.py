@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing import Dict, Any, List
 
-from src.decision_engine import DecisionEngine
-from src.stats_evaluator import StatsEvaluator
-from src.model import ExperimentRecord, MetricSet
+from ace_lab.decision_engine import DecisionEngine
+from ace_lab.stats_evaluator import StatsEvaluator
+from ace_lab.model import ExperimentRecord, MetricSet
 
 
 class StatisticsAgent:

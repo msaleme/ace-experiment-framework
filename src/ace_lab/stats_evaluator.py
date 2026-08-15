@@ -6,8 +6,8 @@ from typing import Dict, Optional, Tuple, Any
 import statistics
 import math
 from scipy import stats
-from src.metrics_collector import MetricsCollector
-from src.model import ExperimentRecord, Verdict
+from ace_lab.metrics_collector import MetricsCollector
+from ace_lab.model import ExperimentRecord, Verdict
 
 
 class StatsEvaluator:

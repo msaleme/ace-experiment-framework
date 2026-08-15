@@ -82,7 +82,7 @@ The three-horizon structure exists to prevent near-term work from cannibalizing 
 
 ```
 ace-experiment-framework/
-├── src/                         # Core framework modules
+├── src/ace_lab/                 # Installable stable package
 │   ├── decision_engine.py       # Single verdict source with explicit gate traces
 │   ├── near_term_telemetry.py   # Runtime, power, and energy provenance
 │   ├── benchmark_quality.py     # Benchmark-specific quality scoring
@@ -146,9 +146,14 @@ This domain is systematically vulnerable to false positives. ACE encodes institu
 ## Quickstart
 
 ```bash
-pip install -e .
-python demo_run_experiment.py
+pip install .
+ace validate experiments/near_term/exp_002_token_pruning.yaml
+ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts
 ```
+
+`ace run` records a validated contract, provenance manifest, and Markdown run record. It does
+not generate workload measurements or an optimization claim. The repository's simulation agents,
+demo scripts, and experimental kernels remain research tooling rather than the public package API.
 
 See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experiment walkthrough.
 

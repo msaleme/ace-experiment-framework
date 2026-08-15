@@ -3,7 +3,7 @@ ACE Experiment Framework - Main Package
 Automated Compute Efficiency Experimental Lab
 """
 
-from src.model import (
+from ace_lab.model import (
     HorizonCategory,
     WorkloadClass,
     Verdict,
@@ -15,13 +15,13 @@ from src.model import (
     MetricSet,
 )
 
-from src.baseline_manager import BaselineManager
-from src.benchmark_registry import BenchmarkRegistry
-from src.metrics_collector import MetricsCollector
-from src.experiment_runner import ExperimentRunner
-from src.stats_evaluator import StatsEvaluator
-from src.results_store import ResultsStore
-from src.report_generator import ReportGenerator
+from ace_lab.baseline_manager import BaselineManager
+from ace_lab.benchmark_registry import BenchmarkRegistry
+from ace_lab.metrics_collector import MetricsCollector
+from ace_lab.experiment_runner import ExperimentRunner
+from ace_lab.stats_evaluator import StatsEvaluator
+from ace_lab.results_store import ResultsStore
+from ace_lab.report_generator import ReportGenerator
 
 __version__ = "0.1.0"
 __all__ = [

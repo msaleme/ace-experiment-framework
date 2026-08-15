@@ -5,11 +5,11 @@ from __future__ import annotations
 from typing import Callable, Dict
 import random
 
-from src.kernels.quantization import QuantizationConfig, create_quantization_trial_executor
-from src.kernels.sparsity import PruningConfig, create_pruning_trial_executor
-from src.kernels.memory_optimization import MemoryOptConfig, create_memory_opt_trial_executor
-from src.kernels.compiler_optimization import CompilerOptConfig, create_compiler_opt_trial_executor
-from src.near_term_telemetry import run_near_term_trial
+from ace_lab.kernels.quantization import QuantizationConfig, create_quantization_trial_executor
+from ace_lab.kernels.sparsity import PruningConfig, create_pruning_trial_executor
+from ace_lab.kernels.memory_optimization import MemoryOptConfig, create_memory_opt_trial_executor
+from ace_lab.kernels.compiler_optimization import CompilerOptConfig, create_compiler_opt_trial_executor
+from ace_lab.near_term_telemetry import run_near_term_trial
 from simulators.mid_term_simulator import MidTermConfig, run_mid_term_proxy
 from simulators.moonshot_simulator import MoonshotConfig, run_moonshot_proxy
 

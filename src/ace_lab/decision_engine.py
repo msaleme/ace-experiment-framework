@@ -6,8 +6,8 @@ from dataclasses import dataclass
 from typing import Any, Dict, Iterable, List
 import statistics
 
-from src.model import ExperimentRecord, MetricSet, Verdict
-from src.stats_evaluator import StatsEvaluator
+from ace_lab.model import ExperimentRecord, MetricSet, Verdict
+from ace_lab.stats_evaluator import StatsEvaluator
 
 
 @dataclass

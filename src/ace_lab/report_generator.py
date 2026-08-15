@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from src.model import ExperimentRecord, Verdict
+from ace_lab.model import ExperimentRecord, Verdict
 
 
 class ReportGenerator:

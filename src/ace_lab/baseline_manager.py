@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional, Any
 from dataclasses import asdict
-from src.model import BaselineSnapshot, Hardware, Benchmark
+from ace_lab.model import BaselineSnapshot, Hardware, Benchmark
 
 
 class BaselineManager:

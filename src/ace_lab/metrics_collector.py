@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Dict, List, Optional, Any
 from dataclasses import asdict
 import statistics
-from src.model import MetricSet
+from ace_lab.model import MetricSet
 
 
 class MetricsCollector:

@@ -182,7 +182,9 @@ def _canonical_dataset_inputs(benchmark_id: str, profile: Dict[str, Any]) -> Lis
 
 
 def _load_benchmark_profile(benchmark_id: str) -> Dict[str, Any]:
-    root = Path(__file__).resolve().parents[1]
+    # Package modules live at ``src/ace_lab`` while benchmark fixtures remain
+    # repository research assets at the checkout root.
+    root = Path(__file__).resolve().parents[2]
     path = root / "configs" / "benchmarks" / f"{benchmark_id}.yaml"
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
