@@ -1,5 +1,8 @@
 # ACE Experiment Framework - Getting Started Guide
 
+> New to ACE? Read [`docs/USING_ACE.md`](docs/USING_ACE.md) first. This document is the deeper
+> research-framework walkthrough behind the package commands.
+
 ## Quick Start (5 minutes)
 
 ### Installation

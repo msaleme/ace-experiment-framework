@@ -4,6 +4,12 @@
 
 **ACE makes an optimization claim earn its evidence before it earns a chart.**
 
+## Start here
+
+If you have an optimization result you want to trust, start with
+[`docs/USING_ACE.md`](docs/USING_ACE.md). It explains the three commands, who benefits, how to read
+a preflight, and what ACE does not claim.
+
 ## Who ACE helps
 
 ACE helps the engineer who has a promising optimization but needs to know whether it is safe to
@@ -41,7 +47,7 @@ The core value is not any individual finding. It is the capacity to tell when an
 
 ---
 
-## The Problem
+## Research context
 
 Optimization claims in AI systems are routinely reported as global improvements — even when they are valid only in narrow operating conditions. Average-case benchmarks hide regime boundaries. Single-run results get promoted. Overheads get omitted. False wins compound.
 
@@ -49,7 +55,7 @@ The result: teams deploy optimizations that collapse under production load.
 
 ---
 
-## What ACE Does
+## Research-system capabilities
 
 ACE is a systematic, closed-loop research program that searches the design space of AI compute efficiency and enforces the conditions necessary to trust what it finds.
 
@@ -205,6 +211,8 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 |---|---|
 | [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md) | Validated findings with theses, caveats, and deployment implications |
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
+| [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
+| [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
 | [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, known limits, recommended next work |
 | [`docs/telemetry_variance_protocol.md`](docs/telemetry_variance_protocol.md) | Telemetry hardening and variance protocol |
