@@ -30,6 +30,14 @@ auditable pre-results contract. Start by running `ace validate` against a checke
 then `ace run` to retain the immutable config digest, package/runtime versions, declared seeds,
 telemetry provenance, and claim boundary alongside the work record.
 
+## Practical benefit
+
+ACE reduces the cost of being wrong about a “win.” Before compute is spent, it makes the researcher
+declare what changes, what remains fixed, which data are held out, how many trials are expected, and
+what result would count. Before a decision is made, it gives the reviewer a compact record of the
+plan, missing evidence, provenance, and claim limit. That is useful whether the finding is accepted,
+rejected, or inconclusive.
+
 ## Positioning line
 
 **ACE makes an optimization claim earn its evidence before it earns a chart.**

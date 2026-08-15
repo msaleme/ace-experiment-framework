@@ -4,6 +4,20 @@
 
 **ACE makes an optimization claim earn its evidence before it earns a chart.**
 
+## Who ACE helps
+
+ACE helps the engineer who has a promising optimization but needs to know whether it is safe to
+act on, the research lead who needs a reviewable decision record, and the platform team that wants
+to stop a one-off benchmark from becoming an overbroad production claim.
+
+In a few minutes, ACE turns an experiment YAML into three useful things:
+
+- A preflight that names missing seeds, telemetry provenance, and the exact work required before measurement.
+- A tamper-resistant run record that binds the baseline, split plan, rules, runtime, and config digest.
+- A plain-language claim boundary so a reviewer can distinguish “ready to measure” from “measured” and “ready to deploy.”
+
+It does not replace a benchmark runner. It makes the decision around a benchmark more trustworthy.
+
 The core value is not any individual finding. It is the capacity to tell when an optimization claim is true, false, or only conditionally true — with traceable evidence at every verdict.
 
 ---
@@ -150,6 +164,7 @@ This domain is systematically vulnerable to false positives. ACE encodes institu
 ```bash
 pip install .
 ace validate experiments/near_term/exp_002_token_pruning.yaml
+ace preflight experiments/near_term/exp_002_token_pruning.yaml
 ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts
 ```
 

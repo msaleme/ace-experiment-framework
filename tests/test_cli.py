@@ -29,6 +29,28 @@ def test_validate_accepts_complete_contract(tmp_path: Path, capsys):
     assert json.loads(capsys.readouterr().out)["valid"] is True
 
 
+def test_preflight_turns_a_contract_into_specific_next_actions(tmp_path: Path, capsys):
+    config = tmp_path / "experiment.yaml"
+    config.write_text(_valid_config(), encoding="utf-8")
+    assert main(["preflight", str(config)]) == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["ready_to_measure"] is True
+    assert output["split_counts"] == {"development": 1, "holdout": 1, "validation": 1}
+    assert len(output["next_actions"]) == 5
+
+
+def test_preflight_surfaces_seed_and_telemetry_gaps(tmp_path: Path, capsys):
+    config = tmp_path / "experiment.yaml"
+    config.write_text(
+        _valid_config().replace("trial_configuration: {seeds: [42, 99]}\n", "").replace("telemetry_provenance: simulated\n", ""),
+        encoding="utf-8",
+    )
+    assert main(["preflight", str(config)]) == 0
+    output = json.loads(capsys.readouterr().out)
+    assert output["ready_to_measure"] is False
+    assert len(output["warnings"]) == 2
+
+
 def test_validate_rejects_missing_holdout(tmp_path: Path, capsys):
     config = tmp_path / "bad.yaml"
     config.write_text(_valid_config().replace("  holdout: [holdout]\n", ""), encoding="utf-8")
@@ -53,7 +75,9 @@ def test_run_writes_manifest_and_inconclusive_record(tmp_path: Path):
     assert manifest["schema_version"] == "1.0"
     assert manifest["execution_mode"] == "contract-recording-only"
     assert manifest["verdict"] == "inconclusive"
+    assert manifest["preflight"]["ready_to_measure"] is True
     assert "INCONCLUSIVE" in report
+    assert "What to do next" in report
 
 
 def test_run_refuses_to_replace_existing_artifacts_without_force(tmp_path: Path, capsys):
