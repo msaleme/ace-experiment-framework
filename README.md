@@ -4,11 +4,50 @@
 
 **ACE makes an optimization claim earn its evidence before it earns a chart.**
 
+## Start here
+
+If you have an optimization result you want to trust, start with
+[`docs/USING_ACE.md`](docs/USING_ACE.md). It explains the three commands, who benefits, how to read
+a preflight, and what ACE does not claim.
+
+## Who ACE helps
+
+ACE helps the engineer who has a promising optimization but needs to know whether it is safe to
+act on, the research lead who needs a reviewable decision record, and the platform team that wants
+to stop a one-off benchmark from becoming an overbroad production claim.
+
+In a few minutes, ACE turns an experiment YAML into three useful things:
+
+- A preflight that names missing seeds, telemetry provenance, and the exact work required before measurement.
+- A tamper-resistant run record that binds the baseline, split plan, rules, runtime, and config digest.
+- A plain-language claim boundary so a reviewer can distinguish “ready to measure” from “measured” and “ready to deploy.”
+
+It does not replace a benchmark runner. It makes the decision around a benchmark more trustworthy.
+
+## Why this is better than the usual workflow
+
+The usual optimization workflow is fast but fragile: change a setting, run a benchmark, keep the
+best chart, then try to reconstruct what changed when someone asks whether the result transfers.
+That approach makes it easy to tune against the holdout set, compare against a moving baseline,
+omit failed trials or overhead, and turn one favorable run into a broad claim.
+
+ACE reverses the order:
+
+- **Usual workflow:** result first, methodology reconstructed later.
+- **ACE workflow:** baseline, allowed changes, holdout split, trial plan, acceptance rules, and
+  evidence-retention plan are declared before measurement.
+- **Usual output:** a score or chart that needs explanation.
+- **ACE output:** a score can be accompanied by a compact decision record showing what was tested,
+  what was held constant, what remains uncertain, and whether the result is ready to act on.
+
+ACE is not better because it produces a higher benchmark score. It is better when the cost of a
+false win is high: it makes a weak result easier to reject early and a real win easier to defend.
+
 The core value is not any individual finding. It is the capacity to tell when an optimization claim is true, false, or only conditionally true — with traceable evidence at every verdict.
 
 ---
 
-## The Problem
+## Research context
 
 Optimization claims in AI systems are routinely reported as global improvements — even when they are valid only in narrow operating conditions. Average-case benchmarks hide regime boundaries. Single-run results get promoted. Overheads get omitted. False wins compound.
 
@@ -16,7 +55,7 @@ The result: teams deploy optimizations that collapse under production load.
 
 ---
 
-## What ACE Does
+## Research-system capabilities
 
 ACE is a systematic, closed-loop research program that searches the design space of AI compute efficiency and enforces the conditions necessary to trust what it finds.
 
@@ -150,6 +189,7 @@ This domain is systematically vulnerable to false positives. ACE encodes institu
 ```bash
 pip install .
 ace validate experiments/near_term/exp_002_token_pruning.yaml
+ace preflight experiments/near_term/exp_002_token_pruning.yaml
 ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts
 ```
 
@@ -171,6 +211,8 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 |---|---|
 | [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md) | Validated findings with theses, caveats, and deployment implications |
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
+| [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
+| [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
 | [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, known limits, recommended next work |
 | [`docs/telemetry_variance_protocol.md`](docs/telemetry_variance_protocol.md) | Telemetry hardening and variance protocol |

@@ -1,5 +1,8 @@
 # ACE Experiment Framework - Getting Started Guide
 
+> New to ACE? Read [`docs/USING_ACE.md`](docs/USING_ACE.md) first. This document is the deeper
+> research-framework walkthrough behind the package commands.
+
 ## Quick Start (5 minutes)
 
 ### Installation
@@ -10,6 +13,9 @@ pip install .
 
 # Validate an experiment contract
 ace validate experiments/near_term/exp_002_token_pruning.yaml
+
+# See what evidence and execution work remains before measurement
+ace preflight experiments/near_term/exp_002_token_pruning.yaml
 
 # Emit a provenance manifest and a human-readable run record
 ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts

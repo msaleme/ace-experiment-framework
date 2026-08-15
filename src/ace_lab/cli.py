@@ -107,6 +107,45 @@ def _atomic_write(path: Path, content: str) -> None:
     temporary.replace(path)
 
 
+def build_preflight(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
+    """Translate a valid contract into the next concrete work a researcher must do."""
+    trial_config = config.get("trial_configuration", {})
+    seeds = trial_config.get("seeds", [])
+    split_counts = {split: len(config["benchmark_sets"][split]) for split in REQUIRED_SPLITS}
+    warnings = []
+    if not seeds:
+        warnings.append("No explicit seeds declared. Record the seeds used before comparing runs.")
+    elif len(seeds) != config["trials"]:
+        warnings.append(
+            f"Declared trials ({config['trials']}) and explicit seeds ({len(seeds)}) differ. "
+            "Resolve the difference before execution."
+        )
+    if config.get("telemetry_provenance", "not-declared") == "not-declared":
+        warnings.append("Telemetry provenance is not declared. State whether power and runtime data are measured, estimated, or simulated.")
+    return {
+        "schema_version": "1.0",
+        "artifact_type": "ace-preflight",
+        "experiment_id": config.get("experiment_id", config_path.stem),
+        "ready_to_measure": not warnings,
+        "baseline": config["baseline"],
+        "split_counts": split_counts,
+        "declared_trials": config["trials"],
+        "declared_seeds": seeds,
+        "warnings": warnings,
+        "next_actions": [
+            "Pin the source revision and execution environment before the first trial.",
+            "Run the declared trials for development, validation, and holdout splits without tuning on holdout.",
+            "Retain raw metrics, telemetry source, and failed trials alongside the config digest.",
+            "Apply the declared acceptance rules only after all split results are available.",
+            "State the operating envelope and evidence boundary with any result; do not promote a contract record as a measured outcome.",
+        ],
+        "decision_help": (
+            "ACE helps reviewers identify whether a result is ready to measure, ready to review, "
+            "or still missing evidence before someone makes a deployment decision."
+        ),
+    }
+
+
 def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
     """Create a provenance record without asserting that a workload was measured."""
     now = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -126,6 +165,7 @@ def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
         "baseline": config["baseline"],
         "benchmark_sets": config["benchmark_sets"],
         "telemetry_provenance": config.get("telemetry_provenance", "not-declared"),
+        "preflight": build_preflight(config_path, config),
         "execution_mode": "contract-recording-only",
         "verdict": "inconclusive",
         "claim_boundary": (
@@ -169,6 +209,14 @@ def write_run_artifacts(config_path: Path, output_dir: Path, *, force: bool = Fa
                 "",
                 manifest["claim_boundary"],
                 "",
+                "## What to do next",
+                "",
+                *[f"- {action}" for action in manifest["preflight"]["next_actions"]],
+                "",
+                "## Preflight warnings",
+                "",
+                *([f"- {warning}" for warning in manifest["preflight"]["warnings"]] or ["- None"]),
+                "",
             ]
         ),
     )
@@ -181,6 +229,8 @@ def main(argv: list[str] | None = None) -> int:
     subparsers = parser.add_subparsers(dest="command", required=True)
     validate = subparsers.add_parser("validate", help="validate an ACE experiment YAML contract")
     validate.add_argument("config", type=Path)
+    preflight = subparsers.add_parser("preflight", help="show the evidence and execution work required before measuring")
+    preflight.add_argument("config", type=Path)
     run = subparsers.add_parser("run", help="record a validated ACE run contract and provenance artifacts")
     run.add_argument("config", type=Path)
     run.add_argument("--output", required=True, type=Path, help="directory for manifest and Markdown record")
@@ -190,6 +240,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "validate":
             config = load_and_validate_config(args.config)
             print(json.dumps({"valid": True, "experiment_id": config.get("experiment_id", args.config.stem)}, sort_keys=True))
+            return 0
+        if args.command == "preflight":
+            config = load_and_validate_config(args.config)
+            print(json.dumps(build_preflight(args.config, config), indent=2, sort_keys=True))
             return 0
         manifest, report = write_run_artifacts(args.config, args.output, force=args.force)
         print(json.dumps({"manifest": str(manifest), "report": str(report)}, sort_keys=True))
