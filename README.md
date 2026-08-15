@@ -19,7 +19,7 @@ to stop a one-off benchmark from becoming an overbroad production claim.
 In a few minutes, ACE turns an experiment YAML into three useful things:
 
 - A preflight that names missing seeds, telemetry provenance, and the exact work required before measurement.
-- A tamper-resistant run record that binds the baseline, split plan, rules, runtime, and config digest.
+- A provenance-bearing, overwrite-protected run record that binds the baseline, split plan, rules, runtime, and config digest.
 - A plain-language claim boundary so a reviewer can distinguish “ready to measure” from “measured” and “ready to deploy.”
 
 It does not replace a benchmark runner. It makes the decision around a benchmark more trustworthy.
@@ -191,11 +191,17 @@ pip install .
 ace validate experiments/near_term/exp_002_token_pruning.yaml
 ace preflight experiments/near_term/exp_002_token_pruning.yaml
 ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifacts
+ace assess experiment.yaml retained-trials.json --output ./ace-assessment
 ```
 
 `ace run` records a validated contract, provenance manifest, and Markdown run record. It does
 not generate workload measurements or an optimization claim. The repository's simulation agents,
 demo scripts, and experimental kernels remain research tooling rather than the public package API.
+
+`ace assess` is the post-run counterpart: it imports retained JSON or CSV trial evidence and checks
+it against the exact contract. It produces an `ACCEPTED`, `REJECTED`, or `INCONCLUSIVE` decision
+pack, but never creates measurements, fills missing evidence, or independently verifies collection.
+See the [worked assessment example](docs/USING_ACE.md#assess-retained-evidence-after-the-run).
 
 The package is a complement to standardized benchmark suites, not a replacement for them. See
 [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) for its category, boundaries, and
@@ -212,6 +218,7 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md) | Validated findings with theses, caveats, and deployment implications |
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
+| [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
 | [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
 | [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, known limits, recommended next work |
