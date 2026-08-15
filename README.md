@@ -2,6 +2,8 @@
 
 **A boundary-discovery and anti-self-deception framework for AI efficiency research.**
 
+**ACE makes an optimization claim earn its evidence before it earns a chart.**
+
 The core value is not any individual finding. It is the capacity to tell when an optimization claim is true, false, or only conditionally true — with traceable evidence at every verdict.
 
 ---
@@ -154,6 +156,10 @@ ace run experiments/near_term/exp_002_token_pruning.yaml --output ./ace-artifact
 `ace run` records a validated contract, provenance manifest, and Markdown run record. It does
 not generate workload measurements or an optimization claim. The repository's simulation agents,
 demo scripts, and experimental kernels remain research tooling rather than the public package API.
+
+The package is a complement to standardized benchmark suites, not a replacement for them. See
+[`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) for its category, boundaries, and
+release posture.
 
 See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experiment walkthrough.
 

@@ -10,7 +10,19 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 authors = [
-    {name = "ACE Lab"}
+    {name = "Michael K. Saleme"}
+]
+keywords = ["benchmarking", "reproducibility", "experiment-tracking", "machine-learning", "evaluation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Testing",
 ]
 
 dependencies = [
@@ -29,6 +41,11 @@ dev = [
 
 [project.scripts]
 ace = "ace_lab.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/msaleme/ace-experiment-framework"
+Repository = "https://github.com/msaleme/ace-experiment-framework"
+Issues = "https://github.com/msaleme/ace-experiment-framework/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]

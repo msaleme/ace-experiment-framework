@@ -36,6 +36,13 @@ def test_validate_rejects_missing_holdout(tmp_path: Path, capsys):
     assert "holdout" in capsys.readouterr().err
 
 
+def test_validate_rejects_unsafe_experiment_id(tmp_path: Path, capsys):
+    config = tmp_path / "bad.yaml"
+    config.write_text(_valid_config().replace("experiment_id: smoke", "experiment_id: ../escape"), encoding="utf-8")
+    assert main(["validate", str(config)]) == 2
+    assert "experiment_id" in capsys.readouterr().err
+
+
 def test_run_writes_manifest_and_inconclusive_record(tmp_path: Path):
     config = tmp_path / "experiment.yaml"
     output = tmp_path / "out"
@@ -47,3 +54,13 @@ def test_run_writes_manifest_and_inconclusive_record(tmp_path: Path):
     assert manifest["execution_mode"] == "contract-recording-only"
     assert manifest["verdict"] == "inconclusive"
     assert "INCONCLUSIVE" in report
+
+
+def test_run_refuses_to_replace_existing_artifacts_without_force(tmp_path: Path, capsys):
+    config = tmp_path / "experiment.yaml"
+    output = tmp_path / "out"
+    config.write_text(_valid_config(), encoding="utf-8")
+    assert main(["run", str(config), "--output", str(output)]) == 0
+    assert main(["run", str(config), "--output", str(output)]) == 2
+    assert "refusing to overwrite" in capsys.readouterr().err
+    assert main(["run", str(config), "--output", str(output), "--force"]) == 0

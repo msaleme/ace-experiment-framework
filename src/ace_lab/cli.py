@@ -7,8 +7,12 @@ import datetime as dt
 import hashlib
 import importlib.metadata
 import json
+import os
 import platform
+import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -27,6 +31,7 @@ REQUIRED_KEYS = (
     "reporting",
 )
 REQUIRED_SPLITS = ("development", "validation", "holdout")
+SAFE_EXPERIMENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 
 
 class ConfigValidationError(ValueError):
@@ -49,14 +54,21 @@ def load_and_validate_config(path: Path) -> dict[str, Any]:
         raise ConfigValidationError(f"missing required keys: {', '.join(missing)}")
     if not isinstance(data["mutation_scope"], list) or not data["mutation_scope"]:
         raise ConfigValidationError("mutation_scope must be a non-empty list")
-    if not isinstance(data["trials"], int) or data["trials"] < 1:
+    if isinstance(data["trials"], bool) or not isinstance(data["trials"], int) or data["trials"] < 1:
         raise ConfigValidationError("trials must be a positive integer")
+    if not isinstance(data["quality_floor"], dict):
+        raise ConfigValidationError("quality_floor must be a mapping")
+    if not isinstance(data["acceptance"], dict) or not isinstance(data["reporting"], dict):
+        raise ConfigValidationError("acceptance and reporting must be mappings")
     sets = data["benchmark_sets"]
     if not isinstance(sets, dict):
         raise ConfigValidationError("benchmark_sets must be a mapping")
     absent = [split for split in REQUIRED_SPLITS if not sets.get(split)]
     if absent:
         raise ConfigValidationError(f"benchmark_sets must include non-empty: {', '.join(absent)}")
+    experiment_id = data.get("experiment_id", path.stem)
+    if not isinstance(experiment_id, str) or not SAFE_EXPERIMENT_ID.fullmatch(experiment_id):
+        raise ConfigValidationError("experiment_id must use only letters, numbers, dot, underscore, or hyphen")
     return data
 
 
@@ -74,6 +86,27 @@ def _dependency_versions() -> dict[str, str | None]:
     return versions
 
 
+def _source_revision() -> str | None:
+    """Use an explicit build value first; Git is available only in a checkout."""
+    revision = os.environ.get("ACE_SOURCE_REVISION")
+    if revision:
+        return revision
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], text=True, stderr=subprocess.DEVNULL
+        ).strip()
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def _atomic_write(path: Path, content: str) -> None:
+    """Persist a complete artifact or leave no partially written target behind."""
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+        handle.write(content)
+        temporary = Path(handle.name)
+    temporary.replace(path)
+
+
 def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
     """Create a provenance record without asserting that a workload was measured."""
     now = dt.datetime.now(dt.timezone.utc).isoformat()
@@ -83,6 +116,7 @@ def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
         "artifact_type": "ace-run-manifest",
         "created_at_utc": now,
         "package_version": __version__,
+        "source_revision": _source_revision(),
         "python_version": platform.python_version(),
         "dependency_versions": _dependency_versions(),
         "config_path": str(config_path.resolve()),
@@ -101,7 +135,7 @@ def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def write_run_artifacts(config_path: Path, output_dir: Path) -> tuple[Path, Path]:
+def write_run_artifacts(config_path: Path, output_dir: Path, *, force: bool = False) -> tuple[Path, Path]:
     """Validate an experiment contract and persist a manifest plus human-readable report."""
     config = load_and_validate_config(config_path)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -109,8 +143,11 @@ def write_run_artifacts(config_path: Path, output_dir: Path) -> tuple[Path, Path
     stem = manifest["experiment_id"]
     manifest_path = output_dir / f"{stem}.manifest.json"
     report_path = output_dir / f"{stem}.report.md"
-    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    report_path.write_text(
+    existing = [str(path) for path in (manifest_path, report_path) if path.exists()]
+    if existing and not force:
+        raise ConfigValidationError("refusing to overwrite run artifacts; pass --force: " + ", ".join(existing))
+    _atomic_write(manifest_path, json.dumps(manifest, indent=2, sort_keys=True) + "\n")
+    _atomic_write(report_path,
         "\n".join(
             [
                 f"# ACE Run Record: {stem}",
@@ -134,7 +171,6 @@ def write_run_artifacts(config_path: Path, output_dir: Path) -> tuple[Path, Path
                 "",
             ]
         ),
-        encoding="utf-8",
     )
     return manifest_path, report_path
 
@@ -148,13 +184,14 @@ def main(argv: list[str] | None = None) -> int:
     run = subparsers.add_parser("run", help="record a validated ACE run contract and provenance artifacts")
     run.add_argument("config", type=Path)
     run.add_argument("--output", required=True, type=Path, help="directory for manifest and Markdown record")
+    run.add_argument("--force", action="store_true", help="replace existing artifacts for this experiment ID")
     args = parser.parse_args(argv)
     try:
         if args.command == "validate":
             config = load_and_validate_config(args.config)
             print(json.dumps({"valid": True, "experiment_id": config.get("experiment_id", args.config.stem)}, sort_keys=True))
             return 0
-        manifest, report = write_run_artifacts(args.config, args.output)
+        manifest, report = write_run_artifacts(args.config, args.output, force=args.force)
         print(json.dumps({"manifest": str(manifest), "report": str(report)}, sort_keys=True))
         return 0
     except ConfigValidationError as exc:
