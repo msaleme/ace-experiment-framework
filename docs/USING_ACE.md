@@ -22,7 +22,7 @@ retained.
 - A platform or evaluation team that needs a lightweight record of what was fixed, changed, and
   still uncertain.
 
-## Three commands, three jobs
+## Four commands, four jobs
 
 ```bash
 pip install ace-experiment-framework
@@ -35,6 +35,9 @@ ace preflight experiment.yaml
 
 # 3. Preserve the validated plan and its claim boundary with the work.
 ace run experiment.yaml --output ./ace-artifacts
+
+# 4. Reconcile retained trial evidence with the exact plan after the run.
+ace assess experiment.yaml retained-trials.json --output ./ace-assessment
 ```
 
 `ace validate` checks the required experiment-contract fields.
@@ -45,6 +48,26 @@ seed/trial consistency; telemetry-provenance gaps; and the next evidence-retenti
 `ace run` writes a provenance manifest and Markdown record. Its initial verdict is
 `INCONCLUSIVE` on purpose. A plan is not a measurement, and a measurement is not automatically a
 deployment recommendation.
+
+## Assess retained evidence after the run
+
+`ace assess` is the bridge between a plan and a review. Give it the original experiment YAML and
+the evidence you retained from the actual runner. ACE checks that the experiment ID and config
+digest match; that all three splits, declared seeds, and trial coverage are present; that failed
+trials were retained; and that telemetry, baseline, quality, ECD, complexity, and required
+statistical evidence can support the declared rules.
+
+It writes a JSON decision pack and a short Markdown assessment. Its verdict is intentionally
+bounded:
+
+- `ACCEPTED` means the supplied evidence reconciles with the contract and passes its explicit rules.
+- `REJECTED` means the evidence is complete but one or more rules fail.
+- `INCONCLUSIVE` means the evidence is missing, mismatched, or cannot support the required rule.
+
+It does not run a benchmark, silently substitute a value, attest to how evidence was collected, or
+independently reproduce a result. The sample in
+[`examples/assess-evidence/`](../examples/assess-evidence/) is deliberately synthetic and is a
+format walkthrough, not a benchmark finding.
 
 ## Reading the preflight
 
@@ -58,9 +81,10 @@ will not let that omission disappear behind an energy-efficiency chart.
 ## What happens after ACE
 
 Run the actual workload with the declared environment and trial plan. Retain raw metrics, failed
-trials, telemetry source, source revision, and the decision trace. Then evaluate the result against
-the acceptance rules and state the operating envelope. ACE makes this process reviewable; it does
-not substitute for the benchmark runner, a domain expert, or independent reproduction.
+trials, telemetry source, source revision, and the decision trace. Then use `ace assess` to
+evaluate the retained result against the acceptance rules and state the operating envelope. ACE
+makes this process reviewable; it does not substitute for the benchmark runner, a domain expert,
+or independent reproduction.
 
 ## What ACE does not claim
 

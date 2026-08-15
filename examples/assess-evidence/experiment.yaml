@@ -1,0 +1,19 @@
+experiment_id: synthetic-assessment-example
+baseline: fixed-baseline-v1
+mutation_scope: [synthetic_example_only]
+trials: 2
+quality_floor: {metric: accuracy, minimum_relative_to_baseline: 0.98}
+benchmark_sets:
+  development: [synthetic-dev]
+  validation: [synthetic-validation]
+  holdout: [synthetic-holdout]
+acceptance:
+  minimum_ecd_improvement: 0.10
+  require_statistical_significance: true
+  confidence_interval_excludes_zero: true
+  require_validation_transfer: true
+  require_holdout_pass: true
+  maximum_complexity_overhead: 0.05
+reporting: {report_format: [json, markdown]}
+trial_configuration: {seeds: [11, 22]}
+telemetry_provenance: measured

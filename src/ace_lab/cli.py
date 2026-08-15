@@ -19,6 +19,7 @@ from typing import Any
 import yaml
 
 from ace_lab import __version__
+from ace_lab.evidence import EvidenceValidationError, assess_evidence, load_trial_evidence
 
 
 REQUIRED_KEYS = (
@@ -54,7 +55,11 @@ def load_and_validate_config(path: Path) -> dict[str, Any]:
         raise ConfigValidationError(f"missing required keys: {', '.join(missing)}")
     if not isinstance(data["mutation_scope"], list) or not data["mutation_scope"]:
         raise ConfigValidationError("mutation_scope must be a non-empty list")
-    if isinstance(data["trials"], bool) or not isinstance(data["trials"], int) or data["trials"] < 1:
+    if (
+        isinstance(data["trials"], bool)
+        or not isinstance(data["trials"], int)
+        or data["trials"] < 1
+    ):
         raise ConfigValidationError("trials must be a positive integer")
     if not isinstance(data["quality_floor"], dict):
         raise ConfigValidationError("quality_floor must be a mapping")
@@ -68,7 +73,9 @@ def load_and_validate_config(path: Path) -> dict[str, Any]:
         raise ConfigValidationError(f"benchmark_sets must include non-empty: {', '.join(absent)}")
     experiment_id = data.get("experiment_id", path.stem)
     if not isinstance(experiment_id, str) or not SAFE_EXPERIMENT_ID.fullmatch(experiment_id):
-        raise ConfigValidationError("experiment_id must use only letters, numbers, dot, underscore, or hyphen")
+        raise ConfigValidationError(
+            "experiment_id must use only letters, numbers, dot, underscore, or hyphen"
+        )
     return data
 
 
@@ -101,7 +108,9 @@ def _source_revision() -> str | None:
 
 def _atomic_write(path: Path, content: str) -> None:
     """Persist a complete artifact or leave no partially written target behind."""
-    with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+    with tempfile.NamedTemporaryFile(
+        "w", encoding="utf-8", dir=path.parent, delete=False
+    ) as handle:
         handle.write(content)
         temporary = Path(handle.name)
     temporary.replace(path)
@@ -121,7 +130,9 @@ def build_preflight(config_path: Path, config: dict[str, Any]) -> dict[str, Any]
             "Resolve the difference before execution."
         )
     if config.get("telemetry_provenance", "not-declared") == "not-declared":
-        warnings.append("Telemetry provenance is not declared. State whether power and runtime data are measured, estimated, or simulated.")
+        warnings.append(
+            "Telemetry provenance is not declared. State whether power and runtime data are measured, estimated, or simulated."
+        )
     return {
         "schema_version": "1.0",
         "artifact_type": "ace-preflight",
@@ -175,7 +186,9 @@ def build_manifest(config_path: Path, config: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def write_run_artifacts(config_path: Path, output_dir: Path, *, force: bool = False) -> tuple[Path, Path]:
+def write_run_artifacts(
+    config_path: Path, output_dir: Path, *, force: bool = False
+) -> tuple[Path, Path]:
     """Validate an experiment contract and persist a manifest plus human-readable report."""
     config = load_and_validate_config(config_path)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -185,9 +198,12 @@ def write_run_artifacts(config_path: Path, output_dir: Path, *, force: bool = Fa
     report_path = output_dir / f"{stem}.report.md"
     existing = [str(path) for path in (manifest_path, report_path) if path.exists()]
     if existing and not force:
-        raise ConfigValidationError("refusing to overwrite run artifacts; pass --force: " + ", ".join(existing))
+        raise ConfigValidationError(
+            "refusing to overwrite run artifacts; pass --force: " + ", ".join(existing)
+        )
     _atomic_write(manifest_path, json.dumps(manifest, indent=2, sort_keys=True) + "\n")
-    _atomic_write(report_path,
+    _atomic_write(
+        report_path,
         "\n".join(
             [
                 f"# ACE Run Record: {stem}",
@@ -223,32 +239,116 @@ def write_run_artifacts(config_path: Path, output_dir: Path, *, force: bool = Fa
     return manifest_path, report_path
 
 
+def write_assessment_artifacts(
+    config_path: Path, results_path: Path, output_dir: Path, *, force: bool = False
+) -> tuple[Path, Path]:
+    """Reconcile retained evidence with a contract and persist a decision pack plus review note."""
+    config = load_and_validate_config(config_path)
+    evidence = load_trial_evidence(results_path)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    pack = assess_evidence(config, _sha256(config_path), evidence)
+    stem = pack["experiment_id"]
+    pack_path = output_dir / f"{stem}.decision-pack.json"
+    report_path = output_dir / f"{stem}.assessment.md"
+    existing = [str(path) for path in (pack_path, report_path) if path.exists()]
+    if existing and not force:
+        raise ConfigValidationError(
+            "refusing to overwrite assessment artifacts; pass --force: " + ", ".join(existing)
+        )
+    _atomic_write(pack_path, json.dumps(pack, indent=2, sort_keys=True) + "\n")
+    failed_gates = [gate["gate"] for gate in pack["gates"] if not gate["passed"]]
+    _atomic_write(
+        report_path,
+        "\n".join(
+            [
+                f"# ACE Assessment: {stem}",
+                "",
+                "## Decision",
+                "",
+                f"- Verdict: **{pack['verdict']}**",
+                f"- Config SHA-256: `{pack['config_sha256']}`",
+                f"- Retained failed trials: {pack['failed_trial_count']}",
+                f"- Decision pack: `{pack_path.name}`",
+                "",
+                "## Gaps requiring review",
+                "",
+                *([f"- {gap}" for gap in pack["evidence_gaps"]] or ["- None"]),
+                "",
+                "## Failed rule checks",
+                "",
+                *([f"- {gate}" for gate in failed_gates] or ["- None"]),
+                "",
+                "## Claim boundary",
+                "",
+                pack["claim_boundary"],
+                "",
+            ]
+        ),
+    )
+    return pack_path, report_path
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ace", description="ACE experiment contract tooling")
     parser.add_argument("--version", action="version", version=f"ace {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
     validate = subparsers.add_parser("validate", help="validate an ACE experiment YAML contract")
     validate.add_argument("config", type=Path)
-    preflight = subparsers.add_parser("preflight", help="show the evidence and execution work required before measuring")
+    preflight = subparsers.add_parser(
+        "preflight", help="show the evidence and execution work required before measuring"
+    )
     preflight.add_argument("config", type=Path)
-    run = subparsers.add_parser("run", help="record a validated ACE run contract and provenance artifacts")
+    run = subparsers.add_parser(
+        "run", help="record a validated ACE run contract and provenance artifacts"
+    )
     run.add_argument("config", type=Path)
-    run.add_argument("--output", required=True, type=Path, help="directory for manifest and Markdown record")
-    run.add_argument("--force", action="store_true", help="replace existing artifacts for this experiment ID")
+    run.add_argument(
+        "--output", required=True, type=Path, help="directory for manifest and Markdown record"
+    )
+    run.add_argument(
+        "--force", action="store_true", help="replace existing artifacts for this experiment ID"
+    )
+    assess = subparsers.add_parser(
+        "assess", help="reconcile retained JSON or CSV trial evidence with an ACE contract"
+    )
+    assess.add_argument("config", type=Path)
+    assess.add_argument("results", type=Path, help="ACE trial-evidence JSON or CSV file")
+    assess.add_argument(
+        "--output",
+        required=True,
+        type=Path,
+        help="directory for decision-pack and Markdown assessment",
+    )
+    assess.add_argument(
+        "--force",
+        action="store_true",
+        help="replace existing assessment artifacts for this experiment ID",
+    )
     args = parser.parse_args(argv)
     try:
         if args.command == "validate":
             config = load_and_validate_config(args.config)
-            print(json.dumps({"valid": True, "experiment_id": config.get("experiment_id", args.config.stem)}, sort_keys=True))
+            print(
+                json.dumps(
+                    {"valid": True, "experiment_id": config.get("experiment_id", args.config.stem)},
+                    sort_keys=True,
+                )
+            )
             return 0
         if args.command == "preflight":
             config = load_and_validate_config(args.config)
             print(json.dumps(build_preflight(args.config, config), indent=2, sort_keys=True))
             return 0
+        if args.command == "assess":
+            pack, report = write_assessment_artifacts(
+                args.config, args.results, args.output, force=args.force
+            )
+            print(json.dumps({"decision_pack": str(pack), "report": str(report)}, sort_keys=True))
+            return 0
         manifest, report = write_run_artifacts(args.config, args.output, force=args.force)
         print(json.dumps({"manifest": str(manifest), "report": str(report)}, sort_keys=True))
         return 0
-    except ConfigValidationError as exc:
+    except (ConfigValidationError, EvidenceValidationError) as exc:
         print(f"ace: validation error: {exc}", file=sys.stderr)
         return 2
 

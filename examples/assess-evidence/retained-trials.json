@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "artifact_type": "ace-trial-evidence",
+  "experiment_id": "synthetic-assessment-example",
+  "config_sha256": "f71ac8a8feef92a5a0d0296a70f1bc5b9d2e4a04ca7a566024f098aa8a46a517",
+  "source_revision": "synthetic-example-not-a-measured-run",
+  "telemetry_provenance": "measured",
+  "baseline_metrics": {"accuracy": 0.99},
+  "statistical_evidence": {
+    "development": {"p_value": 0.01, "ecd_confidence_interval": [0.12, 0.24]}
+  },
+  "trials": [
+    {"trial_id": "dev-11", "seed": 11, "split": "development", "success": true, "metrics": {"accuracy": 0.98, "ecd_improvement": 0.20, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}},
+    {"trial_id": "dev-22", "seed": 22, "split": "development", "success": true, "metrics": {"accuracy": 0.985, "ecd_improvement": 0.22, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}},
+    {"trial_id": "validation-11", "seed": 11, "split": "validation", "success": true, "metrics": {"accuracy": 0.98, "ecd_improvement": 0.17, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}},
+    {"trial_id": "validation-22", "seed": 22, "split": "validation", "success": true, "metrics": {"accuracy": 0.982, "ecd_improvement": 0.18, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}},
+    {"trial_id": "holdout-11", "seed": 11, "split": "holdout", "success": true, "metrics": {"accuracy": 0.979, "ecd_improvement": 0.16, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}},
+    {"trial_id": "holdout-22", "seed": 22, "split": "holdout", "success": true, "metrics": {"accuracy": 0.981, "ecd_improvement": 0.19, "complexity_overhead": 0.01}, "metric_sources": {"accuracy": "synthetic", "ecd_improvement": "synthetic", "complexity_overhead": "synthetic"}}
+  ]
+}

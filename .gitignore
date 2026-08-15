@@ -10,6 +10,8 @@ htmlcov/
 *.pyd
 *.egg-info/
 .vscode/
+build/
+dist/
 
 # Local experiment scratch outputs
 reports/_*/

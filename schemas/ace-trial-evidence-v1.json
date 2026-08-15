@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ACE trial evidence v1",
+  "description": "Retained user-supplied trial evidence. ACE imports this evidence; it does not generate it.",
+  "type": "object",
+  "required": ["schema_version", "artifact_type", "experiment_id", "config_sha256", "source_revision", "telemetry_provenance", "baseline_metrics", "trials"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_type": {"const": "ace-trial-evidence"},
+    "experiment_id": {"type": "string", "minLength": 1},
+    "config_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "source_revision": {"type": "string", "minLength": 1},
+    "telemetry_provenance": {"enum": ["measured", "estimated", "simulated"]},
+    "baseline_metrics": {"type": "object"},
+    "statistical_evidence": {"type": "object"},
+    "trials": {"type": "array", "minItems": 1}
+  }
+}

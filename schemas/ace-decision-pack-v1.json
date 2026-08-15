@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ACE decision pack v1",
+  "description": "A reviewable ACE reconciliation result, not an independent attestation.",
+  "type": "object",
+  "required": ["schema_version", "artifact_type", "experiment_id", "config_sha256", "verdict", "gates", "claim_boundary"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "artifact_type": {"const": "ace-decision-pack"},
+    "verdict": {"enum": ["ACCEPTED", "REJECTED", "INCONCLUSIVE"]},
+    "gates": {"type": "array"},
+    "claim_boundary": {"type": "string", "minLength": 1}
+  }
+}
