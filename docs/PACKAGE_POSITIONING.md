@@ -38,6 +38,20 @@ what result would count. Before a decision is made, it gives the reviewer a comp
 plan, missing evidence, provenance, and claim limit. That is useful whether the finding is accepted,
 rejected, or inconclusive.
 
+## The before-and-after workflow
+
+**Before ACE:** a team tunes an optimization, shares its strongest run, and asks reviewers to infer
+the baseline, scope, trial selection, holdout use, and measurement provenance from notebooks,
+messages, and memory. Review happens after the conclusion has momentum.
+
+**With ACE:** the team writes the experiment contract first, runs `ace preflight` to expose gaps,
+and retains the resulting plan and claim boundary with the work. Reviewers can ask a much better
+question: not “does this chart look good?” but “does this result meet the conditions we agreed would
+make it decision-worthy?”
+
+That is the advantage. ACE does not promise better hardware performance. It reduces the chance that
+a team mistakes an attractive benchmark result for a deployable finding.
+
 ## Positioning line
 
 **ACE makes an optimization claim earn its evidence before it earns a chart.**

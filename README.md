@@ -18,6 +18,25 @@ In a few minutes, ACE turns an experiment YAML into three useful things:
 
 It does not replace a benchmark runner. It makes the decision around a benchmark more trustworthy.
 
+## Why this is better than the usual workflow
+
+The usual optimization workflow is fast but fragile: change a setting, run a benchmark, keep the
+best chart, then try to reconstruct what changed when someone asks whether the result transfers.
+That approach makes it easy to tune against the holdout set, compare against a moving baseline,
+omit failed trials or overhead, and turn one favorable run into a broad claim.
+
+ACE reverses the order:
+
+- **Usual workflow:** result first, methodology reconstructed later.
+- **ACE workflow:** baseline, allowed changes, holdout split, trial plan, acceptance rules, and
+  evidence-retention plan are declared before measurement.
+- **Usual output:** a score or chart that needs explanation.
+- **ACE output:** a score can be accompanied by a compact decision record showing what was tested,
+  what was held constant, what remains uncertain, and whether the result is ready to act on.
+
+ACE is not better because it produces a higher benchmark score. It is better when the cost of a
+false win is high: it makes a weak result easier to reject early and a real win easier to defend.
+
 The core value is not any individual finding. It is the capacity to tell when an optimization claim is true, false, or only conditionally true — with traceable evidence at every verdict.
 
 ---
