@@ -1,4 +1,5 @@
 from ace_lab.benchmark_quality import score_quality
+from ace_lab.benchmark_profiles import load_benchmark_profile
 from ace_lab.near_term_telemetry import run_near_term_trial
 
 
@@ -9,6 +10,13 @@ BASELINE = {
     "energy_joules": 0.548,
     "energy_joules_std": 0.032,
 }
+
+
+def test_packaged_benchmark_profile_is_available_without_checkout_assets():
+    profile = load_benchmark_profile("transformer_inference_small")
+
+    assert profile["benchmark_id"] == "transformer_inference_small"
+    assert profile["benchmark_set"] == "development"
 
 
 def test_token_pruning_quality_is_benchmark_scored():

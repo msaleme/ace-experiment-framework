@@ -22,9 +22,16 @@ jobs:
       - name: Clean-install smoke test
         run: |
           python -m venv /tmp/ace-smoke
-          /tmp/ace-smoke/bin/pip install dist/*.whl
+          /tmp/ace-smoke/bin/pip install pytest dist/*.whl
           /tmp/ace-smoke/bin/ace --version
           /tmp/ace-smoke/bin/ace validate experiments/near_term/exp_002_token_pruning.yaml
           /tmp/ace-smoke/bin/ace run experiments/near_term/exp_002_token_pruning.yaml --output /tmp/ace-artifacts
           test -f /tmp/ace-artifacts/exp_002_token_pruning.manifest.json
           test -f /tmp/ace-artifacts/exp_002_token_pruning.report.md
+          wheel_tests=$(mktemp -d /tmp/ace-wheel-tests.XXXXXX)
+          cp tests/conftest.py "$wheel_tests/"
+          cp tests/test_cli.py tests/test_telemetry_hardening.py "$wheel_tests/"
+          # The remaining tests intentionally cover repository-only agent code,
+          # experiment fixtures, or run_full_program. Run shipped-package tests
+          # from outside the checkout so imports can only resolve from the wheel.
+          (cd /tmp && /tmp/ace-smoke/bin/python -m pytest -q "$wheel_tests")

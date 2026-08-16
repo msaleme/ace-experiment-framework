@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Dict, List, Tuple, Any
 from dataclasses import dataclass
-from pathlib import Path
 import gc
 import hashlib
 import json
@@ -16,6 +15,7 @@ import tracemalloc
 import random
 
 from ace_lab.benchmark_quality import score_quality
+from ace_lab.benchmark_profiles import load_benchmark_profile
 
 
 @dataclass(frozen=True)
@@ -362,13 +362,7 @@ def _stable_seed(experiment_id: str, benchmark_id: str, trial_num: int, window_i
 
 
 def _load_benchmark_profile(benchmark_id: str) -> Dict[str, object]:
-    # Package modules live at ``src/ace_lab`` while benchmark fixtures remain
-    # repository research assets at the checkout root.
-    root = Path(__file__).resolve().parents[2]
-    path = root / "configs" / "benchmarks" / f"{benchmark_id}.yaml"
-    import yaml
-
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    return load_benchmark_profile(benchmark_id)
 
 
 def _extract_value(input_size: str, key: str, default: int) -> int:

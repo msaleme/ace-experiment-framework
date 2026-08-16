@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any, Dict, List
 import hashlib
 import math
 
-import yaml
+from ace_lab.benchmark_profiles import load_benchmark_profile
 
 
 @dataclass
@@ -182,11 +181,7 @@ def _canonical_dataset_inputs(benchmark_id: str, profile: Dict[str, Any]) -> Lis
 
 
 def _load_benchmark_profile(benchmark_id: str) -> Dict[str, Any]:
-    # Package modules live at ``src/ace_lab`` while benchmark fixtures remain
-    # repository research assets at the checkout root.
-    root = Path(__file__).resolve().parents[2]
-    path = root / "configs" / "benchmarks" / f"{benchmark_id}.yaml"
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    return load_benchmark_profile(benchmark_id)
 
 
 def _extract_value(input_size: str, key: str, default: int) -> int:

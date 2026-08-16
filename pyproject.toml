@@ -51,6 +51,9 @@ Issues = "https://github.com/msaleme/ace-experiment-framework/issues"
 where = ["src"]
 include = ["ace_lab*"]
 
+[tool.setuptools.package-data]
+ace_lab = ["resources/benchmarks/*.yaml"]
+
 [tool.black]
 line-length = 100
 target-version = ['py310']
