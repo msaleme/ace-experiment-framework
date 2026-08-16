@@ -207,6 +207,10 @@ The package is a complement to standardized benchmark suites, not a replacement 
 [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) for its category, boundaries, and
 release posture.
 
+ACE v0.1.0 is available on PyPI. See the
+[`v0.1.0 release notes`](docs/RELEASE_NOTES_v0.1.0.md) for the supported workflow, JSON/CSV
+import boundary, and verdict interpretation.
+
 See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experiment walkthrough.
 
 ---
@@ -219,6 +223,7 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
 | [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
+| [`docs/RELEASE_NOTES_v0.1.0.md`](docs/RELEASE_NOTES_v0.1.0.md) | Installed package workflow and verdict boundaries |
 | [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
 | [`docs/PROJECT_CLOSEOUT.md`](docs/PROJECT_CLOSEOUT.md) | Phase 1 and 2 closeout, known limits, recommended next work |
