@@ -58,7 +58,7 @@ a team mistakes an attractive benchmark result for a deployable finding.
 
 ## Release posture
 
-The package should first be released as a beta contract-and-provenance tool. Do not market it as
-measured-performance software until an adapter produces retained measurements under a declared
-environment. Do not represent its artifacts as independent validation or standardized benchmark
-submissions.
+ACE v0.1.0 is released as a contract-and-retained-evidence assessment tool. Do not market it as
+measured-performance software. An adapter's retained measurements support only the exact declared
+environment and contract, not independent validation, deployment certification, or standardized
+benchmark results.
