@@ -19,6 +19,7 @@ from ace_lab import __version__
 EVIDENCE_SCHEMA_VERSION = "1.0"
 REQUIRED_SPLITS = ("development", "validation", "holdout")
 ALLOWED_PROVENANCE = {"measured", "estimated", "simulated"}
+ALLOWED_VERDICTS = {"ACCEPTED", "REJECTED", "INCONCLUSIVE"}
 
 
 class EvidenceValidationError(ValueError):
@@ -173,6 +174,21 @@ def _validate_evidence_shape(data: dict[str, Any]) -> None:
             raise EvidenceValidationError(
                 f"failed trial {trial['trial_id']} must retain error_message"
             )
+    claim_scopes = data.get("claim_scoped_verdicts")
+    if claim_scopes is not None:
+        if not isinstance(claim_scopes, dict) or not claim_scopes:
+            raise EvidenceValidationError(
+                "claim_scoped_verdicts must be a non-empty mapping when retained"
+            )
+        for name, assessment in claim_scopes.items():
+            if not isinstance(name, str) or not isinstance(assessment, dict):
+                raise EvidenceValidationError(
+                    "each claim_scoped_verdicts entry must have a string name and object"
+                )
+            if assessment.get("verdict") not in ALLOWED_VERDICTS:
+                raise EvidenceValidationError(
+                    f"claim scope {name} must retain verdict ACCEPTED, REJECTED, or INCONCLUSIVE"
+                )
 
 
 def _numeric_mean(trials: list[dict[str, Any]], metric: str) -> float | None:
@@ -186,6 +202,40 @@ def _numeric_mean(trials: list[dict[str, Any]], metric: str) -> float | None:
 
 def _gate(name: str, passed: bool, **evidence: Any) -> dict[str, Any]:
     return {"gate": name, "passed": passed, "evidence": evidence}
+
+
+def _claim_scoped_assessments(
+    config: dict[str, Any], evidence: dict[str, Any], gates: list[dict[str, Any]], gaps: list[str]
+) -> dict[str, dict[str, Any]]:
+    """Reconcile declared independent claims without collapsing them into one verdict."""
+    declared = config.get("claim_scopes")
+    retained = evidence.get("claim_scoped_verdicts")
+    if declared is None:
+        return {}
+    expected_names = set(declared)
+    actual_names = set(retained) if isinstance(retained, dict) else set()
+    coverage_ok = expected_names == actual_names
+    gates.append(
+        _gate(
+            "claim_scope_coverage",
+            coverage_ok,
+            expected=sorted(expected_names),
+            actual=sorted(actual_names),
+        )
+    )
+    if not coverage_ok:
+        gaps.append("Retained claim-scoped verdicts do not exactly match the declared claim scopes.")
+    assessments: dict[str, dict[str, Any]] = {}
+    for name in sorted(expected_names):
+        retained_assessment = retained.get(name) if isinstance(retained, dict) else None
+        if not isinstance(retained_assessment, dict):
+            continue
+        assessments[name] = {
+            "verdict": retained_assessment["verdict"],
+            "contract_rule": declared[name],
+            "retained_assessment": retained_assessment,
+        }
+    return assessments
 
 
 def assess_evidence(
@@ -204,6 +254,7 @@ def assess_evidence(
     failed = [trial for trial in evidence["trials"] if not trial["success"]]
     gates: list[dict[str, Any]] = []
     gaps: list[str] = []
+    claim_scoped_assessments = _claim_scoped_assessments(config, evidence, gates, gaps)
 
     contract_trial_plan_ok = bool(declared_seeds) and len(declared_seeds) == expected_trials
     gates.append(
@@ -415,5 +466,7 @@ def assess_evidence(
         "failed_trial_count": len(failed),
         "split_summary": split_summary,
         "gates": gates,
+        "assessment_scope": "generic_contract_gates_only",
+        "claim_scoped_assessments": claim_scoped_assessments,
         "claim_boundary": "This decision pack reconciles retained, user-supplied evidence against an ACE contract. It does not execute a workload, attest to data collection, independently reproduce a result, or certify deployment safety.",
     }

@@ -23,7 +23,7 @@ from ace_lab.stats_evaluator import StatsEvaluator
 from ace_lab.results_store import ResultsStore
 from ace_lab.report_generator import ReportGenerator
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __all__ = [
     # Enums
     "HorizonCategory",

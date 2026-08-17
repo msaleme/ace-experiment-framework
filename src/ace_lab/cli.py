@@ -65,6 +65,22 @@ def load_and_validate_config(path: Path) -> dict[str, Any]:
         raise ConfigValidationError("quality_floor must be a mapping")
     if not isinstance(data["acceptance"], dict) or not isinstance(data["reporting"], dict):
         raise ConfigValidationError("acceptance and reporting must be mappings")
+    claim_scopes = data.get("claim_scopes")
+    if claim_scopes is not None:
+        if not isinstance(claim_scopes, dict) or not claim_scopes:
+            raise ConfigValidationError("claim_scopes must be a non-empty mapping when declared")
+        invalid_scopes = [
+            str(name)
+            for name, rule in claim_scopes.items()
+            if not isinstance(name, str)
+            or not SAFE_EXPERIMENT_ID.fullmatch(name)
+            or not isinstance(rule, dict)
+        ]
+        if invalid_scopes:
+            raise ConfigValidationError(
+                "each claim_scopes entry needs a safe name and mapping rule: "
+                + ", ".join(invalid_scopes)
+            )
     sets = data["benchmark_sets"]
     if not isinstance(sets, dict):
         raise ConfigValidationError("benchmark_sets must be a mapping")
@@ -277,6 +293,16 @@ def write_assessment_artifacts(
                 "## Failed rule checks",
                 "",
                 *([f"- {gate}" for gate in failed_gates] or ["- None"]),
+                "",
+                "## Claim-scoped decisions",
+                "",
+                *(
+                    [
+                        f"- **{name}: {assessment['verdict']}**"
+                        for name, assessment in pack["claim_scoped_assessments"].items()
+                    ]
+                    or ["- None declared by this contract."]
+                ),
                 "",
                 "## Claim boundary",
                 "",
