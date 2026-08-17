@@ -10,6 +10,18 @@ If you have an optimization result you want to trust, start with
 [`docs/USING_ACE.md`](docs/USING_ACE.md). It explains the three commands, who benefits, how to read
 a preflight, and what ACE does not claim.
 
+## Reference application: Token-Bleed R5
+
+ACE's first public claim-scoped reference application is the
+[Token-Bleed R5 result](https://github.com/msaleme/token-bleed-benchmark/releases/tag/r5-results-2026-08-17).
+The benchmark runner collected and scored the workload. ACE checked the frozen contract and
+retained evidence, then kept the generic and claim-specific decisions separate: governed context
+was accepted against raw full context, while its value and routing-miss claims against the cheap
+lexical baseline were rejected under the preregistered cost rule.
+
+That is the intended workflow: a valid narrow finding survives, but it cannot be promoted as a
+broader win. See [`docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md`](docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md).
+
 ## Who ACE helps
 
 ACE helps the engineer who has a promising optimization but needs to know whether it is safe to
@@ -227,6 +239,7 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
 | [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
 | [`docs/CLAIM_SCOPED_ASSESSMENTS.md`](docs/CLAIM_SCOPED_ASSESSMENTS.md) | Independent decision scopes and fail-closed coverage |
+| [`docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md`](docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md) | Public reference application of generic and claim-scoped assessments |
 | [`docs/RELEASE_NOTES_v0.1.0.md`](docs/RELEASE_NOTES_v0.1.0.md) | Installed package workflow and verdict boundaries |
 | [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |
