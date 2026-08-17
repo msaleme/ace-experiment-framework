@@ -201,13 +201,16 @@ demo scripts, and experimental kernels remain research tooling rather than the p
 `ace assess` is the post-run counterpart: it imports retained JSON or CSV trial evidence and checks
 it against the exact contract. It produces an `ACCEPTED`, `REJECTED`, or `INCONCLUSIVE` decision
 pack, but never creates measurements, fills missing evidence, or independently verifies collection.
-See the [worked assessment example](docs/USING_ACE.md#assess-retained-evidence-after-the-run).
+When a contract declares independent claims, ACE carries each retained claim verdict into the
+decision pack instead of silently collapsing it into the generic verdict. See the
+[worked assessment example](docs/USING_ACE.md#assess-retained-evidence-after-the-run) and
+[claim-scoped assessments](docs/CLAIM_SCOPED_ASSESSMENTS.md).
 
 The package is a complement to standardized benchmark suites, not a replacement for them. See
 [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) for its category, boundaries, and
 release posture.
 
-ACE v0.1.0 is available on PyPI. See the
+See the
 [`v0.1.0 release notes`](docs/RELEASE_NOTES_v0.1.0.md) for the supported workflow, JSON/CSV
 import boundary, and verdict interpretation.
 
@@ -223,6 +226,7 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
 | [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
+| [`docs/CLAIM_SCOPED_ASSESSMENTS.md`](docs/CLAIM_SCOPED_ASSESSMENTS.md) | Independent decision scopes and fail-closed coverage |
 | [`docs/RELEASE_NOTES_v0.1.0.md`](docs/RELEASE_NOTES_v0.1.0.md) | Installed package workflow and verdict boundaries |
 | [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) | Category, before/after workflow, and claim boundaries |
 | [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Token pruning boundary study (peer-review format) |

@@ -24,6 +24,14 @@ telemetry_provenance: simulated
 """
 
 
+def _claim_scoped_config() -> str:
+    return _valid_config() + """
+claim_scopes:
+  cost_vs_full: {comparison: governed-vs-full}
+  value_vs_lexical: {comparison: governed-vs-lexical}
+"""
+
+
 def test_validate_accepts_complete_contract(tmp_path: Path, capsys):
     config = tmp_path / "experiment.yaml"
     config.write_text(_valid_config(), encoding="utf-8")
@@ -145,6 +153,43 @@ def test_assess_writes_accepted_reviewable_decision_pack(tmp_path: Path):
     assert pack["evidence_gaps"] == []
     assert "This decision pack reconciles retained" in pack["claim_boundary"]
     assert "ACCEPTED" in report
+
+
+def test_assess_retains_independent_claim_scoped_verdicts(tmp_path: Path):
+    config = tmp_path / "experiment.yaml"
+    results = tmp_path / "retained-trials.json"
+    output = tmp_path / "assessment"
+    config.write_text(_claim_scoped_config(), encoding="utf-8")
+    evidence = _evidence(config)
+    evidence["claim_scoped_verdicts"] = {
+        "cost_vs_full": {"verdict": "ACCEPTED", "checks": [{"passed": True}]},
+        "value_vs_lexical": {"verdict": "REJECTED", "checks": [{"passed": False}]},
+    }
+    results.write_text(json.dumps(evidence), encoding="utf-8")
+    assert main(["assess", str(config), str(results), "--output", str(output)]) == 0
+    pack = json.loads((output / "smoke.decision-pack.json").read_text(encoding="utf-8"))
+    report = (output / "smoke.assessment.md").read_text(encoding="utf-8")
+    assert pack["verdict"] == "ACCEPTED"
+    assert pack["assessment_scope"] == "generic_contract_gates_only"
+    assert pack["claim_scoped_assessments"]["cost_vs_full"]["verdict"] == "ACCEPTED"
+    assert pack["claim_scoped_assessments"]["value_vs_lexical"]["verdict"] == "REJECTED"
+    assert "value_vs_lexical: REJECTED" in report
+
+
+def test_assess_fails_closed_when_declared_claim_scope_is_missing(tmp_path: Path):
+    config = tmp_path / "experiment.yaml"
+    results = tmp_path / "retained-trials.json"
+    output = tmp_path / "assessment"
+    config.write_text(_claim_scoped_config(), encoding="utf-8")
+    evidence = _evidence(config)
+    evidence["claim_scoped_verdicts"] = {"cost_vs_full": {"verdict": "ACCEPTED"}}
+    results.write_text(json.dumps(evidence), encoding="utf-8")
+    assert main(["assess", str(config), str(results), "--output", str(output)]) == 0
+    pack = json.loads((output / "smoke.decision-pack.json").read_text(encoding="utf-8"))
+    assert pack["verdict"] == "INCONCLUSIVE"
+    assert any(
+        gate["gate"] == "claim_scope_coverage" and not gate["passed"] for gate in pack["gates"]
+    )
 
 
 def test_assess_marks_digest_mismatch_inconclusive_without_silently_fixing_it(tmp_path: Path):
