@@ -94,9 +94,11 @@ ECD is most useful in situations where simpler metrics mislead — where through
 
 ---
 
-## First Validated Result: Token Pruning Has a Hard Failure Boundary
+## Historical simulated study: Token Pruning Has a Hard Failure Boundary
 
-Token pruning is a widely cited inference optimization. ACE's first completed boundary analysis produced a concrete deployment-risk finding.
+This earlier, simulated-telemetry study remains in the repository as a framework-development
+example. It is not ACE's primary public reference application and should not be read as a measured
+hardware-energy result. For a current retained-evidence workflow, use Token-Bleed R5 above.
 
 **Thesis:** Token pruning ECD gains are regime-bounded by sequence length and batch size. Outside the validated envelope, ECD degrades deterministically. This is a systems-boundary failure, not noise.
 
@@ -109,7 +111,7 @@ Token pruning is a widely cited inference optimization. ACE's first completed bo
 
 **Deployment implication:** Token pruning should not be accepted or rejected on average. Rollout should be gated on sequence-length and batch-size ceilings, not aggregate ECD.
 
-**Telemetry caveat:** This result was produced under simulated power telemetry (`ACE_DIRECT_POWER_WATTS` override). Native device telemetry would strengthen provenance but is unlikely to reverse the dominant boundary pattern.
+**Telemetry caveat:** This result was produced under simulated power telemetry (`ACE_DIRECT_POWER_WATTS` override). It is useful for exercising boundary logic, not for a measured energy-efficiency claim.
 
 Full analysis: [`docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md`](docs/RESEARCH_PAPER_TOKEN_PRUNING_BOUNDARY_ANALYSIS.md) | Decision memo: [`docs/VALIDATED_RESULTS.md`](docs/VALIDATED_RESULTS.md)
 
@@ -218,6 +220,9 @@ decision pack instead of silently collapsing it into the generic verdict. See th
 [worked assessment example](docs/USING_ACE.md#assess-retained-evidence-after-the-run) and
 [claim-scoped assessments](docs/CLAIM_SCOPED_ASSESSMENTS.md).
 
+For a copy-paste retained-evidence walkthrough, including the R5 public-packet verification path,
+see [`docs/RETAINED_EVIDENCE_WORKFLOW.md`](docs/RETAINED_EVIDENCE_WORKFLOW.md).
+
 The package is a complement to standardized benchmark suites, not a replacement for them. See
 [`docs/PACKAGE_POSITIONING.md`](docs/PACKAGE_POSITIONING.md) for its category, boundaries, and
 release posture.
@@ -238,6 +243,8 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`GETTING_STARTED.md`](GETTING_STARTED.md) | Quickstart and 7-element experiment walkthrough |
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
 | [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
+| [`docs/RETAINED_EVIDENCE_WORKFLOW.md`](docs/RETAINED_EVIDENCE_WORKFLOW.md) | Copy-paste assessment workflow and public R5 verification |
+| [`docs/RELEASE_NOTES_v0.1.3.md`](docs/RELEASE_NOTES_v0.1.3.md) | Retained-evidence reliability release notes |
 | [`docs/CLAIM_SCOPED_ASSESSMENTS.md`](docs/CLAIM_SCOPED_ASSESSMENTS.md) | Independent decision scopes and fail-closed coverage |
 | [`docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md`](docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md) | Public reference application of generic and claim-scoped assessments |
 | [`docs/RELEASE_NOTES_v0.1.0.md`](docs/RELEASE_NOTES_v0.1.0.md) | Installed package workflow and verdict boundaries |
