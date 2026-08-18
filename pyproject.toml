@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ace-experiment-framework"
-version = "0.1.2"
-description = "Automated Compute Efficiency Experimental Lab - Config-driven experimental framework for discovering compute optimizations"
+version = "0.1.3"
+description = "Claim-scoped evidence assessment for reproducible AI optimization experiments"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
