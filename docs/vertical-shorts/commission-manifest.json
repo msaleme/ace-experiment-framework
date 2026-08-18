@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "status": "storyboard_review_required",
+  "distribution": "internal",
+  "series": "ACE evidence-literacy",
+  "reference_application": "Token-Bleed R5",
+  "evidence_boundary": {
+    "runner_collected_evidence": true,
+    "ace_did_not_run_workload": true,
+    "ace_did_not_independently_attest_collection": true,
+    "model_endpoint_scoped": true,
+    "private_raw_report": true
+  },
+  "shared": {
+    "format": "9:16",
+    "duration_seconds": "45-60",
+    "caption_first": true,
+    "end_card": "A benchmark result is not evidence by itself.",
+    "cta": null
+  },
+  "shorts": [
+    {"slug": "ace-contract-before-run", "persona": "Research lead", "premise": "Freeze question and claim boundaries before evidence exists."},
+    {"slug": "ace-retain-the-evidence", "persona": "Evaluation engineer", "premise": "Keep contract, preflight, trial evidence, decision pack, and hashes together."},
+    {"slug": "ace-claim-by-claim", "persona": "Technical executive", "premise": "R5 accepts governed-versus-full claims and rejects governed-versus-lexical claims under its frozen condition."},
+    {"slug": "ace-verification-is-not-attestation", "persona": "Governance/risk leader", "premise": "A public packet can be rechecked without certifying original collection."}
+  ],
+  "required_gates": ["storyboard", "script", "claims", "confidentiality", "visual", "delivery"],
+  "publishing_permitted": false
+}
