@@ -8,7 +8,7 @@ workload, recreate missing rows, or independently attest to collection.
 Keep the original contract and a JSON or CSV evidence file together, then run:
 
 ```bash
-python -m pip install ace-experiment-framework==0.1.3
+python -m pip install ace-experiment-framework==0.1.4
 ace validate experiment.yaml
 ace preflight experiment.yaml
 ace assess experiment.yaml retained-trials.json --output ./ace-assessment
@@ -29,7 +29,7 @@ preflight, derived ACE evidence, decision pack, and a manifest committing to the
 ```bash
 git clone https://github.com/msaleme/token-bleed-benchmark.git
 cd token-bleed-benchmark
-python -m pip install ace-experiment-framework==0.1.3
+python -m pip install ace-experiment-framework==0.1.4
 python scripts/verify_r5_public_evidence.py --ace-command ace
 ```
 

@@ -244,6 +244,7 @@ See [`GETTING_STARTED.md`](GETTING_STARTED.md) for the full seven-element experi
 | [`docs/USING_ACE.md`](docs/USING_ACE.md) | Plain-language guide to what ACE helps people do |
 | [`docs/TRIAL_EVIDENCE_FORMAT.md`](docs/TRIAL_EVIDENCE_FORMAT.md) | JSON/CSV evidence contract for `ace assess` |
 | [`docs/RETAINED_EVIDENCE_WORKFLOW.md`](docs/RETAINED_EVIDENCE_WORKFLOW.md) | Copy-paste assessment workflow and public R5 verification |
+| [`docs/RELEASE_NOTES_v0.1.4.md`](docs/RELEASE_NOTES_v0.1.4.md) | License-file release notes |
 | [`docs/RELEASE_NOTES_v0.1.3.md`](docs/RELEASE_NOTES_v0.1.3.md) | Retained-evidence reliability release notes |
 | [`docs/CLAIM_SCOPED_ASSESSMENTS.md`](docs/CLAIM_SCOPED_ASSESSMENTS.md) | Independent decision scopes and fail-closed coverage |
 | [`docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md`](docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md) | Public reference application of generic and claim-scoped assessments |
