@@ -22,6 +22,16 @@ lexical baseline were rejected under the preregistered cost rule.
 That is the intended workflow: a valid narrow finding survives, but it cannot be promoted as a
 broader win. See [`docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md`](docs/REFERENCE_APPLICATION_TOKEN_BLEED_R5.md).
 
+## Public reading path
+
+- **Method note:** [Before the Benchmark: Make the Claimed Win Reviewable](https://pubpoint.com/publications/before-the-benchmark/)
+- **Reference application:** [Token-Bleed R5 immutable release](https://github.com/msaleme/token-bleed-benchmark/releases/tag/r5-results-2026-08-17)
+- **Research context:** [PubPoint Research Map](https://pubpoint.com/research-map/)
+
+ACE is the assessment layer in this path. It evaluates retained evidence against the declared
+contract; it does not create workload measurements, attest to private collection, or promote a
+model-scoped result into a general deployment claim.
+
 ## Who ACE helps
 
 ACE helps the engineer who has a promising optimization but needs to know whether it is safe to
